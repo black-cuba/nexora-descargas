@@ -125,9 +125,9 @@
   .btn-pri:hover { filter: brightness(1.1); }
   .btn-dis { background: rgba(71, 85, 105, 0.5); color: #cbd5e1; cursor: not-allowed; }
 
-  /* ---------- Panel de características (expansión animada) ---------- */
+  /* ---------- Botón que abre el modal de características ---------- */
   .feat-btn {
-    width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px;
     padding: 13px 16px; border-radius: 12px; cursor: pointer; user-select: none;
     background: rgba(148, 163, 184, 0.07); border: 1px solid var(--border);
     color: #cbd5e1; font-weight: 700; font-size: 0.88rem;
@@ -138,29 +138,86 @@
     width: 22px; height: 22px; stroke: currentColor; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round;
     transition: transform 0.3s ease; flex-shrink: 0;
   }
-  .card.open .feat-btn .chev { transform: rotate(180deg); }
-  .card.open .feat-btn { color: var(--accent, var(--cyan)); border-color: color-mix(in srgb, var(--accent, var(--cyan)) 40%, transparent); }
 
-  .feat-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.45s cubic-bezier(0.4, 0, 0.2, 1); }
-  .card.open .feat-body { grid-template-rows: 1fr; }
-  .feat-inner { overflow: hidden; min-height: 0; }
-  .feat-content { padding-top: 8px; }
+  /* ---------- Modal de características (centrado) ---------- */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+    background: rgba(8, 15, 30, 0.78);
+    backdrop-filter: blur(6px);
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+  }
+  .modal-overlay.show { opacity: 1; visibility: visible; }
+  .modal {
+    position: relative; width: 100%; max-width: 760px; max-height: 88vh;
+    display: flex; flex-direction: column;
+    background: linear-gradient(180deg, #16233a, #0f1b30);
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    border-radius: 20px;
+    box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8);
+    transform: scale(0.94) translateY(14px);
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+  .modal-overlay.show .modal { transform: scale(1) translateY(0); }
+  .modal .m-head {
+    display: flex; align-items: center; gap: 14px;
+    padding: 20px 24px; flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid var(--border);
+  }
+  .modal .m-head .icon {
+    width: 46px; height: 46px; border-radius: 12px; flex-shrink: 0;
+    display: grid; place-items: center; font-size: 1.4rem;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--accent, var(--cyan)) 30%, #16233a), #0e1a30);
+    border: 1px solid color-mix(in srgb, var(--accent, var(--cyan)) 40%, transparent);
+  }
+  .modal .m-head h3 { font-size: 1.25rem; font-weight: 800; color: #fff; line-height: 1.2; }
+  .modal .m-head .plat { display: block; margin-top: 3px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent, var(--cyan)); }
+  .modal .m-close {
+    margin-left: auto; width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+    border: 1px solid var(--border); background: rgba(148, 163, 184, 0.08);
+    color: #cbd5e1; font-size: 1.15rem; line-height: 1; cursor: pointer;
+    display: grid; place-items: center;
+    transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+  }
+  .modal .m-close:hover { background: rgba(148, 163, 184, 0.2); color: #fff; }
+  .modal .m-close:active { transform: scale(0.92); }
+  .modal .m-body {
+    padding: 10px 24px 24px; overflow-y: auto;
+    font-size: 0.84rem; color: #cbd5e1; line-height: 1.6;
+    overscroll-behavior: contain;
+  }
+  .modal .m-body::-webkit-scrollbar { width: 8px; }
+  .modal .m-body::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.35); border-radius: 8px; }
 
-  .feat-content { font-size: 0.84rem; color: #cbd5e1; line-height: 1.6; }
-  .feat-content h4 {
+  .modal .m-body h4 {
     font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;
     color: var(--accent, var(--cyan)); margin: 18px 0 8px; padding-bottom: 6px;
     border-bottom: 1px solid var(--border);
   }
-  .feat-content h4:first-child { margin-top: 4px; }
-  .feat-content b { color: #e8eef8; font-weight: 700; display: block; margin: 14px 0 4px; font-size: 0.86rem; }
-  .feat-content ul { list-style: none; margin: 0 0 2px 0; }
-  .feat-content li { position: relative; padding-left: 18px; margin-bottom: 5px; }
-  .feat-content li::before {
+  .modal .m-body h4:first-child { margin-top: 4px; }
+  .modal .m-body b { color: #e8eef8; font-weight: 700; display: block; margin: 14px 0 4px; font-size: 0.86rem; }
+  .modal .m-body ul { list-style: none; margin: 0 0 2px 0; }
+  .modal .m-body li { position: relative; padding-left: 18px; margin-bottom: 5px; }
+  .modal .m-body li::before {
     content: ""; position: absolute; left: 0; top: 0.62em; width: 7px; height: 7px; border-radius: 2px;
     background: var(--accent, var(--cyan)); opacity: 0.85;
   }
-  .feat-content code { background: rgba(14, 165, 233, 0.12); padding: 1px 6px; border-radius: 5px; font-size: 0.82em; color: #7dd3fc; }
+  .modal .m-body code { background: rgba(14, 165, 233, 0.12); padding: 1px 6px; border-radius: 5px; font-size: 0.82em; color: #7dd3fc; }
+  .modal .m-foot {
+    display: flex; justify-content: flex-end; gap: 10px;
+    padding: 14px 24px; flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.03); border-top: 1px solid var(--border);
+  }
+  .modal .m-foot a.btn { padding: 10px 16px; font-size: 0.85rem; }
+  @media (max-width: 560px) {
+    .modal .m-head { padding: 16px 18px; }
+    .modal .m-body { padding: 8px 18px 20px; }
+    .modal .m-foot { padding: 12px 18px; flex-wrap: wrap; }
+  }
 
   /* ---------- Nota / contacto ---------- */
   .note {
@@ -450,10 +507,6 @@ const APPS = [
   },
 ];
 
-function chevronSvg() {
-  return '<svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>';
-}
-
 function cardHtml(app, data) {
   const ver = data ? data.version : app.versionLabel + ' · consultando...';
   const size = data && data.sizeMB ? ` · ~${data.sizeMB.toFixed(0)} MB` : '';
@@ -476,27 +529,54 @@ function cardHtml(app, data) {
         <a class="btn btn-tg" href="${TELEGRAM}" target="_blank" rel="noopener">✈️ Telegram</a>
         ${dlBtn}
       </div>
-      <button type="button" class="feat-btn" aria-expanded="false">
+      <button type="button" class="feat-btn" data-app="${app.id}" aria-haspopup="dialog">
         <span>📋 Ver características</span>
-        ${chevronSvg()}
+        <svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
       </button>
-      <div class="feat-body">
-        <div class="feat-inner">
-          <div class="feat-content">${app.feats}</div>
-        </div>
-      </div>
     </div>`;
 }
 
 function bindFeat() {
   document.querySelectorAll('.feat-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      const card = btn.closest('.card');
-      const open = card.classList.toggle('open');
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      const app = APPS.find(a => a.id === btn.dataset.app);
+      if (app) abrirModal(app);
     });
   });
 }
+
+function abrirModal(app) {
+  const overlay = document.getElementById('modal');
+  overlay.style.setProperty('--accent', app.accent);
+  document.getElementById('modalIcon').textContent = app.icon;
+  document.getElementById('modalTitulo').textContent = app.nombre + ' ' + app.versionLabel;
+  document.getElementById('modalPlat').textContent = app.plat;
+  document.getElementById('modalContenido').innerHTML = app.feats;
+  const dl = document.getElementById('modalDescargar');
+  if (app.descargaUrl) {
+    dl.href = app.descargaUrl;
+    dl.classList.remove('btn-dis');
+    dl.textContent = '⬇️ Descargar instalador (' + (app.versionLabel) + ')';
+  } else {
+    dl.href = TELEGRAM;
+    dl.classList.add('btn-dis');
+    dl.textContent = 'Descarga por Telegram';
+  }
+  overlay.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function cerrarModal() {
+  document.getElementById('modal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+(function enlazarModal() {
+  const overlay = document.getElementById('modal');
+  overlay.addEventListener('click', e => { if (e.target === overlay) cerrarModal(); });
+  document.getElementById('modalCerrar').addEventListener('click', cerrarModal);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarModal(); });
+})();
 
 async function cargar() {
   const grid = document.getElementById('grid');
@@ -521,18 +601,14 @@ async function cargar() {
           url: asset ? asset.browser_download_url : null,
           sizeMB: asset ? asset.size / (1024 * 1024) : null,
         };
+        app.descargaUrl = data.url;
         const t = new Date(latest.published_at).getTime();
         if (!fechaMax || t > fechaMax) fechaMax = t;
       }
       const cards = grid.querySelectorAll('.card');
-      const wasOpen = cards[APPS.indexOf(app)].classList.contains('open');
       cards[APPS.indexOf(app)].outerHTML = cardHtml(app, data);
     }
     bindFeat();
-    const cards = grid.querySelectorAll('.card');
-    for (let i = 0; i < APPS.length; i++) {
-      if (APPS[i].feats && false) { /* no-op */ }
-    }
     const meta = document.getElementById('meta');
     meta.textContent = fechaMax ? ('Última actualización: ' + new Date(fechaMax).toLocaleString('es')) : 'Versiones compiladas recientemente.';
   } catch (e) {
@@ -542,5 +618,24 @@ async function cargar() {
 }
 cargar();
 </script>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+    <div class="m-head">
+      <div class="icon" id="modalIcon">🏢</div>
+      <div>
+        <h3 id="modalTitulo">App</h3>
+        <span class="plat" id="modalPlat">Plataforma</span>
+      </div>
+      <button type="button" class="m-close" id="modalCerrar" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="m-body" id="modalContenido"></div>
+    <div class="m-foot">
+      <a class="btn btn-tg" href="https://t.me/NEXORA_Suite" target="_blank" rel="noopener">✈️ Descargar por Telegram</a>
+      <a class="btn btn-pri" id="modalDescargar" href="#" target="_blank" rel="noopener">⬇️ Descargar instalador</a>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
