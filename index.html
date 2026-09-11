@@ -31,6 +31,13 @@
   .btn-gh { background: #334155; color: #e2e8f0; }
   .btn-gh:hover { background: #475569; }
   .btn-dis { background: #475569; color: #cbd5e1; cursor: not-allowed; }
+  details.feat { margin-top: 14px; background: #0f172a; border: 1px solid #334155; border-radius: 12px; }
+  details.feat summary { cursor: pointer; padding: 10px 14px; font-weight: 700; font-size: 0.85rem; color: #38bdf8; user-select: none; }
+  details.feat summary:hover { background: #16233a; }
+  details.feat .inner { padding: 4px 16px 14px; font-size: 0.8rem; color: #cbd5e1; line-height: 1.55; }
+  details.feat h4 { color: #fff; font-size: 0.85rem; margin: 14px 0 6px; }
+  details.feat ul { margin: 0 0 0 16px; }
+  details.feat li { margin-bottom: 5px; }
   .note { margin-top: 34px; background: #0f172a; border: 1px solid #334155; border-radius: 14px; padding: 18px 20px; font-size: 0.85rem; color: #94a3b8; line-height: 1.6; }
   .note b { color: #e2e8f0; }
   .note ol { margin: 8px 0 0 20px; }
@@ -84,7 +91,100 @@ const APPS = [
     icon: '🏢📦',
     nombre: 'NEXORA Sistema MultiAlmacen v3',
     plat: 'Windows · EXE · 64 bits',
-    desc: 'Gestión comercial integral: inventario multialmacén, facturación POS, transferencias, ajustes, Modelo D-01 ONAT y reportes.', 
+    desc: 'Gestión comercial integral: inventario multialmacén, facturación POS, transferencias, ajustes, Modelo D-01 ONAT y reportes.',
+    feats: `
+      <h4>Características Principales</h4>
+      <b>Gestión Multi-Almacén & Puntos de Venta:</b>
+      <ul>
+        <li>Creación ilimitada de almacenes y sucursales.</li>
+        <li>Inventario Aislado por Sucursal: Cada almacén mantiene su catálogo, existencias y costos independientes.</li>
+        <li>Permisos Granulares por Usuario: El administrador asigna exactamente los almacenes a los que tiene acceso cada empleado.</li>
+        <li>Carga de Inventario Inicial por Almacén: Asistente masivo con selector de categorías predeterminadas y adición de nuevas categorías en línea.</li>
+      </ul>
+      <b>Módulo de Inventario y Catálogo (Tecla F2):</b>
+      <ul>
+        <li>Nombres, códigos, unidades y categorías en MAYÚSCULAS automáticas para uniformidad.</li>
+        <li>Soporte de decimales completo en cantidades, precios de costo y venta.</li>
+        <li>Fecha de vencimiento automática: si se omite, calcula automáticamente 1 año a partir del registro.</li>
+        <li>Alerta visual de stock mínimo y límite de stock.</li>
+        <li>Eliminación segura de productos y edición directa de costos y precios.</li>
+      </ul>
+      <b>Vales de Entrada y Compras a Proveedores (Tecla F3):</b>
+      <ul>
+        <li>Registro formal de facturas de compra con cálculo automático de totales e impuestos.</li>
+        <li>Generación automática de número de factura correlativo si no se especifica.</li>
+        <li>Alerta de Precios Existentes: Notifica si un producto ya cuenta con precio de costo o venta registrado para evitar inconsistencias.</li>
+        <li>Límites de stock configurables y asignación de operador responsable.</li>
+        <li>Impresión y anulación de vales de entrada.</li>
+      </ul>
+      <b>Vales de Salida y Punto de Venta POS (Tecla F4):</b>
+      <ul>
+        <li>Facturación rápida con lector de código de barras o búsqueda en tiempo real.</li>
+        <li>Validación estricta de stock disponible en el almacén activo.</li>
+        <li>Impresión de tickets térmicos (58mm / 80mm) y facturas oficiales.</li>
+        <li>Control de caja, consumidor final o clientes registrados.</li>
+      </ul>
+      <b>Transferencias entre Almacenes (Tecla F5):</b>
+      <ul>
+        <li>Movimiento documentado de mercancías entre almacenes con control de origen y destino.</li>
+        <li>Creación o actualización automática del producto en el almacén de destino.</li>
+        <li>Comprobante oficial de transferencia con trazabilidad y exportación PDF/impresión.</li>
+      </ul>
+      <b>Integración IPV con POS Móvil (Descriptor de Inventario):</b>
+      <ul>
+        <li>Exportar IPV: desde Configuración se genera el archivo ipv_&lt;Almacén&gt;_&lt;fecha&gt;_inicial.ipv con el catálogo y existencias del almacén.</li>
+        <li>Importar cierre: el POS devuelve un _cierre.ipv con las ventas y el stock real del punto; el sistema lo valida contra el inventario esperado y, al confirmar, descuenta las salidas y registra la factura de venta.</li>
+        <li>Validación y discrepancias: detecta diferencias de stock (faltantes/sobrantes), permite ajustar el stock real del punto y bloquea el cierre hasta resolverlas.</li>
+        <li>Historial IPV: bitácora de todas las exportaciones y cierres con su estado y usuario.</li>
+      </ul>
+      <b>Módulo de Mermas, Devoluciones y Vencidos (Exclusivo Administrador):</b>
+      <ul>
+        <li>Registro tipificado de ajustes de stock: MERMA (rotura/deterioro), DEVOLUCIÓN y VENCIDO.</li>
+        <li>Descuento de stock en almacén y cálculo automático del costo total de la pérdida.</li>
+        <li>Comprobante impreso de ajuste y reporte dedicado en el módulo de Reportes.</li>
+      </ul>
+      <b>Modelo D-01 ONAT (Declaración Jurada Fiscal de Cuba):</b>
+      <ul>
+        <li>Liquidación y cálculo oficial del Impuesto sobre Ingresos Personales y Utilidades conforme a la legislación de la Oficina Nacional de Administración Tributaria (ONAT).</li>
+        <li>Sincronización Automática: Toma el NIT, Sujeto Pasivo, Municipio, Provincia y Régimen de Tributación (General o Simplificado) directamente de los datos de la empresa.</li>
+        <li>Cálculo de Ingresos y Gastos: Autocálculo de ingresos brutos y gastos deducibles a partir de las ventas y compras registradas en el año fiscal.</li>
+        <li>Impresión y Exportación Oficial: Genera el modelo con formato idéntico al documento oficial de la ONAT para su presentación física o digital.</li>
+      </ul>
+      <b>Módulo de Reportes y Estadísticas:</b>
+      <ul>
+        <li>Modo Consolidado Global: Un solo clic para consolidar todos los almacenes y puntos de venta de la empresa.</li>
+        <li>Filtros Temporales: Hoy, Semana, Mes y Todo.</li>
+        <li>7 Sub-Reportes Especializados: Resumen y KPIs Financieros, Inventario Valorado, Vales de Entrada (Compras), Vales de Salida (Ventas), Transferencias entre Almacenes, Mermas/Devoluciones/Vencidos y Auditoría Integral y Log de Operaciones.</li>
+        <li>Exportación en PDF y CSV para cada uno de los 7 reportes.</li>
+      </ul>
+      <b>Configuración, Usuarios y Seguridad de Claves:</b>
+      <ul>
+        <li>Edición Unificada de Usuarios: todos los usuarios (incluido el Administrador) desde el botón "✏️ Editar" en la tabla de usuarios.</li>
+        <li>Permite modificar nombre de usuario, nombre completo, rol, almacenes autorizados y actualizar contraseñas con confirmación y selector de visibilidad.</li>
+        <li>Cumplimiento Fiscal y Legal en Cuba: Registro de NIT/RUT, REEUP, Registro Mercantil, Cuentas Bancarias (CUP/MLC) y Representante Legal con fecha de instalación protegida.</li>
+        <li>Respaldos de Base de Datos SQLite: descarga y restauración de copias de seguridad .db con un solo clic.</li>
+      </ul>
+      <b>Licenciamiento y Activación:</b>
+      <ul>
+        <li>Período de prueba de 15 días con acceso a todos los módulos.</li>
+        <li>Posibilidad de seleccionar y solicitar el plan oficial en cualquier momento vía WhatsApp Desktop.</li>
+        <li>Activación mediante Machine ID de hardware único por clave o archivo de licencia .lic.</li>
+        <li>Planes Disponibles: Mensual ($15), Trimestral ($50), Semestral ($75), Anual ($100).</li>
+      </ul>
+      <b>⌨️ Atajos de Teclado del Sistema</b>
+      <ul>
+        <li>F1: Manual de Ayuda y Guía del Módulo Activo</li>
+        <li>F2: Módulo de Inventario y Catálogo</li>
+        <li>F3: Vales de Entrada / Compras</li>
+        <li>F4: Vales de Salida / Punto de Venta POS</li>
+        <li>F5: Transferencias entre Almacenes</li>
+        <li>ESC: Cerrar modales y ventanas emergentes</li>
+      </ul>
+      <b>🛡️ Credenciales por Defecto</b>
+      <ul>
+        <li>Usuario Administrador: <code>admin</code></li>
+        <li>Contraseña Inicial: <code>admin123</code> (puede cambiarse en el módulo de Configuración)</li>
+      </ul>`,
   },
   {
     id: 'pos',
@@ -93,6 +193,38 @@ const APPS = [
     nombre: 'NEXORA POS Móvil v2',
     plat: 'Android · APK',
     desc: 'Punto de venta móvil. Importa inventario desde el almacén central (IPV), vende offline y devuelve el cierre de turno.',
+    feats: `
+      <h4>Características Principales</h4>
+      <b>Punto de Venta Móvil (Trabaja offline):</b>
+      <ul>
+        <li>Captura de ventas desde el celular sin necesidad de internet; el punto vende normal en zonas alejadas del almacén central.</li>
+        <li>Catálogo y precios sincronizados desde el almacén central vía archivo IPV.</li>
+      </ul>
+      <b>Importación IPV (Descriptor de Inventario):</b>
+      <ul>
+        <li>Importa el archivo ipv_&lt;Almacén&gt;_&lt;fecha&gt;_inicial.ipv generado por NEXORA Sistema MultiAlmacen v3 y queda listo para vender con las existencias reales del punto.</li>
+        <li>Al importar, reemplaza o combina el catálogo local con la información del almacén central.</li>
+      </ul>
+      <b>Ventas y Cobro:</b>
+      <ul>
+        <li>Registro de ventas con cantidades y precios, buscando productos por código o nombre.</li>
+        <li>Cálculo de totales y descuentos por venta.</li>
+        <li>Registro del cierre del turno al finalizar el día.</li>
+      </ul>
+      <b>Cierre y Devolución al Almacén Central (_cierre.ipv):</b>
+      <ul>
+        <li>Exporta el cierre de turno con el detalle de ventas y el stock real del punto.</li>
+        <li>Incluye el desglose de ventas (fecha, total e items con código/nombre/cantidad/precio/descuento/subtotal) para conciliación exacta con el almacén central.</li>
+        <li>El sistema central valida contra el inventario esperado, descuenta salidas y registra las facturas.</li>
+      </ul>
+      <b>Galeria de precios / Notas:</b>
+      <ul>
+        <li>Visualización de la lista de precios descargada para consulta rápida del vendedor.</li>
+      </ul>
+      <b>Instalación:</b>
+      <ul>
+        <li>APK firmada lista para instalar; en Android activar "Instalar apps de orígenes desconocidos".</li>
+      </ul>`,
   },
   {
     id: 'rrhh',
@@ -101,6 +233,73 @@ const APPS = [
     nombre: 'NEXORA RRHH v1',
     plat: 'Windows · EXE · 64 bits',
     desc: 'Gestión de Recursos Humanos: expediente del personal, puestos, asistencia, permisos/ausencias, nómina y vacaciones.',
+    feats: `
+      <h4>Características Principales</h4>
+      <b>Expediente del Personal (Tecla F2):</b>
+      <ul>
+        <li>Alta y gestión completa de trabajadores: datos personales, profesionales, bancarios y de contratación.</li>
+        <li>Ficha visual del trabajador, alta/baja laboral con fecha y causa, y reactivación.</li>
+        <li>Búsqueda y filtros por activos/de baja/todos.</li>
+        <li>Salario base por trabajador o heredado del puesto.</li>
+      </ul>
+      <b>Puestos de Trabajo (Tecla F3):</b>
+      <ul>
+        <li>Organización por departamentos y cargos con su salario base.</li>
+        <li>Protección de integridad: no se eliminan departamentos con cargos ni cargos con trabajadores.</li>
+      </ul>
+      <b>Control de Asistencia (Tecla F4):</b>
+      <ul>
+        <li>Jornada diaria con entrada/salida de un clic y registro de incidencias.</li>
+        <li>Incidencias: Presente, Ausencia, Permiso, Enfermedad, Vacaciones, Sobrecumplimiento, Otro.</li>
+        <li>Historial por rango de fechas y planilla mensual por trabajador con horas.</li>
+        <li>Cálculo automático de horas con soporte de turnos nocturnos y cruce de medianoche.</li>
+      </ul>
+      <b>Permisos y Ausencias (Tecla F5):</b>
+      <ul>
+        <li>Registro de permisos: Enfermedad, Licencia CITMA, Maternidad, Paternidad, Personal, Sin Sueldo, Ausencia injustificada, Vacaciones y Otro.</li>
+        <li>Aprobación con flujo PENDIENTE → APROBADO / RECHAZADO y control de fechas con días automáticos.</li>
+        <li>Filtros por estado con contador de pendientes.</li>
+      </ul>
+      <b>Nómina (Tecla F6):</b>
+      <ul>
+        <li>Generación de nómina por período con cálculo de devengado, impuestos y contribuciones.</li>
+        <li>Conceptos de nómina editables (Ingreso, Impuesto, Contribución, Descuento) con valores por porcentaje o monto.</li>
+        <li>Excepciones por trabajador o por concepto.</li>
+        <li>Cálculo conforme a las tarifas por tramos del Impuesto sobre Ingresos Personales (ONAT).</li>
+        <li>Reversión de períodos y control de duplicados.</li>
+      </ul>
+      <b>Vacaciones (Tecla F7):</b>
+      <ul>
+        <li>Acumulación automática mensual y control de saldo por trabajador.</li>
+        <li>Registro de disfrutes con validación de saldo, carga inicial y reversión de movimientos.</li>
+      </ul>
+      <b>Dashboard y Reportes (Tecla F1-Inicio):</b>
+      <ul>
+        <li>Panel de inicio con KPIs: plantilla activa, asistencia del mes, costo de nómina y saldo de vacaciones.</li>
+        <li>Reportes laborales: Planilla de Asistencia, Nómina por Período, Plantilla del Personal y Submayor de Vacaciones.</li>
+        <li>Exportación CSV e impresión de todos los reportes.</li>
+      </ul>
+      <b>Configuración y Seguridad:</b>
+      <ul>
+        <li>Usuarios y roles con control de acceso.</li>
+        <li>Respaldos y restauración de base de datos SQLite.</li>
+        <li>Licencia offline con Machine ID y archivo .lic; antivertificación de reloj.</li>
+      </ul>
+      <b>⌨️ Atajos de Teclado del Sistema</b>
+      <ul>
+        <li>F1: Inicio (Dashboard y Ayuda)</li>
+        <li>F2: Expediente del Personal</li>
+        <li>F3: Puestos de Trabajo</li>
+        <li>F4: Control de Asistencia</li>
+        <li>F5: Permisos y Ausencias</li>
+        <li>F6: Nómina</li>
+        <li>F7: Vacaciones</li>
+      </ul>
+      <b>🛡️ Credenciales por Defecto</b>
+      <ul>
+        <li>Usuario Administrador: <code>admin</code></li>
+        <li>Contraseña inicial configurable en el módulo de Configuración.</li>
+      </ul>`,
   },
 ];
 
@@ -122,6 +321,10 @@ function cardHtml(app, data) {
         <a class="btn btn-tg" href="${TELEGRAM}" target="_blank" rel="noopener">Telegram</a>
         ${dlBtn}
       </div>
+      <details class="feat">
+        <summary>📋 Ver características</summary>
+        <div class="inner">${app.feats}</div>
+      </details>
     </div>`;
 }
 
