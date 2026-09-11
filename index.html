@@ -298,6 +298,24 @@
   <div class="ft"><span class="mark">N</span> NEXORA Software Suite</div>
 </footer>
 
+<div class="modal-overlay" id="modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+    <div class="m-head">
+      <div class="icon" id="modalIcon">🏢</div>
+      <div>
+        <h3 id="modalTitulo">App</h3>
+        <span class="plat" id="modalPlat">Plataforma</span>
+      </div>
+      <button type="button" class="m-close" id="modalCerrar" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="m-body" id="modalContenido"></div>
+    <div class="m-foot">
+      <a class="btn btn-tg" href="https://t.me/NEXORA_Suite" target="_blank" rel="noopener">✈️ Descargar por Telegram</a>
+      <a class="btn btn-pri" id="modalDescargar" href="#" target="_blank" rel="noopener">⬇️ Descargar instalador</a>
+    </div>
+  </div>
+</div>
+
 <script>
 // La pagina se actualiza SOLA: consulta los releases publicados del repositorio
 // de descargas y toma la ultima version de cada app por prefijo.
@@ -618,24 +636,6 @@ async function cargar() {
 }
 cargar();
 </script>
-
-<div class="modal-overlay" id="modal">
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
-    <div class="m-head">
-      <div class="icon" id="modalIcon">🏢</div>
-      <div>
-        <h3 id="modalTitulo">App</h3>
-        <span class="plat" id="modalPlat">Plataforma</span>
-      </div>
-      <button type="button" class="m-close" id="modalCerrar" aria-label="Cerrar">✕</button>
-    </div>
-    <div class="m-body" id="modalContenido"></div>
-    <div class="m-foot">
-      <a class="btn btn-tg" href="https://t.me/NEXORA_Suite" target="_blank" rel="noopener">✈️ Descargar por Telegram</a>
-      <a class="btn btn-pri" id="modalDescargar" href="#" target="_blank" rel="noopener">⬇️ Descargar instalador</a>
-    </div>
-  </div>
-</div>
 
 </body>
 </html>
