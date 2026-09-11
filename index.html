@@ -6,63 +6,223 @@
 <meta name="description" content="Descargas oficiales de la Suite NEXORA: Sistema MultiAlmacen v3 (Windows), POS Móvil v2 (Android) y RRHH v1 (Windows). Software 100% offline para MIPYME, TCP, SRL y CNA en Cuba." />
 <title>NEXORA — Descargas Oficiales</title>
 <style>
+  :root {
+    --bg1: #0b1120;
+    --bg2: #111c33;
+    --card: rgba(17, 28, 51, 0.82);
+    --border: rgba(148, 163, 184, 0.18);
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --faint: #64748b;
+    --cyan: #0ea5e9;
+    --green: #22c55e;
+    --violet: #8b5cf6;
+    --amber: #fbbf24;
+    --radius: 18px;
+  }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: linear-gradient(160deg, #0f172a 0%, #1e293b 100%); color: #e2e8f0; min-height: 100vh; }
-  .wrap { max-width: 1000px; margin: 0 auto; padding: 40px 20px 60px; }
-  header { text-align: center; margin-bottom: 36px; }
-  header h1 { font-size: 2.2rem; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
-  header h1 span { color: #38bdf8; }
-  header p { color: #94a3b8; margin-top: 8px; font-size: 0.98rem; max-width: 620px; margin-left: auto; margin-right: auto; }
-  .badge { display: inline-block; background: #0ea5e9; color: #fff; font-size: 0.72rem; font-weight: 700; padding: 4px 14px; border-radius: 999px; margin-bottom: 14px; letter-spacing: 0.5px; text-transform: uppercase; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-top: 10px; }
-  .card { background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; transition: transform 0.15s ease, border-color 0.15s ease; }
-  .card:hover { transform: translateY(-3px); border-color: #38bdf8; }
-  .card .icon { font-size: 2rem; margin-bottom: 10px; }
-  .card h2 { font-size: 1.25rem; color: #fff; margin-bottom: 4px; }
-  .card .plat { font-size: 0.78rem; font-weight: 600; color: #38bdf8; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.6px; }
-  .card p { font-size: 0.86rem; color: #94a3b8; line-height: 1.5; flex: 1; }
-  .card .ver { margin-top: 14px; font-size: 0.8rem; color: #cbd5e1; }
-  .card .ver b { color: #fbbf24; }
-  .btns { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
-  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 16px; border-radius: 10px; font-weight: 700; font-size: 0.85rem; text-decoration: none; transition: filter 0.15s ease; }
-  .btn:active { filter: brightness(0.9); }
-  .btn-tg { background: #229ed9; color: #fff; }
-  .btn-tg:hover { background: #1c86b8; }
-  .btn-gh { background: #334155; color: #e2e8f0; }
-  .btn-gh:hover { background: #475569; }
-  .btn-dis { background: #475569; color: #cbd5e1; cursor: not-allowed; }
-  details.feat { margin-top: 14px; background: #0f172a; border: 1px solid #334155; border-radius: 12px; }
-  details.feat summary { cursor: pointer; padding: 10px 14px; font-weight: 700; font-size: 0.85rem; color: #38bdf8; user-select: none; }
-  details.feat summary:hover { background: #16233a; }
-  details.feat .inner { padding: 4px 16px 14px; font-size: 0.8rem; color: #cbd5e1; line-height: 1.55; }
-  details.feat h4 { color: #fff; font-size: 0.85rem; margin: 14px 0 6px; }
-  details.feat ul { margin: 0 0 0 16px; }
-  details.feat li { margin-bottom: 5px; }
-  .note { margin-top: 34px; background: #0f172a; border: 1px solid #334155; border-radius: 14px; padding: 18px 20px; font-size: 0.85rem; color: #94a3b8; line-height: 1.6; }
-  .note b { color: #e2e8f0; }
-  .note ol { margin: 8px 0 0 20px; }
-  .note li { margin-bottom: 4px; }
-  .contact { margin-top: 26px; text-align: center; font-size: 0.85rem; color: #64748b; }
-  .contact b { color: #94a3b8; }
-  .note a { color: #38bdf8; text-decoration: underline; }
-  .meta { margin-top: 26px; text-align: center; color: #64748b; font-size: 0.78rem; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    background: linear-gradient(160deg, var(--bg1) 0%, var(--bg2) 60%, #0a1630 100%);
+    background-attachment: fixed;
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Glow decorativo de fondo */
+  .glow {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .glow::before, .glow::after {
+    content: ""; position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.5;
+  }
+  .glow::before { width: 520px; height: 520px; left: -140px; top: -180px; background: rgba(14, 165, 233, 0.22); }
+  .glow::after  { width: 460px; height: 460px; right: -120px; bottom: -160px; background: rgba(139, 92, 246, 0.18); }
+
+  .wrap { position: relative; z-index: 1; max-width: 1120px; margin: 0 auto; padding: 56px 24px 80px; }
+
+  /* ---------- Hero ---------- */
+  .hero { text-align: center; margin-bottom: 52px; }
+  .hero .brand {
+    display: inline-flex; align-items: center; gap: 12px; margin-bottom: 20px;
+    padding: 8px 20px 8px 10px; border-radius: 999px;
+    background: rgba(14, 165, 233, 0.1); border: 1px solid rgba(14, 165, 233, 0.35);
+  }
+  .hero .brand .mark {
+    width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center;
+    background: linear-gradient(135deg, #38bdf8, #6366f1); font-weight: 800; font-size: 1.05rem; color: #fff;
+  }
+  .hero .brand span { font-weight: 700; letter-spacing: 0.12em; font-size: 0.78rem; color: #bfdbfe; text-transform: uppercase; }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.1rem); font-weight: 800; letter-spacing: -0.02em; color: #fff; line-height: 1.1;
+  }
+  .hero h1 .grad {
+    background: linear-gradient(90deg, #38bdf8, #818cf8, #e879f9);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero p { margin: 16px auto 0; max-width: 680px; color: var(--muted); font-size: 1.02rem; line-height: 1.6; }
+  .hero .badge-row { margin-top: 22px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .hero .pill {
+    font-size: 0.76rem; font-weight: 600; color: #cbd5e1; padding: 6px 14px; border-radius: 999px;
+    background: rgba(148, 163, 184, 0.08); border: 1px solid rgba(148, 163, 184, 0.18);
+  }
+
+  /* ---------- Grid de apps ---------- */
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: start; }
+  @media (max-width: 980px) { .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--card);
+    backdrop-filter: blur(14px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 26px;
+    display: flex; flex-direction: column;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    position: relative; overflow: hidden;
+  }
+  .card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--accent, var(--cyan)); opacity: 0.9; }
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--accent, var(--cyan)) 45%, transparent);
+    box-shadow: 0 18px 42px -18px rgba(0, 0, 0, 0.55), 0 0 0 1px color-mix(in srgb, var(--accent, var(--cyan)) 20%, transparent);
+  }
+
+  .card .top { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+  .card .icon {
+    width: 52px; height: 52px; border-radius: 14px; flex-shrink: 0;
+    display: grid; place-items: center; font-size: 1.6rem;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--accent, var(--cyan)) 28%, #16233a), #0e1a30);
+    border: 1px solid color-mix(in srgb, var(--accent, var(--cyan)) 35%, transparent);
+  }
+  .card h2 { font-size: 1.3rem; font-weight: 800; color: #fff; line-height: 1.2; }
+  .card .plat {
+    display: inline-block; margin-top: 6px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--accent, var(--cyan));
+  }
+  .card .desc { color: var(--muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 16px; }
+
+  .card .ver {
+    display: inline-flex; align-items: center; gap: 8px; margin-bottom: 16px;
+    font-size: 0.82rem; color: var(--muted);
+  }
+  .card .ver .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.18); }
+  .card .ver b { color: var(--amber); font-weight: 700; }
+
+  /* ---------- Botones ---------- */
+  .btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 12px 14px; border-radius: 12px; font-weight: 700; font-size: 0.88rem;
+    text-decoration: none; border: 1px solid transparent;
+    transition: transform 0.15s ease, filter 0.15s ease, background 0.15s ease;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-tg { background: linear-gradient(135deg, #229ed9, #1a7fc0); color: #fff; box-shadow: 0 8px 20px -8px rgba(34, 158, 217, 0.6); }
+  .btn-tg:hover { filter: brightness(1.12); }
+  .btn-pri { background: linear-gradient(135deg, var(--accent, var(--cyan)), color-mix(in srgb, var(--accent, var(--cyan)) 65%, #6366f1)); color: #fff; box-shadow: 0 8px 20px -8px color-mix(in srgb, var(--accent, var(--cyan)) 60%, transparent); }
+  .btn-pri:hover { filter: brightness(1.1); }
+  .btn-dis { background: rgba(71, 85, 105, 0.5); color: #cbd5e1; cursor: not-allowed; }
+
+  /* ---------- Panel de características (expansión animada) ---------- */
+  .feat-btn {
+    width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    padding: 13px 16px; border-radius: 12px; cursor: pointer; user-select: none;
+    background: rgba(148, 163, 184, 0.07); border: 1px solid var(--border);
+    color: #cbd5e1; font-weight: 700; font-size: 0.88rem;
+    transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+  }
+  .feat-btn:hover { background: rgba(148, 163, 184, 0.14); color: #fff; }
+  .feat-btn .chev {
+    width: 22px; height: 22px; stroke: currentColor; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round;
+    transition: transform 0.3s ease; flex-shrink: 0;
+  }
+  .card.open .feat-btn .chev { transform: rotate(180deg); }
+  .card.open .feat-btn { color: var(--accent, var(--cyan)); border-color: color-mix(in srgb, var(--accent, var(--cyan)) 40%, transparent); }
+
+  .feat-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.45s cubic-bezier(0.4, 0, 0.2, 1); }
+  .card.open .feat-body { grid-template-rows: 1fr; }
+  .feat-inner { overflow: hidden; min-height: 0; }
+  .feat-content { padding-top: 8px; }
+
+  .feat-content { font-size: 0.84rem; color: #cbd5e1; line-height: 1.6; }
+  .feat-content h4 {
+    font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--accent, var(--cyan)); margin: 18px 0 8px; padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .feat-content h4:first-child { margin-top: 4px; }
+  .feat-content b { color: #e8eef8; font-weight: 700; display: block; margin: 14px 0 4px; font-size: 0.86rem; }
+  .feat-content ul { list-style: none; margin: 0 0 2px 0; }
+  .feat-content li { position: relative; padding-left: 18px; margin-bottom: 5px; }
+  .feat-content li::before {
+    content: ""; position: absolute; left: 0; top: 0.62em; width: 7px; height: 7px; border-radius: 2px;
+    background: var(--accent, var(--cyan)); opacity: 0.85;
+  }
+  .feat-content code { background: rgba(14, 165, 233, 0.12); padding: 1px 6px; border-radius: 5px; font-size: 0.82em; color: #7dd3fc; }
+
+  /* ---------- Nota / contacto ---------- */
+  .note {
+    margin-top: 46px; padding: 24px 28px; border-radius: var(--radius);
+    background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border);
+    font-size: 0.9rem; color: var(--muted); line-height: 1.65;
+  }
+  .note b { color: var(--text); }
+  .note ol { margin: 10px 0 0 18px; }
+  .note li { margin-bottom: 6px; }
+  .note code { background: rgba(14, 165, 233, 0.12); padding: 1px 6px; border-radius: 5px; color: #7dd3fc; }
+
+  .contact { margin-top: 40px; text-align: center; font-size: 0.95rem; color: #f8fafc; line-height: 1.9; }
+  .contact b { color: #ffffff; font-weight: 800; }
+  .contact .legal { display: block; margin-top: 2px; font-size: 0.82rem; color: #e2e8f0; }
+  .meta {
+    margin-top: 22px; display: inline-block; padding: 9px 22px; border-radius: 999px;
+    text-align: center; color: #ffffff; font-size: 0.78rem; font-weight: 600;
+    background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.18);
+    letter-spacing: 0.03em;
+  }
+  .meta-line { text-align: center; }
+
+  footer { position: relative; z-index: 1; text-align: center; padding: 0 24px 40px; }
+  footer .bar { max-width: 400px; height: 1px; margin: 0 auto 22px; background: linear-gradient(90deg, transparent, rgba(148,163,184,0.4), transparent); }
+  footer .ft {
+    display: inline-flex; align-items: center; gap: 10px; font-size: 0.8rem; color: var(--faint);
+    font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  footer .ft .mark { width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center; background: linear-gradient(135deg, #38bdf8, #6366f1); color: #fff; font-size: 0.72rem; font-weight: 800; }
+
+  @media (max-width: 560px) {
+    .wrap { padding: 36px 16px 64px; }
+    .card { padding: 20px; }
+    .btns { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
+<div class="glow"></div>
 <div class="wrap">
-  <header>
-    <span class="badge">Suite NEXORA · 100% Offline</span>
-    <h1>Descargas <span>Oficiales</span></h1>
-    <p>Software profesional para entidades cubanas (MIPYME, OTPC, TCP, SRL, CNA). Sin conexión a internet para operar una vez instalado.</p>
+  <header class="hero">
+    <div class="brand">
+      <div class="mark">N</div>
+      <span>Suite NEXORA</span>
+    </div>
+    <h1>Aplicaciones de gestión<br/>para Cuba, <span class="grad">100% offline</span></h1>
+    <p>Software profesional para MIPYME, OTPC, TCP, SRL y Cooperativas no agropecuarias. Una vez instalado, opera sin necesidad de conexión a internet.</p>
+    <div class="badge-row">
+      <span class="pill">🔒 100% Local</span>
+      <span class="pill">🇨🇺 Hecho en Cuba</span>
+      <span class="pill">📱 Multiplataforma</span>
+      <span class="pill">🛡️ Licencia segura</span>
+    </div>
   </header>
 
-  <!-- DC-01: MultiAlmacen -->
   <div class="grid" id="grid"></div>
 
   <div class="note">
     <b>¿Cómo descargar (opciones)?</b>
     <ol>
-      <li><b>Desde esta página</b>: pulsa <b>⬇️ Descargar instalador</b> en la tarjeta de la app.</li>
+      <li><b>Desde esta página</b>: abre la tarjeta de la app, revisa sus características y pulsa <b>⬇️ Descargar instalador</b>.</li>
       <li><b>Desde Telegram</b> (recomendado en Cuba): abre el canal <code>@NEXORA_Suite</code>, pulsa <b>Unirme</b> y entra en la pestaña de archivos.</li>
       <li>En Android y al primer aviso de "origen desconocido", activa <b>Permitir esta fuente</b>.</li>
       <li>Si la descarga es lenta, usa Telegram (reanuda y va más rápido en la red nacional).</li>
@@ -71,15 +231,19 @@
 
   <div class="contact">
     Soporte y licenciamiento: <b>Miguel Angel Piñeiro</b> · WhatsApp <b>+53 50840302</b><br/>
-    <span style="font-size:0.78rem;">Suite NEXORA — descarga autorizada solo a licenciatarios.</span>
+    <span class="legal">Suite NEXORA — descarga autorizada solo a licenciatarios.</span>
   </div>
-  <div class="meta" id="meta"></div>
+  <div class="meta-line"><div class="meta" id="meta"></div></div>
 </div>
 
+<footer>
+  <div class="bar"></div>
+  <div class="ft"><span class="mark">N</span> NEXORA Software Suite</div>
+</footer>
+
 <script>
-// DC-02: Aplicaciones publicadas en el repositorio publico de descargas.
-// El index se actualiza SOLO: consulta los releases publicados y toma la
-// ultima version por prefijo. El cliente nunca ve ni accede a GitHub.
+// La pagina se actualiza SOLA: consulta los releases publicados del repositorio
+// de descargas y toma la ultima version de cada app por prefijo.
 const REPO_OWNER = 'black-cuba';
 const REPO_DESCARGAS = 'nexora-descargas';
 const TELEGRAM = 'https://t.me/NEXORA_Suite';
@@ -88,254 +252,261 @@ const APPS = [
   {
     id: 'multialmacen',
     prefix: 'multialmacen',
-    icon: '🏢📦',
-    nombre: 'NEXORA Sistema MultiAlmacen v3',
+    icon: '🏢',
+    accent: '#0ea5e9',
+    nombre: 'Sistema MultiAlmacen',
+    versionLabel: 'v3',
     plat: 'Windows · EXE · 64 bits',
-    desc: 'Gestión comercial integral: inventario multialmacén, facturación POS, transferencias, ajustes, Modelo D-01 ONAT y reportes.',
+    desc: 'Gestión comercial integral: inventario multialmacén, facturación POS, transferencias entre almacenes, Modelo D-01 ONAT y reportes consolidados.',
     feats: `
       <h4>Características Principales</h4>
-      <b>Gestión Multi-Almacén & Puntos de Venta:</b>
+      <b>Gestión Multi-Almacén & Puntos de Venta</b>
       <ul>
         <li>Creación ilimitada de almacenes y sucursales.</li>
-        <li>Inventario Aislado por Sucursal: Cada almacén mantiene su catálogo, existencias y costos independientes.</li>
-        <li>Permisos Granulares por Usuario: El administrador asigna exactamente los almacenes a los que tiene acceso cada empleado.</li>
-        <li>Carga de Inventario Inicial por Almacén: Asistente masivo con selector de categorías predeterminadas y adición de nuevas categorías en línea.</li>
+        <li>Inventario aislado por sucursal: cada almacén mantiene su catálogo, existencias y costos independientes.</li>
+        <li>Permisos granulares por usuario: el administrador asigna exactamente los almacenes a los que tiene acceso cada empleado.</li>
+        <li>Carga de inventario inicial por almacén: asistente masivo con selector de categorías y adición de nuevas en línea.</li>
       </ul>
-      <b>Módulo de Inventario y Catálogo (Tecla F2):</b>
+      <b>Inventario y Catálogo (Tecla F2)</b>
       <ul>
         <li>Nombres, códigos, unidades y categorías en MAYÚSCULAS automáticas para uniformidad.</li>
-        <li>Soporte de decimales completo en cantidades, precios de costo y venta.</li>
-        <li>Fecha de vencimiento automática: si se omite, calcula automáticamente 1 año a partir del registro.</li>
+        <li>Soporte completo de decimales en cantidades, precios de costo y venta.</li>
+        <li>Fecha de vencimiento automática: si se omite, calcula 1 año a partir del registro.</li>
         <li>Alerta visual de stock mínimo y límite de stock.</li>
         <li>Eliminación segura de productos y edición directa de costos y precios.</li>
       </ul>
-      <b>Vales de Entrada y Compras a Proveedores (Tecla F3):</b>
+      <b>Vales de Entrada y Compras (Tecla F3)</b>
       <ul>
-        <li>Registro formal de facturas de compra con cálculo automático de totales e impuestos.</li>
-        <li>Generación automática de número de factura correlativo si no se especifica.</li>
-        <li>Alerta de Precios Existentes: Notifica si un producto ya cuenta con precio de costo o venta registrado para evitar inconsistencias.</li>
-        <li>Límites de stock configurables y asignación de operador responsable.</li>
+        <li>Registro formal de facturas de compra con totales e impuestos automáticos.</li>
+        <li>Número de factura correlativo automático si no se especifica.</li>
+        <li>Alerta de precios existentes para evitar inconsistencias.</li>
+        <li>Límites de stock configurables y operador responsable.</li>
         <li>Impresión y anulación de vales de entrada.</li>
       </ul>
-      <b>Vales de Salida y Punto de Venta POS (Tecla F4):</b>
+      <b>Vales de Salida y Punto de Venta POS (Tecla F4)</b>
       <ul>
         <li>Facturación rápida con lector de código de barras o búsqueda en tiempo real.</li>
         <li>Validación estricta de stock disponible en el almacén activo.</li>
-        <li>Impresión de tickets térmicos (58mm / 80mm) y facturas oficiales.</li>
+        <li>Impresión de tickets térmicos (58 mm / 80 mm) y facturas oficiales.</li>
         <li>Control de caja, consumidor final o clientes registrados.</li>
       </ul>
-      <b>Transferencias entre Almacenes (Tecla F5):</b>
+      <b>Transferencias entre Almacenes (Tecla F5)</b>
       <ul>
-        <li>Movimiento documentado de mercancías entre almacenes con control de origen y destino.</li>
-        <li>Creación o actualización automática del producto en el almacén de destino.</li>
-        <li>Comprobante oficial de transferencia con trazabilidad y exportación PDF/impresión.</li>
+        <li>Movimientos documentados entre almacenes con control de origen y destino.</li>
+        <li>Alta o actualización automática del producto en el almacén de destino.</li>
+        <li>Comprobante oficial con trazabilidad y exportación PDF / impresión.</li>
       </ul>
-      <b>Integración IPV con POS Móvil (Descriptor de Inventario):</b>
+      <b>Integración IPV con POS Móvil</b>
       <ul>
-        <li>Exportar IPV: desde Configuración se genera el archivo ipv_&lt;Almacén&gt;_&lt;fecha&gt;_inicial.ipv con el catálogo y existencias del almacén.</li>
-        <li>Importar cierre: el POS devuelve un _cierre.ipv con las ventas y el stock real del punto; el sistema lo valida contra el inventario esperado y, al confirmar, descuenta las salidas y registra la factura de venta.</li>
-        <li>Validación y discrepancias: detecta diferencias de stock (faltantes/sobrantes), permite ajustar el stock real del punto y bloquea el cierre hasta resolverlas.</li>
-        <li>Historial IPV: bitácora de todas las exportaciones y cierres con su estado y usuario.</li>
+        <li>Exporta el archivo ipv_&lt;Almacén&gt;_&lt;fecha&gt;_inicial.ipv con catálogo y existencias.</li>
+        <li>Importa el _cierre.ipv del punto: valida contra el inventario esperado, descuenta salidas y registra las ventas.</li>
+        <li>Detecta faltantes y sobrantes, permite ajustar y bloquea el cierre hasta resolver diferencias.</li>
+        <li>Historial IPV con bitácora de exportaciones y cierres.</li>
       </ul>
-      <b>Módulo de Mermas, Devoluciones y Vencidos (Exclusivo Administrador):</b>
+      <b>Mermas, Devoluciones y Vencidos (Administrador)</b>
       <ul>
-        <li>Registro tipificado de ajustes de stock: MERMA (rotura/deterioro), DEVOLUCIÓN y VENCIDO.</li>
-        <li>Descuento de stock en almacén y cálculo automático del costo total de la pérdida.</li>
-        <li>Comprobante impreso de ajuste y reporte dedicado en el módulo de Reportes.</li>
+        <li>Ajustes de stock tipificados: MERMA, DEVOLUCIÓN y VENCIDO.</li>
+        <li>Descuento automático de stock y cálculo del costo total de la pérdida.</li>
+        <li>Comprobante impreso y reporte dedicado.</li>
       </ul>
-      <b>Modelo D-01 ONAT (Declaración Jurada Fiscal de Cuba):</b>
+      <b>Modelo D-01 ONAT</b>
       <ul>
-        <li>Liquidación y cálculo oficial del Impuesto sobre Ingresos Personales y Utilidades conforme a la legislación de la Oficina Nacional de Administración Tributaria (ONAT).</li>
-        <li>Sincronización Automática: Toma el NIT, Sujeto Pasivo, Municipio, Provincia y Régimen de Tributación (General o Simplificado) directamente de los datos de la empresa.</li>
-        <li>Cálculo de Ingresos y Gastos: Autocálculo de ingresos brutos y gastos deducibles a partir de las ventas y compras registradas en el año fiscal.</li>
-        <li>Impresión y Exportación Oficial: Genera el modelo con formato idéntico al documento oficial de la ONAT para su presentación física o digital.</li>
+        <li>Liquidación del Impuesto sobre Ingresos Personales y Utilidades conforme a la legislación cubana.</li>
+        <li>Sincroniza NIT, sujeto pasivo, municipio, provincia y régimen de tributación desde los datos de la empresa.</li>
+        <li>Autocálculo de ingresos brutos y gastos deducibles del año fiscal.</li>
+        <li>Impresión con formato idéntico al documento oficial.</li>
       </ul>
-      <b>Módulo de Reportes y Estadísticas:</b>
+      <b>Reportes y Estadísticas</b>
       <ul>
-        <li>Modo Consolidado Global: Un solo clic para consolidar todos los almacenes y puntos de venta de la empresa.</li>
-        <li>Filtros Temporales: Hoy, Semana, Mes y Todo.</li>
-        <li>7 Sub-Reportes Especializados: Resumen y KPIs Financieros, Inventario Valorado, Vales de Entrada (Compras), Vales de Salida (Ventas), Transferencias entre Almacenes, Mermas/Devoluciones/Vencidos y Auditoría Integral y Log de Operaciones.</li>
-        <li>Exportación en PDF y CSV para cada uno de los 7 reportes.</li>
+        <li>Consolidado global de todos los almacenes con un clic.</li>
+        <li>Filtros temporales: hoy, semana, mes y todo.</li>
+        <li>7 reportes: KPIs financieros, inventario valorado, vales de entrada, vales de salida, transferencias, mermas y auditoría.</li>
+        <li>Exportación PDF y CSV en cada reporte.</li>
       </ul>
-      <b>Configuración, Usuarios y Seguridad de Claves:</b>
+      <b>Configuración, Usuarios y Seguridad</b>
       <ul>
-        <li>Edición Unificada de Usuarios: todos los usuarios (incluido el Administrador) desde el botón "✏️ Editar" en la tabla de usuarios.</li>
-        <li>Permite modificar nombre de usuario, nombre completo, rol, almacenes autorizados y actualizar contraseñas con confirmación y selector de visibilidad.</li>
-        <li>Cumplimiento Fiscal y Legal en Cuba: Registro de NIT/RUT, REEUP, Registro Mercantil, Cuentas Bancarias (CUP/MLC) y Representante Legal con fecha de instalación protegida.</li>
-        <li>Respaldos de Base de Datos SQLite: descarga y restauración de copias de seguridad .db con un solo clic.</li>
+        <li>Edición unificada de usuarios (incluido el Administrador).</li>
+        <li>Datos legales: NIT/RUT, REEUP, Registro Mercantil, bancos CUP/MLC.</li>
+        <li>Respaldos SQLite con un clic.</li>
       </ul>
-      <b>Licenciamiento y Activación:</b>
+      <b>Licenciamiento</b>
       <ul>
-        <li>Período de prueba de 15 días con acceso a todos los módulos.</li>
-        <li>Posibilidad de seleccionar y solicitar el plan oficial en cualquier momento vía WhatsApp Desktop.</li>
-        <li>Activación mediante Machine ID de hardware único por clave o archivo de licencia .lic.</li>
-        <li>Planes Disponibles: Mensual ($15), Trimestral ($50), Semestral ($75), Anual ($100).</li>
+        <li>15 días de prueba con todos los módulos.</li>
+        <li>Activación por Machine ID + archivo .lic.</li>
+        <li>Planes: Mensual $15 · Trimestral $50 · Semestral $75 · Anual $100.</li>
       </ul>
-      <b>⌨️ Atajos de Teclado del Sistema</b>
+      <b>Atajos de teclado</b>
       <ul>
-        <li>F1: Manual de Ayuda y Guía del Módulo Activo</li>
-        <li>F2: Módulo de Inventario y Catálogo</li>
-        <li>F3: Vales de Entrada / Compras</li>
-        <li>F4: Vales de Salida / Punto de Venta POS</li>
-        <li>F5: Transferencias entre Almacenes</li>
-        <li>ESC: Cerrar modales y ventanas emergentes</li>
+        <li>F1 Ayuda · F2 Inventario · F3 Compras · F4 POS · F5 Transferencias · ESC cerrar.</li>
       </ul>
-      <b>🛡️ Credenciales por Defecto</b>
+      <b>Credenciales</b>
       <ul>
-        <li>Usuario Administrador: <code>admin</code></li>
-        <li>Contraseña Inicial: <code>admin123</code> (puede cambiarse en el módulo de Configuración)</li>
+        <li>Usuario: <code>admin</code> · Contraseña inicial: <code>admin123</code> (cambiable).</li>
       </ul>`,
   },
   {
     id: 'pos',
     prefix: 'pos',
-    icon: '📱🛒',
-    nombre: 'NEXORA POS Móvil v2',
+    icon: '📱',
+    accent: '#22c55e',
+    nombre: 'POS Móvil',
+    versionLabel: 'v2',
     plat: 'Android · APK',
-    desc: 'Punto de venta móvil. Importa inventario desde el almacén central (IPV), vende offline y devuelve el cierre de turno.',
+    desc: 'Punto de venta móvil. Importa inventario desde el almacén central (IPV), vende offline y devuelve el cierre de turno para conciliación.',
     feats: `
       <h4>Características Principales</h4>
-      <b>Punto de Venta Móvil (Trabaja offline):</b>
+      <b>Punto de Venta Móvil (funciona offline)</b>
       <ul>
-        <li>Captura de ventas desde el celular sin necesidad de internet; el punto vende normal en zonas alejadas del almacén central.</li>
+        <li>Vende desde el celular sin conexión, ideal para puntos alejados del almacén central.</li>
         <li>Catálogo y precios sincronizados desde el almacén central vía archivo IPV.</li>
+        <li>Búsqueda de productos por código o nombre con precios actualizados.</li>
       </ul>
-      <b>Importación IPV (Descriptor de Inventario):</b>
+      <b>Importación IPV (Descriptor de Inventario)</b>
       <ul>
-        <li>Importa el archivo ipv_&lt;Almacén&gt;_&lt;fecha&gt;_inicial.ipv generado por NEXORA Sistema MultiAlmacen v3 y queda listo para vender con las existencias reales del punto.</li>
-        <li>Al importar, reemplaza o combina el catálogo local con la información del almacén central.</li>
+        <li>Importa ipv_&lt;Almacén&gt;_&lt;fecha&gt;_inicial.ipv y queda listo para vender con existencias reales.</li>
+        <li>Reemplaza o combina el catálogo local con la información central.</li>
       </ul>
-      <b>Ventas y Cobro:</b>
+      <b>Ventas y Cobro</b>
       <ul>
-        <li>Registro de ventas con cantidades y precios, buscando productos por código o nombre.</li>
-        <li>Cálculo de totales y descuentos por venta.</li>
-        <li>Registro del cierre del turno al finalizar el día.</li>
+        <li>Registro de ventas con cantidades, precios, totales y descuentos.</li>
+        <li>Consulta rápida de lista de precios del vendedor.</li>
       </ul>
-      <b>Cierre y Devolución al Almacén Central (_cierre.ipv):</b>
+      <b>Cierre de Turno (_cierre.ipv)</b>
       <ul>
-        <li>Exporta el cierre de turno con el detalle de ventas y el stock real del punto.</li>
-        <li>Incluye el desglose de ventas (fecha, total e items con código/nombre/cantidad/precio/descuento/subtotal) para conciliación exacta con el almacén central.</li>
-        <li>El sistema central valida contra el inventario esperado, descuenta salidas y registra las facturas.</li>
+        <li>Exporta el cierre con el detalle de ventas y el stock real del punto.</li>
+        <li>Desglose de ventas (fecha, total e items con código/nombre/cantidad/precio/descuento/subtotal).</li>
+        <li>El almacén central valida, descuenta salidas y registra las facturas.</li>
       </ul>
-      <b>Galeria de precios / Notas:</b>
+      <b>Instalación</b>
       <ul>
-        <li>Visualización de la lista de precios descargada para consulta rápida del vendedor.</li>
-      </ul>
-      <b>Instalación:</b>
-      <ul>
-        <li>APK firmada lista para instalar; en Android activar "Instalar apps de orígenes desconocidos".</li>
+        <li>APK firmada; en Android activar "Instalar apps de orígenes desconocidos".</li>
       </ul>`,
   },
   {
     id: 'rrhh',
     prefix: 'rrhh',
-    icon: '👥📋',
-    nombre: 'NEXORA RRHH v1',
+    icon: '👥',
+    accent: '#8b5cf6',
+    nombre: 'Nexora RRHH',
+    versionLabel: 'v1',
     plat: 'Windows · EXE · 64 bits',
-    desc: 'Gestión de Recursos Humanos: expediente del personal, puestos, asistencia, permisos/ausencias, nómina y vacaciones.',
+    desc: 'Recursos Humanos: expediente del personal, puestos, control de asistencia, permisos/ausencias, nómina y vacaciones.',
     feats: `
       <h4>Características Principales</h4>
-      <b>Expediente del Personal (Tecla F2):</b>
+      <b>Expediente del Personal (Tecla F2)</b>
       <ul>
-        <li>Alta y gestión completa de trabajadores: datos personales, profesionales, bancarios y de contratación.</li>
-        <li>Ficha visual del trabajador, alta/baja laboral con fecha y causa, y reactivación.</li>
-        <li>Búsqueda y filtros por activos/de baja/todos.</li>
-        <li>Salario base por trabajador o heredado del puesto.</li>
+        <li>Gestión completa de trabajadores: datos personales, profesionales, bancarios y de contratación.</li>
+        <li>Ficha visual, altas, bajas con causa y reactivación.</li>
+        <li>Búsqueda y filtros por activos / de baja / todos.</li>
+        <li>Salario base propio o heredado del puesto.</li>
       </ul>
-      <b>Puestos de Trabajo (Tecla F3):</b>
+      <b>Puestos de Trabajo (Tecla F3)</b>
       <ul>
-        <li>Organización por departamentos y cargos con su salario base.</li>
-        <li>Protección de integridad: no se eliminan departamentos con cargos ni cargos con trabajadores.</li>
+        <li>Organización por departamentos y cargos con salario base.</li>
+        <li>Protección de integridad: no se borra un departamento con cargos ni un cargo con trabajadores.</li>
       </ul>
-      <b>Control de Asistencia (Tecla F4):</b>
+      <b>Control de Asistencia (Tecla F4)</b>
       <ul>
-        <li>Jornada diaria con entrada/salida de un clic y registro de incidencias.</li>
+        <li>Jornada diaria con entrada/salida de un clic e incidencias.</li>
         <li>Incidencias: Presente, Ausencia, Permiso, Enfermedad, Vacaciones, Sobrecumplimiento, Otro.</li>
-        <li>Historial por rango de fechas y planilla mensual por trabajador con horas.</li>
-        <li>Cálculo automático de horas con soporte de turnos nocturnos y cruce de medianoche.</li>
+        <li>Historial por fechas y planilla mensual por trabajador.</li>
+        <li>Cálculo automático de horas con turnos nocturnos y cruce de medianoche.</li>
       </ul>
-      <b>Permisos y Ausencias (Tecla F5):</b>
+      <b>Permisos y Ausencias (Tecla F5)</b>
       <ul>
-        <li>Registro de permisos: Enfermedad, Licencia CITMA, Maternidad, Paternidad, Personal, Sin Sueldo, Ausencia injustificada, Vacaciones y Otro.</li>
-        <li>Aprobación con flujo PENDIENTE → APROBADO / RECHAZADO y control de fechas con días automáticos.</li>
-        <li>Filtros por estado con contador de pendientes.</li>
+        <li>Tipos: Enfermedad, Maternidad, Paternidad, CITMA, Personal, Sin Sueldo, Ausencia injustificada, Vacaciones.</li>
+        <li>Flujo PENDIENTE → APROBADO / RECHAZADO con días automáticos.</li>
       </ul>
-      <b>Nómina (Tecla F6):</b>
+      <b>Nómina (Tecla F6)</b>
       <ul>
-        <li>Generación de nómina por período con cálculo de devengado, impuestos y contribuciones.</li>
-        <li>Conceptos de nómina editables (Ingreso, Impuesto, Contribución, Descuento) con valores por porcentaje o monto.</li>
-        <li>Excepciones por trabajador o por concepto.</li>
-        <li>Cálculo conforme a las tarifas por tramos del Impuesto sobre Ingresos Personales (ONAT).</li>
+        <li>Nómina por período con devengado, impuestos y contribuciones.</li>
+        <li>Conceptos editables y excepciones por trabajador o concepto.</li>
+        <li>Cálculo por tramos del Impuesto sobre Ingresos Personales (ONAT).</li>
         <li>Reversión de períodos y control de duplicados.</li>
       </ul>
-      <b>Vacaciones (Tecla F7):</b>
+      <b>Vacaciones (Tecla F7)</b>
       <ul>
-        <li>Acumulación automática mensual y control de saldo por trabajador.</li>
-        <li>Registro de disfrutes con validación de saldo, carga inicial y reversión de movimientos.</li>
+        <li>Acumulación mensual automática y saldo por trabajador.</li>
+        <li>Disfrutes con validación de saldo y reversión de movimientos.</li>
       </ul>
-      <b>Dashboard y Reportes (Tecla F1-Inicio):</b>
+      <b>Dashboard y Reportes</b>
       <ul>
-        <li>Panel de inicio con KPIs: plantilla activa, asistencia del mes, costo de nómina y saldo de vacaciones.</li>
-        <li>Reportes laborales: Planilla de Asistencia, Nómina por Período, Plantilla del Personal y Submayor de Vacaciones.</li>
-        <li>Exportación CSV e impresión de todos los reportes.</li>
+        <li>KPIs: plantilla activa, asistencia del mes, costo de nómina y saldo de vacaciones.</li>
+        <li>Reportes: Planilla de Asistencia, Nómina por Período, Plantilla del Personal y Submayor de Vacaciones.</li>
+        <li>Exportación CSV e impresión.</li>
       </ul>
-      <b>Configuración y Seguridad:</b>
+      <b>Seguridad</b>
       <ul>
-        <li>Usuarios y roles con control de acceso.</li>
-        <li>Respaldos y restauración de base de datos SQLite.</li>
-        <li>Licencia offline con Machine ID y archivo .lic; antivertificación de reloj.</li>
+        <li>Usuarios y roles, respaldos SQLite, licencia offline con Machine ID.</li>
       </ul>
-      <b>⌨️ Atajos de Teclado del Sistema</b>
+      <b>Atajos de teclado</b>
       <ul>
-        <li>F1: Inicio (Dashboard y Ayuda)</li>
-        <li>F2: Expediente del Personal</li>
-        <li>F3: Puestos de Trabajo</li>
-        <li>F4: Control de Asistencia</li>
-        <li>F5: Permisos y Ausencias</li>
-        <li>F6: Nómina</li>
-        <li>F7: Vacaciones</li>
+        <li>F1 Inicio/Ayuda · F2 Expediente · F3 Puestos · F4 Asistencia · F5 Permisos · F6 Nómina · F7 Vacaciones.</li>
       </ul>
-      <b>🛡️ Credenciales por Defecto</b>
+      <b>Credenciales</b>
       <ul>
-        <li>Usuario Administrador: <code>admin</code></li>
-        <li>Contraseña inicial configurable en el módulo de Configuración.</li>
+        <li>Usuario: <code>admin</code> · contraseña configurable en Configuración.</li>
       </ul>`,
   },
 ];
 
+function chevronSvg() {
+  return '<svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>';
+}
+
 function cardHtml(app, data) {
-  const ver = data ? data.version : 'Consultando...';
+  const ver = data ? data.version : app.versionLabel + ' · consultando...';
   const size = data && data.sizeMB ? ` · ~${data.sizeMB.toFixed(0)} MB` : '';
   const dlHref = data && data.url ? data.url : null;
   const dlBtn = dlHref
-    ? `<a class="btn btn-pri" href="${dlHref}" target="_blank" rel="noopener">⬇️ Descargar instalador</a>`
-    : `<span class="btn btn-dis" style="flex:1;">Descarga por Telegram</span>`;
+    ? `<a class="btn btn-pri" href="${dlHref}" target="_blank" rel="noopener">⬇️ Descargar</a>`
+    : `<span class="btn btn-dis">Descarga por Telegram</span>`;
   return `
-    <div class="card">
-      <div class="icon">${app.icon}</div>
-      <h2>${app.nombre}</h2>
-      <div class="plat">${app.plat}</div>
-      <p>${app.desc}</p>
-      <div class="ver">Versión: <b>${ver}</b>${size}</div>
+    <div class="card" style="--accent:${app.accent}">
+      <div class="top">
+        <div class="icon">${app.icon}</div>
+        <div>
+          <h2>${app.nombre}</h2>
+          <span class="plat">${app.plat}</span>
+        </div>
+      </div>
+      <p class="desc">${app.desc}</p>
+      <div class="ver"><span class="dot"></span>Versión: <b>${ver}</b>${size}</div>
       <div class="btns">
-        <a class="btn btn-tg" href="${TELEGRAM}" target="_blank" rel="noopener">Telegram</a>
+        <a class="btn btn-tg" href="${TELEGRAM}" target="_blank" rel="noopener">✈️ Telegram</a>
         ${dlBtn}
       </div>
-      <details class="feat">
-        <summary>📋 Ver características</summary>
-        <div class="inner">${app.feats}</div>
-      </details>
+      <button type="button" class="feat-btn" aria-expanded="false">
+        <span>📋 Ver características</span>
+        ${chevronSvg()}
+      </button>
+      <div class="feat-body">
+        <div class="feat-inner">
+          <div class="feat-content">${app.feats}</div>
+        </div>
+      </div>
     </div>`;
+}
+
+function bindFeat() {
+  document.querySelectorAll('.feat-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.card');
+      const open = card.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
 }
 
 async function cargar() {
   const grid = document.getElementById('grid');
   grid.innerHTML = APPS.map(a => cardHtml(a, null)).join('');
+  bindFeat();
   try {
     const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_DESCARGAS}/releases?per_page=100`);
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const releases = await res.json();
-    const publicadas = [];
+    let fechaMax = null;
     for (const app of APPS) {
       const matches = releases.filter(r =>
         r.tag_name && r.tag_name.toLowerCase().startsWith(app.prefix.toLowerCase()) &&
@@ -350,14 +521,20 @@ async function cargar() {
           url: asset ? asset.browser_download_url : null,
           sizeMB: asset ? asset.size / (1024 * 1024) : null,
         };
-        publicadas.push({ fecha: latest.published_at, app: app.id });
+        const t = new Date(latest.published_at).getTime();
+        if (!fechaMax || t > fechaMax) fechaMax = t;
       }
-      const el = grid.querySelectorAll('.card')[APPS.indexOf(app)];
-      el.outerHTML = cardHtml(app, data);
+      const cards = grid.querySelectorAll('.card');
+      const wasOpen = cards[APPS.indexOf(app)].classList.contains('open');
+      cards[APPS.indexOf(app)].outerHTML = cardHtml(app, data);
     }
-    const fecha = publicadas.length ? publicadas.map(p => p.fecha).sort().reverse()[0] : null;
+    bindFeat();
+    const cards = grid.querySelectorAll('.card');
+    for (let i = 0; i < APPS.length; i++) {
+      if (APPS[i].feats && false) { /* no-op */ }
+    }
     const meta = document.getElementById('meta');
-    meta.textContent = fecha ? ('Última actualización: ' + new Date(fecha).toLocaleString('es')) : 'Versiones compiladas recientemente.';
+    meta.textContent = fechaMax ? ('Última actualización: ' + new Date(fechaMax).toLocaleString('es')) : 'Versiones compiladas recientemente.';
   } catch (e) {
     const meta = document.getElementById('meta');
     meta.textContent = 'No se pudo consultar la lista de versiones. Descargue desde Telegram o vuelva a intentar en unos minutos.';
