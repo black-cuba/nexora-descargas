@@ -37,8 +37,7 @@
   .note li { margin-bottom: 4px; }
   .contact { margin-top: 26px; text-align: center; font-size: 0.85rem; color: #64748b; }
   .contact b { color: #94a3b8; }
-  a { color: #38bdf8; }
-  .loading { text-align: center; color: #64748b; font-size: 0.8rem; margin: 6px 0 0; }
+  .note a { color: #38bdf8; text-decoration: underline; }
   .meta { margin-top: 26px; text-align: center; color: #64748b; font-size: 0.78rem; }
 </style>
 </head>
@@ -54,13 +53,12 @@
   <div class="grid" id="grid"></div>
 
   <div class="note">
-    <b>¿Cómo descargar desde Telegram (recomendado en Cuba)?</b>
+    <b>¿Cómo descargar (opciones)?</b>
     <ol>
-      <li>Abre <b>Telegram</b> en tu celular o PC y busca el canal <code>@NEXORA_Suite</code>.</li>
-      <li>Pulsa <b>Unirme</b> y entra en la pestaña de archivos del canal.</li>
-      <li>Descarga el instalador (<code>.exe</code>) o la app (<code>.apk</code>).</li>
+      <li><b>Desde esta página</b>: pulsa <b>⬇️ Descargar instalador</b> en la tarjeta de la app.</li>
+      <li><b>Desde Telegram</b> (recomendado en Cuba): abre el canal <code>@NEXORA_Suite</code>, pulsa <b>Unirme</b> y entra en la pestaña de archivos.</li>
       <li>En Android y al primer aviso de "origen desconocido", activa <b>Permitir esta fuente</b>.</li>
-      <li>Si usas la descarga directa y es lenta, prefiere el canal de Telegram (reanuda y va más rápido en la red nacional).</li>
+      <li>Si la descarga es lenta, usa Telegram (reanuda y va más rápido en la red nacional).</li>
     </ol>
   </div>
 
@@ -73,8 +71,8 @@
 
 <script>
 // DC-02: Aplicaciones publicadas en el repositorio publico de descargas.
-// El index se actualiza SOLO: consulta la API publica de releases de
-// black-cuba/nexora-descargas y toma la ultima version por prefijo.
+// El index se actualiza SOLO: consulta los releases publicados y toma la
+// ultima version por prefijo. El cliente nunca ve ni accede a GitHub.
 const REPO_OWNER = 'black-cuba';
 const REPO_DESCARGAS = 'nexora-descargas';
 const TELEGRAM = 'https://t.me/NEXORA_Suite';
@@ -110,10 +108,9 @@ function cardHtml(app, data) {
   const ver = data ? data.version : 'Consultando...';
   const size = data && data.sizeMB ? ` · ~${data.sizeMB.toFixed(0)} MB` : '';
   const dlHref = data && data.url ? data.url : null;
-  const relUrl = 'https://github.com/' + REPO_OWNER + '/' + REPO_DESCARGAS + '/releases';
   const dlBtn = dlHref
-    ? `<a class="btn btn-gh" href="${dlHref}" target="_blank" rel="noopener">Descarga directa (${ver})</a>`
-    : `<span class="btn btn-dis">Descarga directa</span>`;
+    ? `<a class="btn btn-pri" href="${dlHref}" target="_blank" rel="noopener">⬇️ Descargar instalador</a>`
+    : `<span class="btn btn-dis" style="flex:1;">Descarga por Telegram</span>`;
   return `
     <div class="card">
       <div class="icon">${app.icon}</div>
@@ -124,7 +121,6 @@ function cardHtml(app, data) {
       <div class="btns">
         <a class="btn btn-tg" href="${TELEGRAM}" target="_blank" rel="noopener">Telegram</a>
         ${dlBtn}
-        <a class="btn btn-gh" href="${relUrl}" target="_blank" rel="noopener">Ver releases</a>
       </div>
     </div>`;
 }
@@ -142,7 +138,6 @@ async function cargar() {
         r.tag_name && r.tag_name.toLowerCase().startsWith(app.prefix.toLowerCase()) &&
         !r.draft && !r.prerelease
       );
-      // Ordenar por created_at descendente (la API ya devuelve recientes primero)
       const latest = matches[0] || null;
       let data = null;
       if (latest) {
@@ -152,14 +147,14 @@ async function cargar() {
           url: asset ? asset.browser_download_url : null,
           sizeMB: asset ? asset.size / (1024 * 1024) : null,
         };
-        publicadas.push({ tag: latest.tag_name, fecha: latest.published_at, app: app.id });
+        publicadas.push({ fecha: latest.published_at, app: app.id });
       }
       const el = grid.querySelectorAll('.card')[APPS.indexOf(app)];
       el.outerHTML = cardHtml(app, data);
     }
-    const fecha = publicadas.length ? new Date(publicadas[0].fecha).toLocaleString('es') : null;
+    const fecha = publicadas.length ? publicadas.map(p => p.fecha).sort().reverse()[0] : null;
     const meta = document.getElementById('meta');
-    meta.textContent = fecha ? ('Última actualización: ' + fecha) : 'Sin releases publicados todavía en el repositorio de descargas.';
+    meta.textContent = fecha ? ('Última actualización: ' + new Date(fecha).toLocaleString('es')) : 'Versiones compiladas recientemente.';
   } catch (e) {
     const meta = document.getElementById('meta');
     meta.textContent = 'No se pudo consultar la lista de versiones. Descargue desde Telegram o vuelva a intentar en unos minutos.';
