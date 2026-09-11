@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Descargas oficiales de la Suite NEXORA: Sistema MultiAlmacen v3 (Windows), POS Móvil v2 (Android) y RRHH v1 (Windows). Software 100% offline para MIPYME, TCP, SRL y CNA en Cuba." />
+<title>NEXORA — Descargas Oficiales</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: linear-gradient(160deg, #0f172a 0%, #1e293b 100%); color: #e2e8f0; min-height: 100vh; }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 40px 20px 60px; }
+  header { text-align: center; margin-bottom: 36px; }
+  header h1 { font-size: 2.2rem; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
+  header h1 span { color: #38bdf8; }
+  header p { color: #94a3b8; margin-top: 8px; font-size: 0.98rem; max-width: 620px; margin-left: auto; margin-right: auto; }
+  .badge { display: inline-block; background: #0ea5e9; color: #fff; font-size: 0.72rem; font-weight: 700; padding: 4px 14px; border-radius: 999px; margin-bottom: 14px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-top: 10px; }
+  .card { background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; transition: transform 0.15s ease, border-color 0.15s ease; }
+  .card:hover { transform: translateY(-3px); border-color: #38bdf8; }
+  .card .icon { font-size: 2rem; margin-bottom: 10px; }
+  .card h2 { font-size: 1.25rem; color: #fff; margin-bottom: 4px; }
+  .card .plat { font-size: 0.78rem; font-weight: 600; color: #38bdf8; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.6px; }
+  .card p { font-size: 0.86rem; color: #94a3b8; line-height: 1.5; flex: 1; }
+  .card .ver { margin-top: 14px; font-size: 0.8rem; color: #cbd5e1; }
+  .card .ver b { color: #fbbf24; }
+  .btns { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 16px; border-radius: 10px; font-weight: 700; font-size: 0.85rem; text-decoration: none; transition: filter 0.15s ease; }
+  .btn:active { filter: brightness(0.9); }
+  .btn-tg { background: #229ed9; color: #fff; }
+  .btn-tg:hover { background: #1c86b8; }
+  .btn-gh { background: #334155; color: #e2e8f0; }
+  .btn-gh:hover { background: #475569; }
+  .btn-dis { background: #475569; color: #cbd5e1; cursor: not-allowed; }
+  .note { margin-top: 34px; background: #0f172a; border: 1px solid #334155; border-radius: 14px; padding: 18px 20px; font-size: 0.85rem; color: #94a3b8; line-height: 1.6; }
+  .note b { color: #e2e8f0; }
+  .note ol { margin: 8px 0 0 20px; }
+  .note li { margin-bottom: 4px; }
+  .contact { margin-top: 26px; text-align: center; font-size: 0.85rem; color: #64748b; }
+  .contact b { color: #94a3b8; }
+  a { color: #38bdf8; }
+  .loading { text-align: center; color: #64748b; font-size: 0.8rem; margin: 6px 0 0; }
+  .meta { margin-top: 26px; text-align: center; color: #64748b; font-size: 0.78rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="badge">Suite NEXORA · 100% Offline</span>
+    <h1>Descargas <span>Oficiales</span></h1>
+    <p>Software profesional para entidades cubanas (MIPYME, OTPC, TCP, SRL, CNA). Sin conexión a internet para operar una vez instalado.</p>
+  </header>
+
+  <!-- DC-01: MultiAlmacen -->
+  <div class="grid" id="grid"></div>
+
+  <div class="note">
+    <b>¿Cómo descargar desde Telegram (recomendado en Cuba)?</b>
+    <ol>
+      <li>Abre <b>Telegram</b> en tu celular o PC y busca el canal <code>@NEXORA_Suite</code>.</li>
+      <li>Pulsa <b>Unirme</b> y entra en la pestaña de archivos del canal.</li>
+      <li>Descarga el instalador (<code>.exe</code>) o la app (<code>.apk</code>).</li>
+      <li>En Android y al primer aviso de "origen desconocido", activa <b>Permitir esta fuente</b>.</li>
+      <li>Si usas la descarga directa y es lenta, prefiere el canal de Telegram (reanuda y va más rápido en la red nacional).</li>
+    </ol>
+  </div>
+
+  <div class="contact">
+    Soporte y licenciamiento: <b>Miguel Angel Piñeiro</b> · WhatsApp <b>+53 50840302</b><br/>
+    <span style="font-size:0.78rem;">Suite NEXORA — descarga autorizada solo a licenciatarios.</span>
+  </div>
+  <div class="meta" id="meta"></div>
+</div>
+
+<script>
+// DC-02: Aplicaciones publicadas en el repositorio publico de descargas.
+// El index se actualiza SOLO: consulta la API publica de releases de
+// black-cuba/nexora-descargas y toma la ultima version por prefijo.
+const REPO_OWNER = 'black-cuba';
+const REPO_DESCARGAS = 'nexora-descargas';
+const TELEGRAM = 'https://t.me/NEXORA_Suite';
+
+const APPS = [
+  {
+    id: 'multialmacen',
+    prefix: 'multialmacen',
+    icon: '🏢📦',
+    nombre: 'NEXORA Sistema MultiAlmacen v3',
+    plat: 'Windows · EXE · 64 bits',
+    desc: 'Gestión comercial integral: inventario multialmacén, facturación POS, transferencias, ajustes, Modelo D-01 ONAT y reportes.', 
+  },
+  {
+    id: 'pos',
+    prefix: 'pos',
+    icon: '📱🛒',
+    nombre: 'NEXORA POS Móvil v2',
+    plat: 'Android · APK',
+    desc: 'Punto de venta móvil. Importa inventario desde el almacén central (IPV), vende offline y devuelve el cierre de turno.',
+  },
+  {
+    id: 'rrhh',
+    prefix: 'rrhh',
+    icon: '👥📋',
+    nombre: 'NEXORA RRHH v1',
+    plat: 'Windows · EXE · 64 bits',
+    desc: 'Gestión de Recursos Humanos: expediente del personal, puestos, asistencia, permisos/ausencias, nómina y vacaciones.',
+  },
+];
+
+function cardHtml(app, data) {
+  const ver = data ? data.version : 'Consultando...';
+  const size = data && data.sizeMB ? ` · ~${data.sizeMB.toFixed(0)} MB` : '';
+  const dlHref = data && data.url ? data.url : null;
+  const relUrl = 'https://github.com/' + REPO_OWNER + '/' + REPO_DESCARGAS + '/releases';
+  const dlBtn = dlHref
+    ? `<a class="btn btn-gh" href="${dlHref}" target="_blank" rel="noopener">Descarga directa (${ver})</a>`
+    : `<span class="btn btn-dis">Descarga directa</span>`;
+  return `
+    <div class="card">
+      <div class="icon">${app.icon}</div>
+      <h2>${app.nombre}</h2>
+      <div class="plat">${app.plat}</div>
+      <p>${app.desc}</p>
+      <div class="ver">Versión: <b>${ver}</b>${size}</div>
+      <div class="btns">
+        <a class="btn btn-tg" href="${TELEGRAM}" target="_blank" rel="noopener">Telegram</a>
+        ${dlBtn}
+        <a class="btn btn-gh" href="${relUrl}" target="_blank" rel="noopener">Ver releases</a>
+      </div>
+    </div>`;
+}
+
+async function cargar() {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = APPS.map(a => cardHtml(a, null)).join('');
+  try {
+    const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_DESCARGAS}/releases?per_page=100`);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const releases = await res.json();
+    const publicadas = [];
+    for (const app of APPS) {
+      const matches = releases.filter(r =>
+        r.tag_name && r.tag_name.toLowerCase().startsWith(app.prefix.toLowerCase()) &&
+        !r.draft && !r.prerelease
+      );
+      // Ordenar por created_at descendente (la API ya devuelve recientes primero)
+      const latest = matches[0] || null;
+      let data = null;
+      if (latest) {
+        const asset = (latest.assets && latest.assets.length) ? latest.assets[0] : null;
+        data = {
+          version: latest.tag_name,
+          url: asset ? asset.browser_download_url : null,
+          sizeMB: asset ? asset.size / (1024 * 1024) : null,
+        };
+        publicadas.push({ tag: latest.tag_name, fecha: latest.published_at, app: app.id });
+      }
+      const el = grid.querySelectorAll('.card')[APPS.indexOf(app)];
+      el.outerHTML = cardHtml(app, data);
+    }
+    const fecha = publicadas.length ? new Date(publicadas[0].fecha).toLocaleString('es') : null;
+    const meta = document.getElementById('meta');
+    meta.textContent = fecha ? ('Última actualización: ' + fecha) : 'Sin releases publicados todavía en el repositorio de descargas.';
+  } catch (e) {
+    const meta = document.getElementById('meta');
+    meta.textContent = 'No se pudo consultar la lista de versiones. Descargue desde Telegram o vuelva a intentar en unos minutos.';
+  }
+}
+cargar();
+</script>
+</body>
+</html>
