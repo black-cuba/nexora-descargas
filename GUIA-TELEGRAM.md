@@ -1,69 +1,77 @@
-# Guía de distribución por Telegram (internet nacional de Cuba)
+# Guía de distribución de la Suite NEXORA (internet nacional de Cuba)
 
-Estrategia recomendada para que tus clientes descarguen la Suite NEXORA
-desde la red nacional: **canal de Telegram** como fuente principal y la
-**página de descargas** (`descargas/index.html`) como vitrina de enlaces.
+Estrategia para que tus clientes descarguen la Suite NEXORA desde la red
+nacional: **canal de Telegram** como fuente principal y **página web pública**
+(`nexora-descargas` en GitHub Pages) como vitrina de instaladores.
 
 Telegram es el método más rápido y confiable en Cuba: reanuda descargas,
 no depende de VPN y casi todos los clientes ya lo tienen instalado.
 
+> **Importante**: el cliente **nunca accede a tus repositorios de código**.
+> Todos los repos de código (MultiAlmacen, POS, RRHH) son **privados**. La
+> página pública solo muestra los **releases autorizados** que se publican en
+> el repo público `nexora-descargas`, y el cliente descarga desde esa página
+> o desde Telegram.
+
 ---
 
-## 1. Crear el canal
+## 1. Página pública de descargas (ya montada)
 
-1. En Telegram pulsa el icono del **lápiz** (Android) o el **menú** (‏PC) → **Nuevo canal**.
+| Dato | Valor |
+|---|---|
+| Repo público | `black-cuba/nexora-descargas` |
+| URL de la página | https://black-cuba.github.io/nexora-descargas/ |
+| Contenido | `index.html` (auto-actualizable) + `GUIA-TELEGRAM.md` + `docs/CONTRATO-SUITE-NEXORA.md` |
+
+### Cómo se actualiza sola
+
+1. `index.html` consulta la API pública de releases de `nexora-descargas`
+   (`/releases?per_page=100`) al abrirse.
+2. Agrupa los releases por prefijo y muestra la **última versión** de cada app:
+   - `multialmacen-*` → MultiAlmacen (Windows EXE)
+   - `pos-*` → POS Móvil (Android APK)
+   - `rrhh-*` → RRHH (Windows EXE)
+3. Cada build que publica un release en el repo privado publica **también** un
+   release con ese prefijo en `nexora-descargas` → la página refleja la nueva
+   versión automáticamente. No hay que editar la página a mano.
+
+### Cómo se publica un release del código → repo público
+
+Cada repo privado tiene su workflow con un paso extra que publica el instalador
+en `nexora-descargas` (usa el secreto `NEXORA_DEPLOY_TOKEN`):
+- MultiAlmacen: `.github/workflows/build-windows-exe.yml` → `multialmacen-v3.0.N`
+- RRHH: `.github/workflows/build-windows-exe.yml` → `rrhh-v1.0.N`
+- POS: `.github/workflows/build.yml` → `pos-v2.0.N`
+
+Si el secreto no existe, el paso se omite sin romper el build (puedes publicar
+a mano con `gh release create <tag> <archivo> --repo black-cuba/nexora-descargas`).
+
+---
+
+## 2. Crear el canal de Telegram
+
+1. En Telegram pulsa el icono del **lápiz** (Android) o el **menú** (PC) → **Nuevo canal**.
 2. Nombre sugerido: **NEXORA Suite** · Usuario/alias: `NEXORA_Suite`.
-3. Tipo: **Canal público** (para que cualquiera lo encuentre). Privado también sirve, pero
-   tendrás que enviar el enlace de invitación a cada cliente.
-4. Al crearlo, ve a **Editar canal → Administradores** y agrega un bot o a un segundo dispositivo
-   tuyo como respaldo (por si pierdes el acceso).
+3. Tipo: **Canal público** (para que cualquiera lo encuentre).
+4. Al crearlo: **Editar canal → Administradores** y agrega un bot o segundo
+   dispositivo tuyo como respaldo.
 
 Quedará con enlace: `https://t.me/NEXORA_Suite`
 
 ---
 
-## 2. Subir los instaladores (mensajes fijos / archivos)
+## 3. Subir los instaladores al canal
 
-Sube cada instalador como **archivo adjunto** en su propio mensaje para
-que aparezca en la pestaña "Archivos" del canal:
+Sube cada instalador como **archivo adjunto** en su propio mensaje:
 
-| App | Archivo | Cómo apuntarlo |
-|---|---|---|
-| MultiAlmacen EXE | `NEXORA-SistemaMultiAlmacen-SETUP-V*.exe` | Descargar desde GitHub Release |
-| POS Móvil APK | `Nexora-POS-v2.0.31.apk` | Descargar desde GitHub Release del repo móvil |
-| RRHH EXE | `NexoraRRHH-v1.0.0-Setup.exe` | Descargar desde GitHub Release de NEXORA_RRHH |
-
-Pasos por archivo:
-
-1. Abre el canal y envía el archivo (arrastra o usa el clip 📎).
-2. En el mensaje explica brevemente: qué app es, requisitos y versión.
-3. Pulsa los **3 puntos del mensaje → Fijar** (pin) para que quede arriba.
-4. Crea un mensaje de **bienvenida/índice** con las 3 apps y los pasos de
-   instalación, y fíjalo también (así el cliente sabe qué hacer al entrar).
-
-> Consejo: marca los archivos como **sin compresión** para que Telegram los
-> suba tal cual y la descarga del cliente sea directa.
-
----
-
-## 3. Preparar la página de descargas
-
-Ya tienes `descargas/index.html` (autónoma, sin dependencias externas).
-Antes de publicarla:
-
-- Actualiza el enlace **Telegram** a tu canal real (`https://t.me/...`).
-- Actualiza los enlaces **Descarga directa / Ver releases** con tus URLs reales de GitHub.
-- Ajusta versiones si lanzas una nueva.
-
-Dónde alojarla (opciones):
-
-| Opción | Como funciona |
+| App | Archivo |
 |---|---|
-| **GitHub Pages** (repo público de solo docs) | Crear un repo público `nexora-descargas`, subir el `index.html` y activar Pages. Enlace tipo `https://usuario.github.io/nexora-descargas/`. |
-| **Telegram "Fijado"** | Pegar el HTML no se ve bien; mejor compartir el enlace de GitHub Pages en un mensaje fijado. |
-| **PC del cliente** | Enviar el `index.html` por WhatsApp; se abre en cualquier navegador (no necesita internet. Pero si lo abren en móvil, se ve bien). |
+| MultiAlmacen EXE | `NEXORA-SistemaMultiAlmacen-SETUP-V3.0.N.exe` |
+| POS Móvil APK | `Nexora-POS-v2.0.N.apk` |
+| RRHH EXE | `NexoraRRHH-v1.0.N-Setup.exe` |
 
-> GitHub puede ir lento en Cuba: siempre ofrece primero Telegram en la página.
+Pasos: enviar archivo → explicar app/versión → **fijar** el mensaje. Crea un
+mensaje de bienvenida/índice con las 3 apps y fíjalo también.
 
 ---
 
@@ -71,23 +79,23 @@ Dónde alojarla (opciones):
 
 > 📥 <b>NEXORA Suite — Descargas</b>
 >
-> 1️⃣ Entra aquí al canal y baja de la pestaña **Archivos**.
-> 2️⃣ Descarga el que necesites:
+> 1️⃣ Página web: <code>https://black-cuba.github.io/nexora-descargas/</code>
+> 2️⃣ O baja de la pestaña **Archivos** del canal el que necesites:
 >    • 🏢 MultiAlmacen v3 (Windows) — `...-Setup.exe`
 >    • 📱 POS Móvil v2 (Android) — `...apk`
 >    • 👥 RRHH v1 (Windows) — `...-Setup.exe`
-> 3️⃣ Instala y abre. Al primer arranque solicita la **licencia**; contáctanos por
->    WhatsApp +53 50840302 para activarla.
+> 3️⃣ Instala y abre. Al primer arranque solicita la **licencia**; contáctanos
+>    por WhatsApp +53 50840302 para activarla.
 > 💡 Si la descarga se corta, Telegram la reanuda sola.
 
 ---
 
 ## 5. Notas importantes para Cuba
 
-- **La licencia es independiente por app** (ver `docs/CONTRATO-SUITE-NEXORA.md`,
-  Anexo A): $15/mes, $50/trim, $75/sem, $100/año por aplicación.
+- **Licencia independiente por app** (`docs/CONTRATO-SUITE-NEXORA.md`, Anexo A):
+  $15/mes, $50/trim, $75/sem, $100/año por aplicación.
 - El APK requiere activar "Instalar apps de orígenes desconocidos" en Android.
-- El EXE de Windows muestra "Publicador desconocido" hasta que el cliente
-  instale el certificado (`INSTALAR-CERTIFICADO.bat` + `.cer`) incluido en el Release.
-- No copies los instaladores a servicios como Mega/Drive: en Cuba suelen ir
-  bloqueados o lentos. Telegram es la vía probada.
+- El EXE de Windows muestra "Publicador desconocido" hasta que se instale el
+  certificado (`INSTALAR-CERTIFICADO.bat` + `.cer`) incluido en el Release.
+- No copies instaladores a Mega/Drive: en Cuba suelen ir bloqueados o lentos.
+  Telegram es la vía probada.
