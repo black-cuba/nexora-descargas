@@ -49,9 +49,8 @@
     padding: 8px 20px 8px 10px; border-radius: 999px;
     background: rgba(14, 165, 233, 0.1); border: 1px solid rgba(14, 165, 233, 0.35);
   }
-  .hero .brand .mark {
-    width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center;
-    background: linear-gradient(135deg, #38bdf8, #6366f1); font-weight: 800; font-size: 1.05rem; color: #fff;
+  .hero .brand .logo {
+    display: block; height: 40px; width: auto; border-radius: 8px;
   }
   .hero .brand span { font-weight: 700; letter-spacing: 0.12em; font-size: 0.78rem; color: #bfdbfe; text-transform: uppercase; }
   .hero h1 {
@@ -111,7 +110,7 @@
   .card .ver b { color: var(--amber); font-weight: 700; }
 
   /* ---------- Botones ---------- */
-  .btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+  .btns { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 16px; }
   .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
     padding: 12px 14px; border-radius: 12px; font-weight: 700; font-size: 0.88rem;
@@ -119,8 +118,6 @@
     transition: transform 0.15s ease, filter 0.15s ease, background 0.15s ease;
   }
   .btn:active { transform: scale(0.97); }
-  .btn-tg { background: linear-gradient(135deg, #229ed9, #1a7fc0); color: #fff; box-shadow: 0 8px 20px -8px rgba(34, 158, 217, 0.6); }
-  .btn-tg:hover { filter: brightness(1.12); }
   .btn-pri { background: linear-gradient(135deg, var(--accent, var(--cyan)), color-mix(in srgb, var(--accent, var(--cyan)) 65%, #6366f1)); color: #fff; box-shadow: 0 8px 20px -8px color-mix(in srgb, var(--accent, var(--cyan)) 60%, transparent); }
   .btn-pri:hover { filter: brightness(1.1); }
   .btn-dis { background: rgba(71, 85, 105, 0.5); color: #cbd5e1; cursor: not-allowed; }
@@ -247,7 +244,7 @@
     display: inline-flex; align-items: center; gap: 10px; font-size: 0.8rem; color: var(--faint);
     font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
   }
-  footer .ft .mark { width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center; background: linear-gradient(135deg, #38bdf8, #6366f1); color: #fff; font-size: 0.72rem; font-weight: 800; }
+  footer .ft .logo { display: block; height: 20px; width: auto; }
 
   @media (max-width: 560px) {
     .wrap { padding: 36px 16px 64px; }
@@ -261,7 +258,7 @@
 <div class="wrap">
   <header class="hero">
     <div class="brand">
-      <div class="mark">N</div>
+      <img class="logo" src="nexora.png" alt="NEXORA" />
       <span>Suite NEXORA</span>
     </div>
     <h1>Aplicaciones de gestión<br/>para Cuba, <span class="grad">100% offline</span></h1>
@@ -277,12 +274,12 @@
   <div class="grid" id="grid"></div>
 
   <div class="note">
-    <b>¿Cómo descargar (opciones)?</b>
+    <b>¿Cómo descargar?</b>
     <ol>
-      <li><b>Desde esta página</b>: abre la tarjeta de la app, revisa sus características y pulsa <b>⬇️ Descargar instalador</b>.</li>
-      <li><b>Desde Telegram</b> (recomendado en Cuba): abre el canal <code>@NEXORA_Suite</code>, pulsa <b>Unirme</b> y entra en la pestaña de archivos.</li>
+      <li>Pulsa <b>⬇️ Descargar</b> en la tarjeta de la app y descargarás directamente la <b>última versión publicada</b>.</li>
+      <li>Usa <b>📋 Ver características</b> para revisar qué incluye cada aplicación antes de instalar.</li>
       <li>En Android y al primer aviso de "origen desconocido", activa <b>Permitir esta fuente</b>.</li>
-      <li>Si la descarga es lenta, usa Telegram (reanuda y va más rápido en la red nacional).</li>
+      <li>Si la descarga se interrumpe, vuelve a pulsar el botón y el archivo se reanuda automáticamente.</li>
     </ol>
   </div>
 
@@ -295,7 +292,7 @@
 
 <footer>
   <div class="bar"></div>
-  <div class="ft"><span class="mark">N</span> NEXORA Software Suite</div>
+  <div class="ft"><img class="logo" src="nexora.png" alt="NEXORA" /> NEXORA Software Suite</div>
 </footer>
 
 <div class="modal-overlay" id="modal">
@@ -310,8 +307,7 @@
     </div>
     <div class="m-body" id="modalContenido"></div>
     <div class="m-foot">
-      <a class="btn btn-tg" href="https://t.me/NEXORA_Suite" target="_blank" rel="noopener">✈️ Descargar por Telegram</a>
-      <a class="btn btn-pri" id="modalDescargar" href="#" target="_blank" rel="noopener">⬇️ Descargar instalador</a>
+      <a class="btn btn-pri" id="modalDescargar" href="#" rel="noopener">⬇️ Descargar instalador</a>
     </div>
   </div>
 </div>
@@ -530,8 +526,8 @@ function cardHtml(app, data) {
   const size = data && data.sizeMB ? ` · ~${data.sizeMB.toFixed(0)} MB` : '';
   const dlHref = data && data.url ? data.url : null;
   const dlBtn = dlHref
-    ? `<a class="btn btn-pri" href="${dlHref}" target="_blank" rel="noopener">⬇️ Descargar</a>`
-    : `<span class="btn btn-dis">Descarga por Telegram</span>`;
+    ? `<a class="btn btn-pri" href="${dlHref}" rel="noopener">⬇️ Descargar</a>`
+    : `<span class="btn btn-dis">Próximamente</span>`;
   return `
     <div class="card" style="--accent:${app.accent}">
       <div class="top">
@@ -544,7 +540,6 @@ function cardHtml(app, data) {
       <p class="desc">${app.desc}</p>
       <div class="ver"><span class="dot"></span>Versión: <b>${ver}</b>${size}</div>
       <div class="btns">
-        <a class="btn btn-tg" href="${TELEGRAM}" target="_blank" rel="noopener">✈️ Telegram</a>
         ${dlBtn}
       </div>
       <button type="button" class="feat-btn" data-app="${app.id}" aria-haspopup="dialog">
@@ -555,11 +550,12 @@ function cardHtml(app, data) {
 }
 
 function bindFeat() {
-  document.querySelectorAll('.feat-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const app = APPS.find(a => a.id === btn.dataset.app);
-      if (app) abrirModal(app);
-    });
+  const grid = document.getElementById('grid');
+  grid.addEventListener('click', e => {
+    const btn = e.target.closest('.feat-btn');
+    if (!btn) return;
+    const app = APPS.find(a => a.id === btn.dataset.app);
+    if (app) abrirModal(app);
   });
 }
 
@@ -574,11 +570,11 @@ function abrirModal(app) {
   if (app.descargaUrl) {
     dl.href = app.descargaUrl;
     dl.classList.remove('btn-dis');
-    dl.textContent = '⬇️ Descargar instalador (' + (app.versionLabel) + ')';
+    dl.textContent = '⬇️ Descargar instalador (' + app.versionLabel + ')';
   } else {
-    dl.href = TELEGRAM;
+    dl.removeAttribute('href');
     dl.classList.add('btn-dis');
-    dl.textContent = 'Descarga por Telegram';
+    dl.textContent = '⬇️ Próximamente disponible';
   }
   overlay.classList.add('show');
   document.body.style.overflow = 'hidden';
@@ -614,10 +610,11 @@ async function cargar() {
       let data = null;
       if (latest) {
         const asset = (latest.assets && latest.assets.length) ? latest.assets[0] : null;
+        const ok = asset && asset.size >= (1024 * 1024);
         data = {
           version: latest.tag_name,
-          url: asset ? asset.browser_download_url : null,
-          sizeMB: asset ? asset.size / (1024 * 1024) : null,
+          url: ok ? asset.browser_download_url : null,
+          sizeMB: ok ? asset.size / (1024 * 1024) : null,
         };
         app.descargaUrl = data.url;
         const t = new Date(latest.published_at).getTime();
@@ -631,7 +628,7 @@ async function cargar() {
     meta.textContent = fechaMax ? ('Última actualización: ' + new Date(fechaMax).toLocaleString('es')) : 'Versiones compiladas recientemente.';
   } catch (e) {
     const meta = document.getElementById('meta');
-    meta.textContent = 'No se pudo consultar la lista de versiones. Descargue desde Telegram o vuelva a intentar en unos minutos.';
+    meta.textContent = 'No se pudo consultar la lista de versiones. Vuelva a intentar en unos minutos.';
   }
 }
 cargar();
