@@ -269,14 +269,20 @@
   }
   .meta-line { text-align: center; }
 
-  footer { position: relative; z-index: 1; text-align: center; padding: 0 24px 46px; }
+  footer { position: relative; z-index: 1; text-align: center; padding: 0 0 46px; }
   footer .bar { max-width: 400px; height: 1px; margin: 0 auto 22px; background: linear-gradient(90deg, transparent, rgba(148,163,184,0.4), transparent); }
   footer .ft {
-    display: flex; flex-direction: column; align-items: center; gap: 14px;
+    display: flex; flex-direction: column; align-items: center; gap: 16px;
   }
   footer .ft .logo {
-    display: block; height: clamp(44px, 6vw, 72px); width: auto;
-    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.35));
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 1120px;
+    border-radius: 14px;
+    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.4));
+    box-sizing: border-box;
+    padding: 0 24px;
   }
   footer .ft .txt {
     font-size: 0.78rem; color: var(--faint);
