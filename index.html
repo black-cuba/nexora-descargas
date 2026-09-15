@@ -333,8 +333,9 @@
   footer { position: relative; z-index: 1; text-align: center; padding: 0 24px 44px; }
   footer .bar { max-width: 420px; height: 1px; margin: 0 auto 26px; background: linear-gradient(90deg, transparent, rgba(148,163,184,0.4), transparent); }
   footer .logo-pie { width: 100%; height: auto; margin: 0 auto 16px; display: block; filter: none; }
-  footer .legal { font-size: 0.78rem; color: var(--faint); line-height: 1.9; }
-  footer .legal b { color: #cbd5e1; }
+  footer .legal { font-size: 0.82rem; color: #fff; line-height: 1.9; }
+  footer .legal b { color: #fff; font-weight: 700; }
+  footer .legal .dim { color: #cbd5e1; }
   .meta-line { text-align: center; margin-top: 26px; position: relative; z-index: 1; }
   .meta { display: inline-block; padding: 8px 20px; border-radius: 999px; font-family: var(--font-m); font-size: 0.7rem; color: #cbd5e1; background: rgba(255,255,255,0.06); border: 1px solid var(--line-strong); letter-spacing: 0.06em; }
 </style>
@@ -500,10 +501,9 @@
 
 <footer>
   <div class="bar"></div>
-  <img class="logo-pie" src="nexora-pie.png" alt="NEXORA Software Suite" />
   <div class="legal">
     <b>NEXORA Software Suite</b> — © 2026 Miguel Angel Piñeiro · Hecho en Cuba 🇨🇺<br/>
-    Software 100% local · Los datos del licenciatario solo residen en su equipo.
+    <span class="dim">Software 100% local · Los datos del licenciatario solo residen en su equipo.</span>
   </div>
 </footer>
 
