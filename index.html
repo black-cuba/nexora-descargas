@@ -61,9 +61,10 @@
   }
   .hero .brand .logo {
     display: block;
-    height: clamp(110px, 16vw, 190px);
-    width: auto;
-    filter: drop-shadow(0 14px 38px rgba(14, 165, 233, 0.30));
+    width: min(860px, 92%);
+    height: auto;
+    border-radius: 14px;
+    filter: drop-shadow(0 14px 38px rgba(14, 165, 233, 0.28));
   }
   .hero .brand span {
     font-weight: 700; letter-spacing: 0.34em; font-size: 0.78rem; color: #7dd3fc;
@@ -269,57 +270,25 @@
   }
   .meta-line { text-align: center; }
 
-  /* ---------- Navbar profesional ---------- */
-  .nav {
-    position: sticky; top: 0; z-index: 40;
-    display: flex; align-items: center; justify-content: space-between; gap: 18px;
-    padding: 12px clamp(18px, 4vw, 34px);
-    background: rgba(11, 17, 32, 0.72);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+  /* ---------- Menú debajo del lema ---------- */
+  .menu {
+    display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px;
+    margin: -6px auto 6px; max-width: 760px;
   }
-  .nav .n-logo {
-    display: flex; align-items: center; gap: 10px;
-    text-decoration: none; color: #fff;
-  }
-  .nav .n-logo img { height: 34px; width: auto; display: block; }
-  .nav .n-logo .n-name { font-weight: 800; letter-spacing: 0.1em; font-size: 0.86rem; text-transform: uppercase; }
-  .nav .n-links { display: flex; align-items: center; gap: 4px; list-style: none; }
-  .nav .n-links a {
-    display: block; padding: 9px 14px; border-radius: 10px;
-    color: #cbd5e1; font-size: 0.86rem; font-weight: 600; text-decoration: none;
-    transition: background 0.16s ease, color 0.16s ease;
-  }
-  .nav .n-links a:hover { background: rgba(148, 163, 184, 0.12); color: #fff; }
-  .nav .n-cta {
+  .menu a {
     display: inline-flex; align-items: center; gap: 8px;
-    padding: 9px 16px; border-radius: 10px;
+    padding: 10px 18px; border-radius: 12px;
+    color: #cbd5e1; font-size: 0.88rem; font-weight: 700; text-decoration: none;
+    background: rgba(148, 163, 184, 0.07); border: 1px solid rgba(148, 163, 184, 0.18);
+    transition: background 0.16s ease, color 0.16s ease, border-color 0.16s ease;
+  }
+  .menu a:hover { background: rgba(148, 163, 184, 0.15); color: #fff; border-color: rgba(148, 163, 184, 0.35); }
+  .menu a.cta {
     background: linear-gradient(135deg, #0ea5e9, #6366f1);
-    color: #fff; font-size: 0.85rem; font-weight: 800; text-decoration: none;
+    color: #fff; border-color: transparent;
     box-shadow: 0 8px 20px -8px rgba(14, 165, 233, 0.55);
   }
-  .nav .n-cta:hover { filter: brightness(1.12); }
-  .nav .n-burger {
-    display: none; flex-direction: column; justify-content: center; gap: 5px;
-    width: 42px; height: 42px; padding: 10px; border-radius: 10px; cursor: pointer;
-    background: rgba(148, 163, 184, 0.08); border: 1px solid rgba(148, 163, 184, 0.2);
-  }
-  .nav .n-burger span { display: block; height: 2px; width: 100%; border-radius: 2px; background: #e2e8f0; transition: 0.25s; }
-  .nav.open .n-burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .nav.open .n-burger span:nth-child(2) { opacity: 0; }
-  .nav.open .n-burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-  @media (max-width: 860px) {
-    .nav .n-links {
-      position: absolute; top: 100%; left: 0; right: 0;
-      flex-direction: column; align-items: stretch; gap: 2px; padding: 8px 12px 14px;
-      background: rgba(11, 17, 32, 0.96);
-      border-bottom: 1px solid rgba(148, 163, 184, 0.16);
-      display: none;
-    }
-    .nav.open .n-links { display: flex; }
-    .nav .n-burger { display: flex; }
-    .nav .n-cta { display: none; }
-  }
+  .menu a.cta:hover { filter: brightness(1.12); }
 
   /* ---------- Lema ---------- */
   .lema {
@@ -337,27 +306,14 @@
 
   footer { position: relative; z-index: 1; text-align: center; padding: 0 0 46px; }
   footer .bar { max-width: 400px; height: 1px; margin: 0 auto 22px; background: linear-gradient(90deg, transparent, rgba(148,163,184,0.4), transparent); }
-  footer .ft {
-    display: flex; flex-direction: column; align-items: center; gap: 16px;
-  }
-  footer .ft .logo {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-width: 1120px;
-    border-radius: 14px;
-    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.4));
-    box-sizing: border-box;
-    padding: 0 24px;
-  }
   footer .ft .txt {
     font-size: 0.78rem; color: var(--faint);
     font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
   }
 
   /* Compensar altura del navbar fijo al navegar por anclas */
-  .wrap > .sec, .wrap > .note, .wrap > .contact { scroll-margin-top: 84px; }
-  .hero { scroll-margin-top: 84px; }
+  .wrap > .sec, .wrap > .note, .wrap > .contact { scroll-margin-top: 24px; }
+  .hero { scroll-margin-top: 24px; }
 
   @media (max-width: 560px) {
     .wrap { padding: 36px 16px 64px; }
@@ -369,28 +325,10 @@
 <body>
 <div class="glow"></div>
 
-<nav class="nav" id="nav">
-  <a class="n-logo" href="#inicio">
-    <img src="nexora.png" alt="NEXORA" />
-    <span class="n-name">NEXORA Suite</span>
-  </a>
-  <ul class="n-links">
-    <li><a href="#inicio">Inicio</a></li>
-    <li><a href="#descargas">Descargas</a></li>
-    <li><a href="#como-descargar">Guía</a></li>
-    <li><a href="#licenciamiento">Licenciamiento</a></li>
-    <li><a href="#contacto">Soporte</a></li>
-  </ul>
-  <button class="n-burger" id="nBurger" aria-label="Abrir menú" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-  <a class="n-cta" href="#descargas">⬇️ Descargar ahora</a>
-</nav>
-
 <div class="wrap">
   <header class="hero" id="inicio">
     <div class="brand">
-      <img class="logo" src="nexora-encabezado.png" alt="NEXORA" />
+      <img class="logo" src="nexora-pie.png" alt="NEXORA" />
       <span>Suite NEXORA</span>
     </div>
     <h1>Aplicaciones de gestión<br/>para Cuba, <span class="grad">100% offline</span></h1>
@@ -408,6 +346,15 @@
   <div class="lema">
     <p>TU CONTROL, TU SOFTWARE<br/>Y <span class="grad">NOSOTROS JUNTOS</span></p>
   </div>
+
+  <nav class="menu" aria-label="Menú principal">
+    <a href="#inicio">🏠 Inicio</a>
+    <a href="#descargas">⬇️ Descargas</a>
+    <a href="#como-descargar">📖 Guía</a>
+    <a href="#licenciamiento">🔑 Licenciamiento</a>
+    <a href="#contacto">💬 Soporte</a>
+    <a class="cta" href="#descargas">Descargar ahora</a>
+  </nav>
 
   <div class="sec-label" id="descargas">Descargas</div>
   <div class="grid" id="grid"></div>
@@ -443,7 +390,6 @@
 <footer>
   <div class="bar"></div>
   <div class="ft">
-    <img class="logo" src="nexora-pie.png" alt="NEXORA Suite" />
     <span class="txt">NEXORA Software Suite</span>
   </div>
 </footer>
@@ -810,18 +756,6 @@ function cerrarModal() {
   overlay.addEventListener('click', e => { if (e.target === overlay) cerrarModal(); });
   document.getElementById('modalCerrar').addEventListener('click', cerrarModal);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarModal(); });
-})();
-
-(function enlazarNav() {
-  const nav = document.getElementById('nav');
-  const burger = document.getElementById('nBurger');
-  const toggle = (force) => {
-    const open = typeof force === 'boolean' ? force : !nav.classList.contains('open');
-    nav.classList.toggle('open', open);
-    burger.setAttribute('aria-expanded', String(open));
-  };
-  burger.addEventListener('click', () => toggle());
-  nav.querySelectorAll('.n-links a').forEach(a => a.addEventListener('click', () => toggle(false)));
 })();
 
 async function cargar() {
