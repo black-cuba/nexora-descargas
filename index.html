@@ -976,7 +976,10 @@ async function cargar() {
       const latest = matches[0] || null;
       let data = null;
       if (latest) {
-        const asset = (latest.assets && latest.assets.length) ? latest.assets[0] : null;
+        const installers = latest.assets.filter(a => /\.exe$/i.test(a.name) || /\.apk$/i.test(a.name) || /\.zip$/i.test(a.name));
+        const withSize = installers.filter(a => a.size >= (1024 * 1024));
+        const eligibles = withSize.length ? withSize : installers;
+        const asset = eligibles.sort((a, b) => (a.name.toLowerCase().includes('portable') ? 1 : 0) - (b.name.toLowerCase().includes('portable') ? 1 : 0))[0] || null;
         const ok = asset && asset.size >= (1024 * 1024);
         data = {
           version: latest.tag_name.split(app.prefix.toLowerCase() + '-').pop() || latest.tag_name,
