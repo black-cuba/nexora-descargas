@@ -78,7 +78,7 @@
   header.top .logo .nm small { display: block; font-family: var(--font-m); font-size: 0.6rem; font-weight: 500; color: var(--cyan); letter-spacing: 0.28em; text-transform: uppercase; }
   header.top nav.links { display: flex; align-items: center; gap: 2px; }
   header.top nav.links a {
-    padding: 9px 14px; border-radius: 10px; color: var(--mute); font-size: 0.88rem; font-weight: 600;
+    padding: 9px 14px; border-radius: 10px; color: #ffffff; font-size: 0.92rem; font-weight: 600;
     text-decoration: none; transition: color 0.16s ease, background 0.16s ease;
   }
   header.top nav.links a:hover { color: #fff; background: rgba(148,163,184,0.1); }
@@ -115,21 +115,21 @@
   /* ---------- Ticker de estado ---------- */
   .ticker {
     position: relative; z-index: 1; overflow: hidden;
-    border-bottom: 1px solid var(--line);
-    background: rgba(0, 0, 0, 0.82);
-    padding: 9px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    background: linear-gradient(90deg, rgba(34, 211, 238, 0.12), rgba(167, 139, 250, 0.1), rgba(34, 211, 238, 0.12));
+    padding: 11px 0;
     white-space: nowrap;
   }
   .ticker .run {
     display: inline-block; padding-left: 100%;
     animation: ticker 34s linear infinite;
-    font-family: var(--font-m); font-size: 0.74rem; letter-spacing: 0.14em; color: var(--mute);
+    font-family: var(--font-m); font-size: 0.86rem; font-weight: 600; letter-spacing: 0.06em; color: #ffffff;
   }
-  .ticker .run i { color: var(--cyan); padding: 0 18px; font-style: normal; }
+  .ticker .run i { color: var(--cyan); padding: 0 10px; font-style: normal; }
   @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-100%); } }
 
   /* ---------- Hero ---------- */
-  .hero { position: relative; text-align: center; padding: 64px 0 40px; }
+  .hero { position: relative; text-align: center; padding: 40px 0 30px; }
   .hero .sys {
     display: inline-block; font-family: var(--font-m); font-size: 0.68rem;
     letter-spacing: 0.3em; text-transform: uppercase; color: var(--cyan);
@@ -138,14 +138,14 @@
   }
   .hero .sys b { color: var(--green); font-weight: 600; }
   .hero .brand {
-    margin: 0 calc(50% - 50vw) 18px;
+    margin: 0 calc(50% - 50vw) 4px;
     width: 100vw;
     max-width: none;
   }
   .hero .brand img { width: 100%; height: auto; display: block; border-radius: 0; filter: none; }
   .hero h1 {
     font-size: clamp(2.1rem, 5.2vw, 3.4rem); font-weight: 700; letter-spacing: -0.02em;
-    color: #fff; line-height: 1.08; margin-top: 26px;
+    color: #fff; line-height: 1.08; margin-top: 14px;
   }
   .hero h1 .grad {
     background: linear-gradient(90deg, var(--cyan), var(--violet));
@@ -155,7 +155,7 @@
     margin: 18px auto 0; max-width: 660px; color: var(--mute); font-size: 1.04rem; line-height: 1.65;
   }
   .hero .lema {
-    margin: 30px auto 0; max-width: 680px;
+    margin: 20px auto 0; max-width: 680px;
     border: 1px solid var(--line); border-radius: 14px;
     background: linear-gradient(180deg, rgba(34, 211, 238, 0.07), rgba(167, 139, 250, 0.05));
     padding: 18px 22px;
@@ -163,7 +163,7 @@
     letter-spacing: 0.06em; color: #fff; line-height: 1.7;
   }
   .hero .lema .g { color: var(--cyan); }
-  .hero .ctas { margin-top: 32px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .hero .ctas { margin-top: 22px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
   .btn {
     display: inline-flex; align-items: center; gap: 9px;
     padding: 14px 24px; border-radius: 12px;
@@ -344,7 +344,7 @@
 
 <header class="top" id="topHeader">
   <a class="logo" href="#inicio">
-    <img src="assets/app/nexora-512.png" alt="NEXORA" />
+    <img src="assets/app/nexora-128.png" alt="NEXORA" />
     <span class="nm">NEXORA<small>Software Suite</small></span>
   </a>
   <nav class="links" aria-label="Navegación principal">
@@ -367,7 +367,7 @@
   <section class="hero" id="inicio">
     <div class="sys"><b>●</b> SISTEMA OPERATIVO &nbsp;ESTADO: EN LÍNEA</div>
     <div class="brand">
-      <img src="nexora-pie.png" alt="NEXORA — Tu control, tu software" />
+      <img src="nexora-pie.jpg" alt="NEXORA — Tu control, tu software" />
     </div>
     <h1>Aplicaciones de gestión<br/>para Cuba, <span class="grad">100% offline</span></h1>
     <p class="lead">Software profesional para MIPYME, OTPC, TCP, SRL y Cooperativas no agropecuarias. Una vez instalado, opera sin necesidad de conexión a internet. Tus datos pertenecen a tu negocio y solo a tu negocio.</p>
@@ -377,7 +377,7 @@
     <div class="ctas">
       <a class="btn btn-pri" href="#la-suite">⬇ Descargar ahora</a>
       <a class="btn btn-ghost" href="#planes">Ver planes de licencia</a>
-      <div class="sub">DESCARGAS AUTORIZADAS SOLO PARA LICENCIATARIOS · +53 50840302</div>
+      <div class="sub">DESCARGA AUTORIZADA · +53 50840302</div>
     </div>
   </section>
 
@@ -490,7 +490,7 @@
       <div class="sup-card">
         <h3>🔐 Modelo de confianza</h3>
         <p>Activación por <b>archivo .lic</b> o clave firmada (RSA) ligada a tu equipo. El software detecta manipulación del reloj y versiones adulteradas.</p>
-        <p style="margin-bottom:0">Suite NEXORA — descarga autorizada solo a licenciatarios.</p>
+        <p style="margin-bottom:0">Suite NEXORA — descarga autorizada.</p>
       </div>
     </div>
   </section>
@@ -535,7 +535,7 @@ const APPS = [
   {
     id: 'multialmacen',
     prefix: 'multialmacen',
-    icon: 'assets/app/multialmacen-512.png',
+    icon: 'assets/app/multialmacen-128.png',
     accent: '#0ea5e9',
     nombre: 'Sistema MultiAlmacen',
     versionLabel: 'v3',
@@ -631,7 +631,7 @@ const APPS = [
   {
     id: 'pos',
     prefix: 'pos',
-    icon: 'assets/app/pos-512.png',
+    icon: 'assets/app/pos-128.png',
     accent: '#22c55e',
     nombre: 'POS Móvil',
     versionLabel: 'v2',
@@ -670,7 +670,7 @@ const APPS = [
   {
     id: 'rrhh',
     prefix: 'rrhh',
-    icon: 'assets/app/rrhh-512.png',
+    icon: 'assets/app/rrhh-128.png',
     accent: '#a78bfa',
     nombre: 'Nexora RRHH',
     versionLabel: 'v1',
@@ -738,7 +738,7 @@ const APPS = [
   {
     id: 'cubapos-exe',
     prefix: 'cubapos-exe',
-    icon: 'assets/app/cubapos-512.png',
+    icon: 'assets/app/cubapos-128.png',
     accent: '#f59e0b',
     nombre: 'NEXORA CubaPOS',
     versionLabel: 'v1',
@@ -793,7 +793,7 @@ const APPS = [
   {
     id: 'cubapos-apk',
     prefix: 'cubapos-apk',
-    icon: 'assets/app/cubapos-512.png',
+    icon: 'assets/app/cubapos-128.png',
     accent: '#f59e0b',
     nombre: 'NEXORA CubaPOS',
     versionLabel: 'v1',
