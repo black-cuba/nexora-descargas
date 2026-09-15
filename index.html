@@ -30,6 +30,17 @@
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
   }
+  /* Grid sutil de fondo (no genérico) */
+  body::before {
+    content: "";
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse 75% 60% at 50% 0%, #000 45%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 75% 60% at 50% 0%, #000 45%, transparent 100%);
+  }
   /* Glow decorativo de fondo */
   .glow {
     position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
@@ -45,16 +56,21 @@
   /* ---------- Hero ---------- */
   .hero { text-align: center; margin-bottom: 52px; }
   .hero .brand {
-    display: inline-flex; align-items: center; gap: 12px; margin-bottom: 20px;
-    padding: 8px 20px 8px 10px; border-radius: 999px;
-    background: rgba(14, 165, 233, 0.1); border: 1px solid rgba(14, 165, 233, 0.35);
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    margin-bottom: 26px;
   }
   .hero .brand .logo {
-    display: block; height: 46px; width: auto; border-radius: 8px;
+    display: block;
+    height: clamp(110px, 16vw, 190px);
+    width: auto;
+    filter: drop-shadow(0 14px 38px rgba(14, 165, 233, 0.30));
   }
-  .hero .brand span { font-weight: 700; letter-spacing: 0.12em; font-size: 0.78rem; color: #bfdbfe; text-transform: uppercase; }
+  .hero .brand span {
+    font-weight: 700; letter-spacing: 0.34em; font-size: 0.78rem; color: #7dd3fc;
+    text-transform: uppercase; text-indent: 0.34em;
+  }
   .hero h1 {
-    font-size: clamp(2rem, 5vw, 3.1rem); font-weight: 800; letter-spacing: -0.02em; color: #fff; line-height: 1.1;
+    font-size: clamp(1.9rem, 4.6vw, 2.9rem); font-weight: 800; letter-spacing: -0.02em; color: #fff; line-height: 1.12;
   }
   .hero h1 .grad {
     background: linear-gradient(90deg, #38bdf8, #818cf8, #e879f9);
@@ -65,6 +81,20 @@
   .hero .pill {
     font-size: 0.76rem; font-weight: 600; color: #cbd5e1; padding: 6px 14px; border-radius: 999px;
     background: rgba(148, 163, 184, 0.08); border: 1px solid rgba(148, 163, 184, 0.18);
+  }
+  /* Divisor degradado bajo el hero */
+  .hero-divider {
+    width: min(480px, 70%);
+    height: 1px;
+    margin: 0 auto;
+    background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.55), rgba(232, 121, 249, 0.55), transparent);
+  }
+
+  /* Encabezado de la sección Descargas */
+  .sec-label {
+    margin-top: 44px; margin-bottom: 22px; text-align: center;
+    font-size: 0.76rem; font-weight: 800; letter-spacing: 0.32em; text-transform: uppercase;
+    color: #38bdf8; text-indent: 0.32em;
   }
 
   /* ---------- Grid de apps ---------- */
@@ -272,6 +302,9 @@
     </div>
   </header>
 
+  <div class="hero-divider"></div>
+
+  <div class="sec-label">Descargas</div>
   <div class="grid" id="grid"></div>
 
   <div class="note">
