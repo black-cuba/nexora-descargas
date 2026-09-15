@@ -3,401 +3,512 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="Descargas oficiales de la Suite NEXORA: Sistema MultiAlmacen v3 (Windows), POS Móvil v2 (Android) y RRHH v1 (Windows). Software 100% offline para MIPYME, TCP, SRL y CNA en Cuba." />
-<title>NEXORA — Descargas Oficiales</title>
+<meta name="description" content="Suite NEXORA: Sistema MultiAlmacen v3 (Windows), POS Móvil v2 (Android), Nexora RRHH v1 (Windows) y CubaPOS (Windows/Android). Software 100% offline para MIPYME, TCP, SRL y Cooperativas en Cuba." />
+<title>NEXORA — Centro de Control de tu Negocio</title>
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg1: #0b1120;
-    --bg2: #111c33;
-    --card: rgba(17, 28, 51, 0.82);
-    --border: rgba(148, 163, 184, 0.18);
-    --text: #e2e8f0;
-    --muted: #94a3b8;
-    --faint: #64748b;
-    --cyan: #0ea5e9;
-    --green: #22c55e;
-    --violet: #8b5cf6;
+    --bg0: #05080f;
+    --bg1: #0a0f1c;
+    --bg2: #0e1626;
+    --panel: rgba(15, 23, 42, 0.72);
+    --line: rgba(148, 163, 184, 0.16);
+    --line-strong: rgba(148, 163, 184, 0.3);
+    --txt: #e2e8f0;
+    --mute: #8fa2bd;
+    --faint: #5b6b84;
+    --cyan: #22d3ee;
+    --green: #34d399;
+    --violet: #a78bfa;
     --amber: #fbbf24;
-    --radius: 18px;
+    --rose: #fb7185;
+    --radius: 16px;
+    --font-d: "Space Grotesk", system-ui, sans-serif;
+    --font-m: "IBM Plex Mono", ui-monospace, monospace;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-    background: linear-gradient(160deg, var(--bg1) 0%, var(--bg2) 60%, #0a1630 100%);
-    background-attachment: fixed;
-    color: var(--text);
+    font-family: var(--font-d);
+    background: var(--bg0);
+    color: var(--txt);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
-  /* Grid sutil de fondo (no genérico) */
+  /* Rejilla de trazado técnico */
   body::before {
-    content: "";
-    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
     background-image:
-      linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
-    background-size: 44px 44px;
-    mask-image: radial-gradient(ellipse 75% 60% at 50% 0%, #000 45%, transparent 100%);
-    -webkit-mask-image: radial-gradient(ellipse 75% 60% at 50% 0%, #000 45%, transparent 100%);
+      linear-gradient(rgba(100, 130, 170, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(100, 130, 170, 0.06) 1px, transparent 1px);
+    background-size: 52px 52px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000 30%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000 30%, transparent 100%);
   }
-  /* Glow decorativo de fondo */
-  .glow {
-    position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
-  }
+  .glow { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
   .glow::before, .glow::after {
-    content: ""; position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.5;
+    content: ""; position: absolute; border-radius: 50%; filter: blur(130px); opacity: 0.45;
   }
-  .glow::before { width: 520px; height: 520px; left: -140px; top: -180px; background: rgba(14, 165, 233, 0.22); }
-  .glow::after  { width: 460px; height: 460px; right: -120px; bottom: -160px; background: rgba(139, 92, 246, 0.18); }
+  .glow::before { width: 560px; height: 560px; left: -160px; top: -200px; background: rgba(34, 211, 238, 0.16); }
+  .glow::after  { width: 480px; height: 480px; right: -140px; bottom: -180px; background: rgba(167, 139, 250, 0.14); }
 
-  .wrap { position: relative; z-index: 1; max-width: 1120px; margin: 0 auto; padding: 56px 24px 80px; }
+  .wrap { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; padding: 0 24px 90px; }
+
+  /* ---------- Header fijo ---------- */
+  header.top {
+    position: sticky; top: 0; z-index: 60;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 12px clamp(18px, 3vw, 30px);
+    background: rgba(5, 8, 15, 0.82);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  header.top .logo {
+    display: flex; align-items: center; gap: 12px; text-decoration: none;
+  }
+  header.top .logo img { height: 38px; width: 38px; border-radius: 10px; display: block; }
+  header.top .logo .nm {
+    font-weight: 700; font-size: 1.05rem; letter-spacing: 0.04em; color: #fff;
+  }
+  header.top .logo .nm small { display: block; font-family: var(--font-m); font-size: 0.6rem; font-weight: 500; color: var(--cyan); letter-spacing: 0.28em; text-transform: uppercase; }
+  header.top nav.links { display: flex; align-items: center; gap: 2px; }
+  header.top nav.links a {
+    padding: 9px 14px; border-radius: 10px; color: var(--mute); font-size: 0.88rem; font-weight: 600;
+    text-decoration: none; transition: color 0.16s ease, background 0.16s ease;
+  }
+  header.top nav.links a:hover { color: #fff; background: rgba(148,163,184,0.1); }
+  header.top nav.links a .num { font-family: var(--font-m); font-size: 0.66rem; color: var(--cyan); margin-right: 6px; }
+  header.top .cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 18px; border-radius: 11px;
+    background: linear-gradient(135deg, var(--cyan), var(--violet));
+    color: #05080f; font-weight: 800; font-size: 0.86rem; text-decoration: none;
+    box-shadow: 0 10px 24px -10px rgba(34, 211, 238, 0.55);
+  }
+  header.top .cta:hover { filter: brightness(1.12); }
+  header.top .burger {
+    display: none; flex-direction: column; justify-content: center; gap: 5px;
+    width: 42px; height: 42px; padding: 10px; border-radius: 10px; cursor: pointer;
+    background: rgba(148,163,184,0.08); border: 1px solid var(--line);
+  }
+  header.top .burger span { display: block; height: 2px; border-radius: 2px; background: #e2e8f0; transition: 0.25s; }
+  header.top.open .burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  header.top.open .burger span:nth-child(2) { opacity: 0; }
+  header.top.open .burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  @media (max-width: 880px) {
+    header.top nav.links {
+      position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; align-items: stretch; gap: 2px; padding: 8px 12px 14px;
+      background: rgba(5,8,15,0.97); border-bottom: 1px solid var(--line); display: none;
+    }
+    header.top.open nav.links { display: flex; }
+    header.top .burger { display: flex; }
+    header.top .cta { display: none; }
+    header.top nav.links a { padding: 14px 14px; font-size: 1rem; }
+  }
+
+  /* ---------- Ticker de estado ---------- */
+  .ticker {
+    position: relative; z-index: 1; overflow: hidden;
+    border-bottom: 1px solid var(--line);
+    background: rgba(10, 15, 28, 0.7);
+    padding: 9px 0;
+    white-space: nowrap;
+  }
+  .ticker .run {
+    display: inline-block; padding-left: 100%;
+    animation: ticker 34s linear infinite;
+    font-family: var(--font-m); font-size: 0.74rem; letter-spacing: 0.14em; color: var(--mute);
+  }
+  .ticker .run i { color: var(--cyan); padding: 0 18px; font-style: normal; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-100%); } }
 
   /* ---------- Hero ---------- */
-  .hero { text-align: center; margin-bottom: 52px; }
+  .hero { position: relative; text-align: center; padding: 64px 0 40px; }
+  .hero .sys {
+    display: inline-block; font-family: var(--font-m); font-size: 0.68rem;
+    letter-spacing: 0.3em; text-transform: uppercase; color: var(--cyan);
+    border: 1px solid rgba(34, 211, 238, 0.3); background: rgba(34, 211, 238, 0.06);
+    padding: 6px 14px; border-radius: 999px; margin-bottom: 26px;
+  }
+  .hero .sys b { color: var(--green); font-weight: 600; }
   .hero .brand {
-    display: flex; flex-direction: column; align-items: center; gap: 12px;
-    margin-bottom: 26px;
+    margin: 0 auto 18px; max-width: 780px;
   }
-  .hero .brand .logo {
-    display: block;
-    width: min(860px, 92%);
-    height: auto;
-    border-radius: 14px;
-    filter: drop-shadow(0 14px 38px rgba(14, 165, 233, 0.28));
-  }
-  .hero .brand span {
-    font-weight: 700; letter-spacing: 0.34em; font-size: 0.78rem; color: #7dd3fc;
-    text-transform: uppercase; text-indent: 0.34em;
-  }
+  .hero .brand img { width: 100%; height: auto; border-radius: 12px; filter: drop-shadow(0 18px 46px rgba(34, 211, 238, 0.18)); }
   .hero h1 {
-    font-size: clamp(1.9rem, 4.6vw, 2.9rem); font-weight: 800; letter-spacing: -0.02em; color: #fff; line-height: 1.12;
+    font-size: clamp(2.1rem, 5.2vw, 3.4rem); font-weight: 700; letter-spacing: -0.02em;
+    color: #fff; line-height: 1.08; margin-top: 26px;
   }
   .hero h1 .grad {
-    background: linear-gradient(90deg, #38bdf8, #818cf8, #e879f9);
+    background: linear-gradient(90deg, var(--cyan), var(--violet));
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
-  .hero p { margin: 16px auto 0; max-width: 680px; color: var(--muted); font-size: 1.02rem; line-height: 1.6; }
-  .hero .badge-row { margin-top: 22px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-  .hero .pill {
-    font-size: 0.76rem; font-weight: 600; color: #cbd5e1; padding: 6px 14px; border-radius: 999px;
-    background: rgba(148, 163, 184, 0.08); border: 1px solid rgba(148, 163, 184, 0.18);
+  .hero p.lead {
+    margin: 18px auto 0; max-width: 660px; color: var(--mute); font-size: 1.04rem; line-height: 1.65;
   }
-  /* Divisor degradado bajo el hero */
-  .hero-divider {
-    width: min(480px, 70%);
-    height: 1px;
-    margin: 0 auto;
-    background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.55), rgba(232, 121, 249, 0.55), transparent);
+  .hero .lema {
+    margin: 30px auto 0; max-width: 680px;
+    border: 1px solid var(--line); border-radius: 14px;
+    background: linear-gradient(180deg, rgba(34, 211, 238, 0.07), rgba(167, 139, 250, 0.05));
+    padding: 18px 22px;
+    font-family: var(--font-m); font-size: clamp(0.92rem, 2.6vw, 1.15rem);
+    letter-spacing: 0.06em; color: #fff; line-height: 1.7;
   }
-
-  /* Encabezado de la sección Descargas */
-  .sec-label {
-    margin-top: 44px; margin-bottom: 22px; text-align: center;
-    font-size: 0.76rem; font-weight: 800; letter-spacing: 0.32em; text-transform: uppercase;
-    color: #38bdf8; text-indent: 0.32em;
-  }
-
-  /* ---------- Grid de apps ---------- */
-  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: stretch; }
-  .grid > .card { height: 100%; }
-  @media (max-width: 980px) { .grid { grid-template-columns: 1fr; } }
-
-  .card {
-    background: var(--card);
-    backdrop-filter: blur(14px);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 26px;
-    display: flex; flex-direction: column;
-    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
-    position: relative; overflow: hidden;
-  }
-  .card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--accent, var(--cyan)); opacity: 0.9; }
-  .card:hover {
-    transform: translateY(-4px);
-    border-color: color-mix(in srgb, var(--accent, var(--cyan)) 45%, transparent);
-    box-shadow: 0 18px 42px -18px rgba(0, 0, 0, 0.55), 0 0 0 1px color-mix(in srgb, var(--accent, var(--cyan)) 20%, transparent);
-  }
-
-  .card .top { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
-  .card .icon {
-    width: 52px; height: 52px; border-radius: 14px; flex-shrink: 0;
-    display: grid; place-items: center; font-size: 1.6rem;
-    background: linear-gradient(135deg, color-mix(in srgb, var(--accent, var(--cyan)) 28%, #16233a), #0e1a30);
-    border: 1px solid color-mix(in srgb, var(--accent, var(--cyan)) 35%, transparent);
-  }
-  .card h2 { font-size: 1.3rem; font-weight: 800; color: #fff; line-height: 1.2; }
-  .card .plat {
-    display: inline-block; margin-top: 6px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em;
-    text-transform: uppercase; color: var(--accent, var(--cyan));
-  }
-  .card .desc { color: var(--muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 16px; flex: 1 1 auto; }
-
-  .card .ver {
-    display: inline-flex; align-items: center; gap: 8px; margin-bottom: 16px;
-    font-size: 0.82rem; color: var(--muted);
-  }
-  .card .ver .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.18); }
-  .card .ver b { color: var(--amber); font-weight: 700; }
-
-  /* ---------- Botones ---------- */
-  .btns { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 16px; }
+  .hero .lema .g { color: var(--cyan); }
+  .hero .ctas { margin-top: 32px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
   .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    padding: 12px 14px; border-radius: 12px; font-weight: 700; font-size: 0.88rem;
-    text-decoration: none; border: 1px solid transparent;
-    transition: transform 0.15s ease, filter 0.15s ease, background 0.15s ease;
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 14px 24px; border-radius: 12px;
+    font-weight: 800; font-size: 0.92rem; text-decoration: none;
+    border: 1px solid transparent; transition: transform 0.15s, filter 0.15s;
   }
   .btn:active { transform: scale(0.97); }
-  .btn-pri { background: linear-gradient(135deg, var(--accent, var(--cyan)), color-mix(in srgb, var(--accent, var(--cyan)) 65%, #6366f1)); color: #fff; box-shadow: 0 8px 20px -8px color-mix(in srgb, var(--accent, var(--cyan)) 60%, transparent); }
-  .btn-pri:hover { filter: brightness(1.1); }
-  .btn-dis { background: rgba(71, 85, 105, 0.5); color: #cbd5e1; cursor: not-allowed; }
+  .btn-pri { background: linear-gradient(135deg, var(--cyan), var(--violet)); color: #05080f; box-shadow: 0 14px 34px -14px rgba(34,211,238,0.6); }
+  .btn-pri:hover { filter: brightness(1.12); }
+  .btn-ghost { background: rgba(148,163,184,0.08); color: #e2e8f0; border-color: var(--line-strong); }
+  .btn-ghost:hover { background: rgba(148,163,184,0.16); }
+  .hero .ctas .sub {
+    width: 100%; margin-top: 4px; font-family: var(--font-m); font-size: 0.7rem;
+    color: var(--faint); letter-spacing: 0.12em;
+  }
 
-  /* ---------- Botón que abre el modal de características ---------- */
+  /* ---------- Secciones ---------- */
+  section.block { padding: 54px 0 6px; scroll-margin-top: 86px; }
+  .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 30px; }
+  .sec-head .num { font-family: var(--font-m); font-size: 0.78rem; color: var(--cyan); }
+  .sec-head h2 { font-size: clamp(1.5rem, 3.4vw, 2.1rem); font-weight: 700; color: #fff; letter-spacing: -0.01em; }
+  .sec-head .ghost { margin-left: auto; font-family: var(--font-m); font-size: 0.7rem; color: var(--faint); letter-spacing: 0.14em; text-transform: uppercase; }
+
+  /* ---------- Grid de apps ---------- */
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 20px; }
+  .card {
+    position: relative; display: flex; flex-direction: column;
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 24px; overflow: hidden;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+  }
+  .card:hover { transform: translateY(-5px); border-color: color-mix(in srgb, var(--ac, var(--cyan)) 45%, transparent); box-shadow: 0 24px 50px -24px rgba(0,0,0,0.6); }
+  .card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; background: linear-gradient(90deg, var(--ac, var(--cyan)), transparent 70%); }
+  .card .top { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+  .card .top .ico {
+    width: 62px; height: 62px; border-radius: 15px; flex-shrink: 0; overflow: hidden;
+    box-shadow: 0 10px 24px -10px color-mix(in srgb, var(--ac, var(--cyan)) 60%, transparent);
+    border: 1px solid color-mix(in srgb, var(--ac, var(--cyan)) 35%, transparent);
+  }
+  .card .top .ico img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .card .top h3 { font-size: 1.18rem; font-weight: 700; color: #fff; line-height: 1.2; }
+  .card .top .plat {
+    display: inline-block; margin-top: 7px; font-family: var(--font-m); font-size: 0.66rem;
+    font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ac, var(--cyan));
+    border: 1px solid color-mix(in srgb, var(--ac, var(--cyan)) 40%, transparent);
+    border-radius: 6px; padding: 2px 8px; background: color-mix(in srgb, var(--ac, var(--cyan)) 10%, transparent);
+  }
+  .card .desc { color: var(--mute); font-size: 0.9rem; line-height: 1.6; margin-bottom: 14px; flex: 1 1 auto; }
+  .card .specs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .card .specs .chip {
+    font-family: var(--font-m); font-size: 0.66rem; color: var(--mute);
+    border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; background: rgba(148,163,184,0.05);
+  }
+  .card .ver { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; font-family: var(--font-m); font-size: 0.76rem; color: var(--mute); }
+  .card .ver .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px rgba(52,211,153,0.16); }
+  .card .ver b { color: var(--amber); font-weight: 600; }
+  .card .btns { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 14px; }
+  .card .btns .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .btn-sm { padding: 11px 14px; font-size: 0.84rem; }
+  .btn-dis { background: rgba(71,85,105,0.4); color: #cbd5e1; cursor: not-allowed; }
+  .btn-scnd { background: rgba(148,163,184,0.07); color: #cbd5e1; border-color: var(--line); }
+  .btn-scnd:hover { background: rgba(148,163,184,0.14); }
   .feat-btn {
     width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px;
-    padding: 13px 16px; border-radius: 12px; cursor: pointer; user-select: none;
-    background: rgba(148, 163, 184, 0.07); border: 1px solid var(--border);
-    color: #cbd5e1; font-weight: 700; font-size: 0.88rem;
+    padding: 12px 16px; border-radius: 12px; cursor: pointer; user-select: none;
+    background: rgba(148,163,184,0.06); border: 1px solid var(--line);
+    color: #cbd5e1; font-family: var(--font-d); font-weight: 700; font-size: 0.86rem;
     transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
   }
-  .feat-btn:hover { background: rgba(148, 163, 184, 0.14); color: #fff; }
-  .feat-btn .chev {
-    width: 22px; height: 22px; stroke: currentColor; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round;
-    transition: transform 0.3s ease; flex-shrink: 0;
-  }
+  .feat-btn:hover { background: rgba(148,163,184,0.13); color: #fff; }
+  .feat-btn .chev { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.3s ease; flex-shrink: 0; }
+  .feat-btn.open .chev { transform: rotate(180deg); }
 
-  /* ---------- Modal de características (centrado) ---------- */
+  /* ---------- Modal ---------- */
   .modal-overlay {
-    position: fixed; inset: 0; z-index: 50;
-    display: flex; align-items: center; justify-content: center;
-    padding: 24px;
-    background: rgba(8, 15, 30, 0.78);
-    backdrop-filter: blur(6px);
-    opacity: 0; visibility: hidden;
-    transition: opacity 0.25s ease, visibility 0.25s ease;
+    position: fixed; inset: 0; z-index: 80;
+    display: flex; align-items: center; justify-content: center; padding: 24px;
+    background: rgba(4, 7, 14, 0.82); backdrop-filter: blur(8px);
+    opacity: 0; visibility: hidden; transition: opacity 0.25s ease, visibility 0.25s ease;
   }
   .modal-overlay.show { opacity: 1; visibility: visible; }
   .modal {
-    position: relative; width: 100%; max-width: 760px; max-height: 88vh;
+    position: relative; width: 100%; max-width: 780px; max-height: 88vh;
     display: flex; flex-direction: column;
-    background: linear-gradient(180deg, #16233a, #0f1b30);
-    border: 1px solid rgba(148, 163, 184, 0.25);
-    border-radius: 20px;
-    box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8);
-    transform: scale(0.94) translateY(14px);
-    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(180deg, #101a2e, #0b1222);
+    border: 1px solid var(--line-strong); border-radius: 20px;
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,0.85);
+    transform: scale(0.95) translateY(16px); transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
   }
   .modal-overlay.show .modal { transform: scale(1) translateY(0); }
-  .modal .m-head {
-    display: flex; align-items: center; gap: 14px;
-    padding: 20px 24px; flex-shrink: 0;
-    background: rgba(255, 255, 255, 0.03);
-    border-bottom: 1px solid var(--border);
-  }
-  .modal .m-head .icon {
-    width: 46px; height: 46px; border-radius: 12px; flex-shrink: 0;
-    display: grid; place-items: center; font-size: 1.4rem;
-    background: linear-gradient(135deg, color-mix(in srgb, var(--accent, var(--cyan)) 30%, #16233a), #0e1a30);
-    border: 1px solid color-mix(in srgb, var(--accent, var(--cyan)) 40%, transparent);
-  }
-  .modal .m-head h3 { font-size: 1.25rem; font-weight: 800; color: #fff; line-height: 1.2; }
-  .modal .m-head .plat { display: block; margin-top: 3px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent, var(--cyan)); }
-  .modal .m-close {
-    margin-left: auto; width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
-    border: 1px solid var(--border); background: rgba(148, 163, 184, 0.08);
-    color: #cbd5e1; font-size: 1.15rem; line-height: 1; cursor: pointer;
-    display: grid; place-items: center;
-    transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
-  }
-  .modal .m-close:hover { background: rgba(148, 163, 184, 0.2); color: #fff; }
-  .modal .m-close:active { transform: scale(0.92); }
-  .modal .m-body {
-    padding: 10px 24px 24px; overflow-y: auto;
-    font-size: 0.84rem; color: #cbd5e1; line-height: 1.6;
-    overscroll-behavior: contain;
-  }
+  .modal .m-head { display: flex; align-items: center; gap: 14px; padding: 20px 24px; flex-shrink: 0; border-bottom: 1px solid var(--line); }
+  .modal .m-head .ico { width: 46px; height: 46px; border-radius: 12px; overflow: hidden; flex-shrink: 0; }
+  .modal .m-head .ico img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .modal .m-head h3 { font-size: 1.28rem; font-weight: 800; color: #fff; line-height: 1.2; }
+  .modal .m-head .plat { display: block; margin-top: 3px; font-family: var(--font-m); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ac, var(--cyan)); }
+  .modal .m-close { margin-left: auto; width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0; border: 1px solid var(--line); background: rgba(148,163,184,0.08); color: #cbd5e1; font-size: 1.1rem; line-height: 1; cursor: pointer; display: grid; place-items: center; transition: background 0.15s, color 0.15s, transform 0.15s; }
+  .modal .m-close:hover { background: rgba(148,163,184,0.2); color: #fff; }
+  .modal .m-body { padding: 8px 24px 24px; overflow-y: auto; font-size: 0.85rem; color: #cbd5e1; line-height: 1.62; overscroll-behavior: contain; }
   .modal .m-body::-webkit-scrollbar { width: 8px; }
-  .modal .m-body::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.35); border-radius: 8px; }
-
-  .modal .m-body h4 {
-    font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;
-    color: var(--accent, var(--cyan)); margin: 18px 0 8px; padding-bottom: 6px;
-    border-bottom: 1px solid var(--border);
-  }
-  .modal .m-body h4:first-child { margin-top: 4px; }
-  .modal .m-body b { color: #e8eef8; font-weight: 700; display: block; margin: 14px 0 4px; font-size: 0.86rem; }
+  .modal .m-body::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.35); border-radius: 8px; }
+  .modal .m-body h4 { font-family: var(--font-m); font-size: 0.74rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ac, var(--cyan)); margin: 20px 0 8px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+  .modal .m-body h4:first-child { margin-top: 10px; }
+  .modal .m-body b { color: #eef3fb; font-weight: 700; display: block; margin: 14px 0 4px; font-size: 0.9rem; }
   .modal .m-body ul { list-style: none; margin: 0 0 2px 0; }
   .modal .m-body li { position: relative; padding-left: 18px; margin-bottom: 5px; }
-  .modal .m-body li::before {
-    content: ""; position: absolute; left: 0; top: 0.62em; width: 7px; height: 7px; border-radius: 2px;
-    background: var(--accent, var(--cyan)); opacity: 0.85;
-  }
-  .modal .m-body code { background: rgba(14, 165, 233, 0.12); padding: 1px 6px; border-radius: 5px; font-size: 0.82em; color: #7dd3fc; }
-  .modal .m-foot {
-    display: flex; justify-content: flex-end; gap: 10px;
-    padding: 14px 24px; flex-shrink: 0;
-    background: rgba(255, 255, 255, 0.03); border-top: 1px solid var(--border);
-  }
-  .modal .m-foot a.btn { padding: 10px 16px; font-size: 0.85rem; }
+  .modal .m-body li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 7px; height: 7px; border-radius: 2px; background: var(--ac, var(--cyan)); opacity: 0.85; }
+  .modal .m-body code { background: rgba(34, 211, 238, 0.12); padding: 1px 6px; border-radius: 5px; font-size: 0.8em; color: #7dd3fc; }
+  .modal .m-foot { display: flex; justify-content: flex-end; gap: 10px; padding: 14px 24px; flex-shrink: 0; background: rgba(255,255,255,0.03); border-top: 1px solid var(--line); }
   @media (max-width: 560px) {
     .modal .m-head { padding: 16px 18px; }
-    .modal .m-body { padding: 8px 18px 20px; }
+    .modal .m-body { padding: 6px 18px 20px; }
     .modal .m-foot { padding: 12px 18px; flex-wrap: wrap; }
   }
 
-  /* ---------- Nota / contacto ---------- */
-  .note {
-    margin-top: 46px; padding: 24px 28px; border-radius: var(--radius);
-    background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border);
-    font-size: 0.9rem; color: var(--muted); line-height: 1.65;
+  /* ---------- Planes ---------- */
+  .planes {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;
   }
-  .note b { color: var(--text); }
-  .note ol { margin: 10px 0 0 18px; }
-  .note li { margin-bottom: 6px; }
-  .note code { background: rgba(14, 165, 233, 0.12); padding: 1px 6px; border-radius: 5px; color: #7dd3fc; }
+  .plan {
+    position: relative; padding: 24px; border-radius: var(--radius);
+    background: rgba(15, 23, 42, 0.7); border: 1px solid var(--line);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .plan:hover { transform: translateY(-4px); border-color: rgba(34, 211, 238, 0.4); }
+  .plan .p-name { font-family: var(--font-m); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.16em; color: var(--cyan); }
+  .plan .p-per { display: block; margin-top: 3px; font-size: 0.82rem; color: var(--faint); }
+  .plan .p-price { font-size: 2rem; font-weight: 800; color: #fff; margin-top: 14px; }
+  .plan .p-price small { font-size: 0.8rem; color: var(--mute); font-weight: 600; }
+  .plan .p-feats { margin-top: 16px; list-style: none; }
+  .plan .p-feats li { position: relative; padding-left: 16px; margin-bottom: 7px; font-size: 0.82rem; color: var(--mute); }
+  .plan .p-feats li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+  .plan.destacado { border-color: rgba(34, 211, 238, 0.45); background: linear-gradient(180deg, rgba(34,211,238,0.08), rgba(15,23,42,0.7)); }
+  .plan.destacado .label { position: absolute; top: 0; right: 0; font-family: var(--font-m); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; background: linear-gradient(90deg, var(--cyan), var(--violet)); color: #05080f; padding: 5px 12px; border-radius: 0 16px 0 12px; font-weight: 700; }
 
-  .contact { margin-top: 40px; text-align: center; font-size: 0.95rem; color: #f8fafc; line-height: 1.9; }
-  .contact b { color: #ffffff; font-weight: 800; }
-  .contact .legal { display: block; margin-top: 2px; font-size: 0.82rem; color: #e2e8f0; }
-  .meta {
-    margin-top: 22px; display: inline-block; padding: 9px 22px; border-radius: 999px;
-    text-align: center; color: #ffffff; font-size: 0.78rem; font-weight: 600;
-    background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.18);
-    letter-spacing: 0.03em;
+  /* ---------- Notas / soporte ---------- */
+  .note-block {
+    margin-top: 44px; padding: 26px 30px; border-radius: var(--radius);
+    background: rgba(15, 23, 42, 0.55); border: 1px solid var(--line);
+    font-size: 0.9rem; color: var(--mute); line-height: 1.7;
   }
-  .meta-line { text-align: center; }
+  .note-block b { color: #fff; }
+  .note-block ol { margin: 10px 0 0 20px; }
+  .note-block li { margin-bottom: 7px; }
+  .note-block code { background: rgba(34, 211, 238, 0.12); padding: 1px 6px; border-radius: 5px; color: #7dd3fc; }
+  .support {
+    display: grid; grid-template-columns: 1.3fr 1fr; gap: 18px; margin-top: 36px;
+  }
+  @media (max-width: 760px) { .support { grid-template-columns: 1fr; } }
+  .sup-card {
+    padding: 26px; border-radius: var(--radius); border: 1px solid var(--line);
+    background: rgba(15, 23, 42, 0.7);
+  }
+  .sup-card h3 { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .sup-card p { font-size: 0.88rem; color: var(--mute); line-height: 1.6; margin-bottom: 16px; }
+  .sup-card .who { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .sup-card .who .av { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; font-size: 1.3rem; background: linear-gradient(135deg, rgba(34,211,238,0.2), rgba(167,139,250,0.2)); }
+  .sup-card .who .nm { font-weight: 700; color: #fff; font-size: 0.96rem; }
+  .sup-card .who .rl { font-size: 0.74rem; color: var(--faint); font-family: var(--font-m); }
+  .btn-wa { background: linear-gradient(135deg, #25d366, #128c7e); color: #fff; justify-content: center; }
+  .btn-wa:hover { filter: brightness(1.1); }
+  .btn-tg { background: linear-gradient(135deg, #29a9eb, #0e6fb8); color: #fff; justify-content: center; }
+  .btn-tg:hover { filter: brightness(1.1); }
 
-  /* ---------- Menú debajo del lema ---------- */
-  .menu {
-    display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px;
-    margin: -6px auto 6px; max-width: 760px;
-  }
-  .menu a {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 10px 18px; border-radius: 12px;
-    color: #cbd5e1; font-size: 0.88rem; font-weight: 700; text-decoration: none;
-    background: rgba(148, 163, 184, 0.07); border: 1px solid rgba(148, 163, 184, 0.18);
-    transition: background 0.16s ease, color 0.16s ease, border-color 0.16s ease;
-  }
-  .menu a:hover { background: rgba(148, 163, 184, 0.15); color: #fff; border-color: rgba(148, 163, 184, 0.35); }
-  .menu a.cta {
-    background: linear-gradient(135deg, #0ea5e9, #6366f1);
-    color: #fff; border-color: transparent;
-    box-shadow: 0 8px 20px -8px rgba(14, 165, 233, 0.55);
-  }
-  .menu a.cta:hover { filter: brightness(1.12); }
-
-  /* ---------- Lema ---------- */
-  .lema {
-    margin: 0 auto 0; text-align: center;
-    padding: 26px 24px 30px;
-  }
-  .lema p {
-    font-size: clamp(1.1rem, 3vw, 1.6rem);
-    font-weight: 800; letter-spacing: 0.04em; color: #fff; line-height: 1.5;
-  }
-  .lema p span.grad {
-    background: linear-gradient(90deg, #38bdf8, #818cf8, #e879f9);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-  }
-
-  footer { position: relative; z-index: 1; text-align: center; padding: 0 0 46px; }
-  footer .bar { max-width: 400px; height: 1px; margin: 0 auto 22px; background: linear-gradient(90deg, transparent, rgba(148,163,184,0.4), transparent); }
-  footer .ft .txt {
-    font-size: 0.78rem; color: var(--faint);
-    font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
-  }
-
-  /* Compensar altura del navbar fijo al navegar por anclas */
-  .wrap > .sec, .wrap > .note, .wrap > .contact { scroll-margin-top: 24px; }
-  .hero { scroll-margin-top: 24px; }
-
-  @media (max-width: 560px) {
-    .wrap { padding: 36px 16px 64px; }
-    .card { padding: 20px; }
-    .btns { grid-template-columns: 1fr; }
-  }
+  /* ---------- Footer ---------- */
+  footer { position: relative; z-index: 1; text-align: center; padding: 0 24px 44px; }
+  footer .bar { max-width: 420px; height: 1px; margin: 0 auto 26px; background: linear-gradient(90deg, transparent, rgba(148,163,184,0.4), transparent); }
+  footer .logo-pie { width: min(560px, 90%); height: auto; margin: 0 auto 16px; display: block; filter: drop-shadow(0 10px 26px rgba(0,0,0,0.4)); }
+  footer .legal { font-size: 0.78rem; color: var(--faint); line-height: 1.9; }
+  footer .legal b { color: #cbd5e1; }
+  .meta-line { text-align: center; margin-top: 26px; position: relative; z-index: 1; }
+  .meta { display: inline-block; padding: 8px 20px; border-radius: 999px; font-family: var(--font-m); font-size: 0.7rem; color: #cbd5e1; background: rgba(255,255,255,0.06); border: 1px solid var(--line-strong); letter-spacing: 0.06em; }
 </style>
 </head>
 <body>
 <div class="glow"></div>
 
+<header class="top" id="topHeader">
+  <a class="logo" href="#inicio">
+    <img src="assets/app/nexora-512.png" alt="NEXORA" />
+    <span class="nm">NEXORA<small>Software Suite</small></span>
+  </a>
+  <nav class="links" aria-label="Navegación principal">
+    <a href="#la-suite"><span class="num">I.</span>La Suite</a>
+    <a href="#planes"><span class="num">II.</span>Planes</a>
+    <a href="#guia"><span class="num">III.</span>Guía</a>
+    <a href="#soporte"><span class="num">IV.</span>Soporte</a>
+  </nav>
+  <div class="burger" id="burger" role="button" aria-label="Abrir menú" tabindex="0">
+    <span></span><span></span><span></span>
+  </div>
+  <a class="cta" href="#la-suite">⬇ Descargar</a>
+</header>
+
+<div class="ticker">
+  <div class="run"><i>▪</i>100% OFFLINE<i>▪</i>HECHO EN CUBA<i>▪</i>LICENCIA RSA SIGNED<i>▪</i>15 DÍAS DE PRUEBA<i>▪</i>DATOS 100% LOCALES EN TU PC<i>▪</i>NEXORA SUITE 3.0<i>▪</i>TU CONTROL, TU SOFTWARE Y NOSOTROS JUNTOS<i>▪</i>100% OFFLINE<i>▪</i></div>
+</div>
+
 <div class="wrap">
-  <header class="hero" id="inicio">
+  <section class="hero" id="inicio">
+    <div class="sys"><b>●</b> SISTEMA OPERATIVO &nbsp;ESTADO: EN LÍNEA</div>
     <div class="brand">
-      <img class="logo" src="nexora-pie.png" alt="NEXORA" />
-      <span>Suite NEXORA</span>
+      <img src="nexora-pie.png" alt="NEXORA — Tu control, tu software" />
     </div>
     <h1>Aplicaciones de gestión<br/>para Cuba, <span class="grad">100% offline</span></h1>
-    <p>Software profesional para MIPYME, OTPC, TCP, SRL y Cooperativas no agropecuarias. Una vez instalado, opera sin necesidad de conexión a internet.</p>
-    <div class="badge-row">
-      <span class="pill">🔒 100% Local</span>
-      <span class="pill">🇨🇺 Hecho en Cuba</span>
-      <span class="pill">📱 Multiplataforma</span>
-      <span class="pill">🛡️ Licencia segura</span>
+    <p class="lead">Software profesional para MIPYME, OTPC, TCP, SRL y Cooperativas no agropecuarias. Una vez instalado, opera sin necesidad de conexión a internet. Tus datos pertenecen a tu negocio y solo a tu negocio.</p>
+    <div class="lema">
+      TU CONTROL<span class="g">,</span> TU SOFTWARE<span class="g"> Y </span>NOSOTROS JUNTOS
     </div>
-  </header>
-
-  <div class="hero-divider"></div>
-
-  <div class="lema">
-    <p>TU CONTROL, TU SOFTWARE<br/>Y <span class="grad">NOSOTROS JUNTOS</span></p>
-  </div>
-
-  <nav class="menu" aria-label="Menú principal">
-    <a href="#inicio">🏠 Inicio</a>
-    <a href="#descargas">⬇️ Descargas</a>
-    <a href="#como-descargar">📖 Guía</a>
-    <a href="#licenciamiento">🔑 Licenciamiento</a>
-    <a href="#contacto">💬 Soporte</a>
-    <a class="cta" href="#descargas">Descargar ahora</a>
-  </nav>
-
-  <div class="sec-label" id="descargas">Descargas</div>
-  <div class="grid" id="grid"></div>
-
-  <div class="note" id="como-descargar">
-    <b>¿Cómo descargar?</b>
-    <ol>
-      <li>Pulsa <b>⬇️ Descargar</b> en la tarjeta de la app y descargarás directamente la <b>última versión publicada</b>.</li>
-      <li>Usa <b>📋 Ver características</b> para revisar qué incluye cada aplicación antes de instalar.</li>
-      <li>En Android y al primer aviso de "origen desconocido", activa <b>Permitir esta fuente</b>.</li>
-      <li>Si la descarga se interrumpe, vuelve a pulsar el botón y el archivo se reanuda automáticamente.</li>
-    </ol>
-  </div>
-
-  <div class="contact" id="licenciamiento">
-    <b>Licenciamiento</b>
-    <p style="margin-top:6px; max-width:680px; margin-left:auto; margin-right:auto;">
-      Cada aplicación se activa con una licencia por plazos (mensual, trimestral, semestral o anual) ligada al equipo donde se instala.
-      La suscripción cubre actualizaciones y soporte directo por WhatsApp.
-    </p>
-    <div style="margin-top:10px">
-      <a class="btn btn-pri" href="docs/CONTRATO-SUITE-NEXORA.md" rel="noopener" style="text-decoration:none; display:inline-flex;">📄 Ver contrato de licencia</a>
+    <div class="ctas">
+      <a class="btn btn-pri" href="#la-suite">⬇ Descargar ahora</a>
+      <a class="btn btn-ghost" href="#planes">Ver planes de licencia</a>
+      <div class="sub">DESCARGAS AUTORIZADAS SOLO PARA LICENCIATARIOS · +53 50840302</div>
     </div>
-  </div>
+  </section>
 
-  <div class="contact" id="contacto">
-    Soporte y licenciamiento: <b>Miguel Angel Piñeiro</b> · WhatsApp <b>+53 50840302</b><br/>
-    <span class="legal">Suite NEXORA — descarga autorizada solo a licenciatarios.</span>
-  </div>
+  <section class="block" id="la-suite">
+    <div class="sec-head">
+      <span class="num">// I</span>
+      <h2>La Suite</h2>
+      <span class="ghost">BINARIOS VERIFICADOS</span>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="block" id="planes">
+    <div class="sec-head">
+      <span class="num">// II</span>
+      <h2>Planes de Licencia</h2>
+      <span class="ghost">TARIFAS POR APP · POR EQUIPO</span>
+    </div>
+    <div class="planes">
+      <div class="plan">
+        <span class="p-name">Mensual</span>
+        <span class="p-per">30 días</span>
+        <div class="p-price">$15 <small>USD</small></div>
+        <ul class="p-feats">
+          <li>Todos los módulos activos</li>
+          <li>Soporte por WhatsApp</li>
+          <li>Actualizaciones incluidas</li>
+        </ul>
+      </div>
+      <div class="plan destacado">
+        <span class="label">Recomendado</span>
+        <span class="p-name">Trimestral</span>
+        <span class="p-per">90 días</span>
+        <div class="p-price">$50 <small>USD</small></div>
+        <ul class="p-feats">
+          <li>Todo lo del plan Mensual</li>
+          <li>Ahorro vs. renovación mensual</li>
+          <li>Renovación flexible</li>
+        </ul>
+      </div>
+      <div class="plan">
+        <span class="p-name">Semestral</span>
+        <span class="p-per">180 días</span>
+        <div class="p-price">$75 <small>USD</small></div>
+        <ul class="p-feats">
+          <li>Todo lo del plan Trimestral</li>
+          <li>Mejor tarifa por día</li>
+        </ul>
+      </div>
+      <div class="plan">
+        <span class="p-name">Anual</span>
+        <span class="p-per">365 días</span>
+        <div class="p-price">$100 <small>USD</small></div>
+        <ul class="p-feats">
+          <li>Máxima continuidad del negocio</li>
+          <li>Soporte prioritario</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note-block">
+      <b>Notas de licenciamiento</b>
+      <ul>
+        <li>Tarifas por <b>cada aplicación</b> de la Suite y por <b>cada equipo</b> donde se instale.</li>
+        <li>Cada app incluye <b>15 días de prueba gratuita</b> con todos los módulos; al vencer requiere activación.</li>
+        <li>Pago coordinado por <b>WhatsApp</b>: Modelo D-01 ONAT · transferencia · efectivo.</li>
+        <li>La licencia queda ligada al <b>equipo (Machine ID)</b> donde se activa.</li>
+      </ul>
+      <p style="margin-top:12px">
+        <a class="btn btn-ghost" href="docs/CONTRATO-SUITE-NEXORA.md" rel="noopener" style="padding:10px 18px;font-size:0.84rem;">📄 Ver contrato de licencia</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="block" id="guia">
+    <div class="sec-head">
+      <span class="num">// III</span>
+      <h2>Guía de descarga e instalación</h2>
+      <span class="ghost">4 PASOS</span>
+    </div>
+    <div class="note-block">
+      <ol>
+        <li>Pulsa <b>⬇ Descargar</b> en la tarjeta de la app y descargarás la <b>última versión publicada</b>.</li>
+        <li>Usa <b>📋 Especificaciones</b> para revisar qué incluye cada aplicación antes de instalar.</li>
+        <li>En Android y ante el aviso de "origen desconocido", activa <b>Permitir esta fuente</b>.</li>
+        <li>Si la descarga se interrumpe, vuelve a pulsar el botón: la descarga se <b>reanuda automáticamente</b>.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="soporte">
+    <div class="sec-head">
+      <span class="num">// IV</span>
+      <h2>Soporte y Licenciamiento</h2>
+      <span class="ghost">ATENCIÓN DIRECTA</span>
+    </div>
+    <div class="support">
+      <div class="sup-card">
+        <h3>📡 Canal de soporte</h3>
+        <p>Renovaciones, activaciones, dudas de instalación y asesoría técnica directa por WhatsApp con el desarrollador.</p>
+        <div class="who">
+          <div class="av">👨‍💻</div>
+          <div>
+            <div class="nm">Miguel Angel Piñeiro</div>
+            <div class="rl">DESARROLLADOR · NEXORA</div>
+          </div>
+        </div>
+        <a class="btn btn-wa" href="https://wa.me/5350840302" rel="noopener" style="width:100%">💬 WhatsApp +53 50840302</a>
+        <a class="btn btn-tg" href="https://t.me/NEXORA_Suite" rel="noopener" style="width:100%;margin-top:10px">✈ Telegram @NEXORA_Suite</a>
+      </div>
+      <div class="sup-card">
+        <h3>🔐 Modelo de confianza</h3>
+        <p>Activación por <b>archivo .lic</b> o clave firmada (RSA) ligada a tu equipo. El software detecta manipulación del reloj y versiones adulteradas.</p>
+        <p style="margin-bottom:0">Suite NEXORA — descarga autorizada solo a licenciatarios.</p>
+      </div>
+    </div>
+  </section>
+
   <div class="meta-line"><div class="meta" id="meta"></div></div>
 </div>
 
 <footer>
   <div class="bar"></div>
-  <div class="ft">
-    <span class="txt">NEXORA Software Suite</span>
+  <img class="logo-pie" src="nexora-pie.png" alt="NEXORA Software Suite" />
+  <div class="legal">
+    <b>NEXORA Software Suite</b> — © 2026 Miguel Angel Piñeiro · Hecho en Cuba 🇨🇺<br/>
+    Software 100% local · Los datos del licenciatario solo residen en su equipo.
   </div>
 </footer>
 
 <div class="modal-overlay" id="modal">
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+  <div class="modal" role="dialog" aria-modal="true">
     <div class="m-head">
-      <div class="icon" id="modalIcon">🏢</div>
+      <div class="ico"><img id="modalIcon" src="" alt="" /></div>
       <div>
         <h3 id="modalTitulo">App</h3>
         <span class="plat" id="modalPlat">Plataforma</span>
@@ -406,27 +517,29 @@
     </div>
     <div class="m-body" id="modalContenido"></div>
     <div class="m-foot">
-      <a class="btn btn-pri" id="modalDescargar" href="#" rel="noopener">⬇️ Descargar instalador</a>
+      <a class="btn btn-pri" id="modalDescargar" href="#" rel="noopener">⬇ Descargar instalador</a>
     </div>
   </div>
 </div>
 
 <script>
-// La pagina se actualiza SOLA: consulta los releases publicados del repositorio
+// La pagina se actualiza sola: consulta los releases publicados del repositorio
 // de descargas y toma la ultima version de cada app por prefijo.
 const REPO_OWNER = 'black-cuba';
 const REPO_DESCARGAS = 'nexora-descargas';
 const TELEGRAM = 'https://t.me/NEXORA_Suite';
+const WHATSAPP = 'https://wa.me/5350840302';
 
 const APPS = [
   {
     id: 'multialmacen',
     prefix: 'multialmacen',
-    icon: '🏢',
+    icon: 'assets/app/multialmacen-512.png',
     accent: '#0ea5e9',
     nombre: 'Sistema MultiAlmacen',
     versionLabel: 'v3',
-    plat: 'Windows · EXE · 64 bits',
+    plat: 'EXE · Windows · 64 bits',
+    specChips: ['SQLite local', '32/64 bits', 'Prueba 15 días'],
     desc: 'Gestión comercial integral: inventario multialmacén, facturación POS, transferencias entre almacenes, Modelo D-01 ONAT y reportes consolidados.',
     feats: `
       <h4>Características Principales</h4>
@@ -517,11 +630,12 @@ const APPS = [
   {
     id: 'pos',
     prefix: 'pos',
-    icon: '📱',
+    icon: 'assets/app/pos-512.png',
     accent: '#22c55e',
     nombre: 'POS Móvil',
     versionLabel: 'v2',
-    plat: 'Android · APK',
+    plat: 'APK · Android',
+    specChips: ['Offline-first', 'IPV Sync', 'Prueba 15 días'],
     desc: 'Punto de venta móvil. Importa inventario desde el almacén central (IPV), vende offline y devuelve el cierre de turno para conciliación.',
     feats: `
       <h4>Características Principales</h4>
@@ -555,12 +669,13 @@ const APPS = [
   {
     id: 'rrhh',
     prefix: 'rrhh',
-    icon: '👥',
-    accent: '#8b5cf6',
+    icon: 'assets/app/rrhh-512.png',
+    accent: '#a78bfa',
     nombre: 'Nexora RRHH',
     versionLabel: 'v1',
-    plat: 'Windows · EXE · 64 bits',
+    plat: 'EXE · Windows · 64 bits',
     sinDescarga: true,
+    specChips: ['SQLite local', '64 bits', 'Prueba 15 días'],
     desc: 'Recursos Humanos: expediente del personal, puestos, control de asistencia, permisos/ausencias, nómina y vacaciones.',
     feats: `
       <h4>Características Principales</h4>
@@ -622,113 +737,158 @@ const APPS = [
   {
     id: 'cubapos-exe',
     prefix: 'cubapos-exe',
-    icon: '🛒',
+    icon: 'assets/app/cubapos-512.png',
     accent: '#f59e0b',
-    nombre: 'NEXORA CubaPOS (Windows)',
+    nombre: 'NEXORA CubaPOS',
     versionLabel: 'v1',
-    plat: 'Windows · EXE · 64 bits',
-    desc: 'Punto de venta multimoneda (CUP/USD/MLC/EUR) e inventario en tiempo real para restaurantes y bares, con modo offline para redes 3G/4G.',
+    sinVersion: true,
+    plat: 'EXE · Windows · 64 bits',
+    specChips: ['Multimoneda CUP/USD/MLC', 'Offline-first', 'Prueba 15 días'],
+    desc: 'Punto de venta multimoneda e inventario en tiempo real para restaurantes y bares, con modo offline para redes 3G/4G.',
     feats: `
       <h4>Características Principales</h4>
-      <b>Punto de Ventas Multimoneda</b>
+      <b>Punto de Venta Multimoneda</b>
       <ul>
-        <li>Ventas en CUP, USD, MLC y EUR con tasas de cambio independientes.</li>
-        <li>Control de inventario y existencias en tiempo real.</li>
+        <li>Ventas en CUP, USD y EUR con tasas de cambio independientes.</li>
+        <li>Pagos mixtos: efectivo CUP/USD/EUR, TransferMóvil, EnZona, Zelle y mixto.</li>
+        <li>Cálculo automático de cambio y descuentos en cada venta.</li>
+        <li>Control de inventario y existencias en tiempo real por punto.</li>
       </ul>
-      <b>Offline-First (funciona sin conexión)</b>
+      <b>Inventario y Almacenes</b>
       <ul>
-        <li>Ideal para el mercado cubano con redes 3G/4G limitadas.</li>
-        <li>Todo queda guardado localmente hasta recuperar conexión.</li>
+        <li>Productos con código, imagen, lote y vencimiento.</li>
+        <li>Sucursales: almacén principal, puntos de venta y tiendas con stock independiente.</li>
+        <li>Vale de transferencia entre locales con bloques de firma (Entrega / Recibe).</li>
+        <li>Vale de entrada por compra a proveedores.</li>
+        <li>Ajustes tipificados: merma, rotura, vencimiento, cuenta casa, donación, consumo interno.</li>
+        <li>Devoluciones con reembolso o reemplazo y restauración de stock.</li>
+        <li>Avisos de stock bajo automáticos.</li>
       </ul>
-      <b>Reportes e Integraciones</b>
+      <b>Cierre de Turno y Reportes</b>
       <ul>
-        <li>Reportes automáticos de ventas e inventario.</li>
-        <li>Integración con WhatsApp API para pedidos y notificaciones.</li>
+        <li>Cierre con resumen por método de pago y respaldo de la base de datos.</li>
+        <li>Reporte de ventas en PDF para enviar al dueño por WhatsApp.</li>
+        <li>Reportes de auditoría, devoluciones, mermas, vales de entrada y transferencias.</li>
+        <li>Exportación Excel/CSV de ventas y reportes.</li>
+      </ul>
+      <b>WhatsApp Studio</b>
+      <ul>
+        <li>Enviar recibo de venta al cliente por WhatsApp.</li>
+        <li>Reporte de cierre al dueño, órdenes a proveedores y cotizaciones.</li>
+        <li>Avisos de stock bajo y catálogos PDF por WhatsApp.</li>
+        <li>Generador de promociones con IA integrado.</li>
+      </ul>
+      <b>Modelo D-01 ONAT</b>
+      <ul>
+        <li>Reporte fiscal D-01 con gastos deducibles y predicción de impuestos.</li>
+        <li>NIT y número de licencia ONAT configurados por negocio.</li>
       </ul>
       <b>Seguridad y Licenciamiento</b>
       <ul>
         <li>Firma SHA-256, anti-manipulación y anti-retroceso de reloj.</li>
-        <li>Bloqueo automático al vencer el período de prueba o suscripción.</li>
-        <li>Planes: 1 Mes $15 · 6 Meses $50 · 1 Año $100.</li>
+        <li>Licencia por período: 1 Mes $15 · 6 Meses $50 · 1 Año $100.</li>
       </ul>`,
   },
   {
     id: 'cubapos-apk',
     prefix: 'cubapos-apk',
-    icon: '🛒',
+    icon: 'assets/app/cubapos-512.png',
     accent: '#f59e0b',
-    nombre: 'NEXORA CubaPOS (Android)',
+    nombre: 'NEXORA CubaPOS',
     versionLabel: 'v1',
-    plat: 'Android · APK',
-    desc: 'La misma plataforma CubaPOS en tu celular: punto de venta multimoneda (CUP/USD/MLC/EUR) e inventario en tiempo real para restaurantes y bares, funcionando offline.',
+    sinVersion: true,
+    plat: 'APK · Android',
+    specChips: ['Multimoneda CUP/USD/MLC', 'Offline-first', 'Prueba 15 días'],
+    desc: 'La misma plataforma CubaPOS en tu celular: punto de venta multimoneda e inventario en tiempo real para restaurantes y bares, funcionando offline.',
     feats: `
       <h4>Características Principales</h4>
-      <b>Punto de Ventas Multimoneda</b>
+      <b>Punto de Venta Multimoneda</b>
       <ul>
-        <li>Ventas en CUP, USD, MLC y EUR con tasas de cambio independientes.</li>
-        <li>Control de inventario y existencias en tiempo real.</li>
+        <li>Ventas en CUP, USD y EUR con tasas de cambio independientes.</li>
+        <li>Pagos mixtos: efectivo CUP/USD/EUR, TransferMóvil, EnZona, Zelle y mixto.</li>
+        <li>Cálculo automático de cambio y descuentos en cada venta.</li>
+        <li>Control de inventario y existencias en tiempo real por punto.</li>
       </ul>
-      <b>Offline-First (funciona sin conexión)</b>
+      <b>Inventario y Almacenes</b>
       <ul>
-        <li>Ideal para el mercado cubano con redes 3G/4G limitadas.</li>
-        <li>Todo queda guardado localmente hasta recuperar conexión.</li>
+        <li>Productos con código, imagen, lote y vencimiento.</li>
+        <li>Sucursales: almacén principal, puntos de venta y tiendas con stock independiente.</li>
+        <li>Vale de transferencia entre locales con bloques de firma (Entrega / Recibe).</li>
+        <li>Vale de entrada por compra a proveedores.</li>
+        <li>Ajustes tipificados: merma, rotura, vencimiento, cuenta casa, donación, consumo interno.</li>
+        <li>Devoluciones con reembolso o reemplazo y restauración de stock.</li>
       </ul>
-      <b>Reportes e Integraciones</b>
+      <b>Sincronización Móvil (.cpdat)</b>
       <ul>
-        <li>Reportes automáticos de ventas e inventario.</li>
-        <li>Integración con WhatsApp API para pedidos y notificaciones.</li>
+        <li>Exporta carga de inventario del central hacia la versión móvil (.cpdat).</li>
+        <li>Importa cierres de ventas desde el móvil con protección anti-duplicados.</li>
+        <li>Detección automática del tipo de archivo (inventario vs. cierre).</li>
+      </ul>
+      <b>WhatsApp Studio</b>
+      <ul>
+        <li>Recibo de venta al cliente, reporte de cierre al dueño y pedidos a proveedores por WhatsApp.</li>
+        <li>Catálogos PDF y avisos de stock bajo por WhatsApp.</li>
       </ul>
       <b>Seguridad y Licenciamiento</b>
       <ul>
         <li>Firma SHA-256, anti-manipulación y anti-retroceso de reloj.</li>
-        <li>Bloqueo automático al vencer el período de prueba o suscripción.</li>
-        <li>Planes: 1 Mes $15 · 6 Meses $50 · 1 Año $100.</li>
+        <li>Licencia por período: 1 Mes $15 · 6 Meses $50 · 1 Año $100.</li>
       </ul>`,
   },
 ];
+
+function chipsHtml(app) {
+  return (app.specChips || []).map(c => `<span class="chip">${c}</span>`).join('');
+}
 
 function cardHtml(app, data) {
   const ver = data ? data.version : app.versionLabel + ' · consultando...';
   const size = data && data.sizeMB ? ` · ~${data.sizeMB.toFixed(0)} MB` : '';
   const dlHref = (!app.sinDescarga && data && data.url) ? data.url : null;
   const dlBtn = dlHref
-    ? `<a class="btn btn-pri" href="${dlHref}" rel="noopener">⬇️ Descargar</a>`
-    : `<span class="btn btn-dis">Próximamente</span>`;
+    ? `<a class="btn btn-pri btn-sm" href="${dlHref}" rel="noopener">⬇ Descargar</a>`
+    : `<a class="btn btn-dis btn-sm" href="#" aria-disabled="true">Próximamente</a>`;
+  const verLine = app.sinVersion
+    ? '<div class="ver"><span class="dot"></span>Disponible para descarga</div>'
+    : `<div class="ver"><span class="dot"></span>Versión: <b>${ver}</b>${size}</div>`;
   return `
-    <div class="card" style="--accent:${app.accent}">
+    <article class="card" style="--ac:${app.accent}">
       <div class="top">
-        <div class="icon">${app.icon}</div>
+        <div class="ico"><img src="${app.icon}" alt="${app.nombre}" loading="lazy" /></div>
         <div>
-          <h2>${app.nombre}</h2>
+          <h3>${app.nombre}</h3>
           <span class="plat">${app.plat}</span>
         </div>
       </div>
       <p class="desc">${app.desc}</p>
-      <div class="ver"><span class="dot"></span>Versión: <b>${ver}</b>${size}</div>
+      <div class="specs">${chipsHtml(app)}</div>
+      ${verLine}
       <div class="btns">
         ${dlBtn}
       </div>
       <button type="button" class="feat-btn" data-app="${app.id}" aria-haspopup="dialog">
-        <span>📋 Ver características</span>
+        <span>📋 Especificaciones</span>
         <svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
       </button>
-    </div>`;
+    </article>`;
 }
 
 function bindFeat() {
   const grid = document.getElementById('grid');
-  grid.addEventListener('click', e => {
+  const handler = e => {
     const btn = e.target.closest('.feat-btn');
     if (!btn) return;
     const app = APPS.find(a => a.id === btn.dataset.app);
     if (app) abrirModal(app);
-  });
+  };
+  grid.removeEventListener('click', handler);
+  grid.addEventListener('click', handler);
 }
 
 function abrirModal(app) {
   const overlay = document.getElementById('modal');
-  overlay.style.setProperty('--accent', app.accent);
-  document.getElementById('modalIcon').textContent = app.icon;
+  overlay.style.setProperty('--ac', app.accent);
+  document.getElementById('modalIcon').src = app.icon;
   document.getElementById('modalTitulo').textContent = app.nombre + ' ' + app.versionLabel;
   document.getElementById('modalPlat').textContent = app.plat;
   document.getElementById('modalContenido').innerHTML = app.feats;
@@ -736,11 +896,11 @@ function abrirModal(app) {
   if (app.descargaUrl) {
     dl.href = app.descargaUrl;
     dl.classList.remove('btn-dis');
-    dl.textContent = '⬇️ Descargar instalador (' + app.versionLabel + ')';
+    dl.textContent = '⬇ Descargar instalador';
   } else {
     dl.removeAttribute('href');
     dl.classList.add('btn-dis');
-    dl.textContent = '⬇️ Próximamente disponible';
+    dl.textContent = '⬇ Próximamente disponible';
   }
   overlay.classList.add('show');
   document.body.style.overflow = 'hidden';
@@ -751,11 +911,18 @@ function cerrarModal() {
   document.body.style.overflow = '';
 }
 
-(function enlazarModal() {
+(function enlazarUI() {
   const overlay = document.getElementById('modal');
   overlay.addEventListener('click', e => { if (e.target === overlay) cerrarModal(); });
   document.getElementById('modalCerrar').addEventListener('click', cerrarModal);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarModal(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { cerrarModal(); }
+  });
+  const h = document.getElementById('topHeader');
+  const b = document.getElementById('burger');
+  b.addEventListener('click', () => h.classList.toggle('open'));
+  b.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); h.classList.toggle('open'); } });
+  h.querySelectorAll('nav.links a').forEach(a => a.addEventListener('click', () => h.classList.remove('open')));
 })();
 
 async function cargar() {
@@ -778,7 +945,7 @@ async function cargar() {
         const asset = (latest.assets && latest.assets.length) ? latest.assets[0] : null;
         const ok = asset && asset.size >= (1024 * 1024);
         data = {
-          version: latest.tag_name,
+          version: latest.tag_name.split(app.prefix.toLowerCase() + '-').pop() || latest.tag_name,
           url: ok ? asset.browser_download_url : null,
           sizeMB: ok ? asset.size / (1024 * 1024) : null,
         };
@@ -791,7 +958,7 @@ async function cargar() {
     }
     bindFeat();
     const meta = document.getElementById('meta');
-    meta.textContent = fechaMax ? ('Última actualización: ' + new Date(fechaMax).toLocaleString('es')) : 'Versiones compiladas recientemente.';
+    meta.textContent = fechaMax ? ('Último lanzamiento publicado: ' + new Date(fechaMax).toLocaleString('es')) : 'Versiones compiladas recientemente.';
   } catch (e) {
     const meta = document.getElementById('meta');
     meta.textContent = 'No se pudo consultar la lista de versiones. Vuelva a intentar en unos minutos.';
