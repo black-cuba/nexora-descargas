@@ -269,13 +269,19 @@
   }
   .meta-line { text-align: center; }
 
-  footer { position: relative; z-index: 1; text-align: center; padding: 0 24px 40px; }
+  footer { position: relative; z-index: 1; text-align: center; padding: 0 24px 46px; }
   footer .bar { max-width: 400px; height: 1px; margin: 0 auto 22px; background: linear-gradient(90deg, transparent, rgba(148,163,184,0.4), transparent); }
   footer .ft {
-    display: inline-flex; align-items: center; gap: 10px; font-size: 0.8rem; color: var(--faint);
-    font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
   }
-  footer .ft .logo { display: block; height: 20px; width: auto; }
+  footer .ft .logo {
+    display: block; height: clamp(44px, 6vw, 72px); width: auto;
+    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.35));
+  }
+  footer .ft .txt {
+    font-size: 0.78rem; color: var(--faint);
+    font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  }
 
   @media (max-width: 560px) {
     .wrap { padding: 36px 16px 64px; }
@@ -326,7 +332,10 @@
 
 <footer>
   <div class="bar"></div>
-  <div class="ft"><img class="logo" src="nexora.png" alt="NEXORA" /> NEXORA Software Suite</div>
+  <div class="ft">
+    <img class="logo" src="nexora-pie.png" alt="NEXORA Suite" />
+    <span class="txt">NEXORA Software Suite</span>
+  </div>
 </footer>
 
 <div class="modal-overlay" id="modal">
