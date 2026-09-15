@@ -38,4 +38,4 @@ Cada repo privado tiene un workflow que en cada build publica el release tambien
 
 ## Licencia
 
-Suite NEXORA — descarga autorizada solo a licenciatarios. Ver `docs/CONTRATO-SUITE-NEXORA.md`.
+Suite NEXORA — descarga autorizada. Ver `docs/CONTRATO-SUITE-NEXORA.md`.
