@@ -325,6 +325,41 @@
   .note-block ol { margin: 10px 0 0 20px; }
   .note-block li { margin-bottom: 7px; }
   .note-block code { background: rgba(34, 211, 238, 0.12); padding: 1px 6px; border-radius: 5px; color: #7dd3fc; }
+
+  /* ---------- Acerca de ---------- */
+  .about { margin-top: 36px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 22px; align-items: start; }
+  @media (max-width: 760px) { .about { grid-template-columns: 1fr; } }
+  .about .a-card {
+    background: linear-gradient(180deg, rgba(34, 211, 238, 0.07), rgba(167, 139, 250, 0.04));
+    border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 26px 28px;
+  }
+  .about .a-card h3 { color: #fff; font-size: 1.05rem; margin-bottom: 16px; letter-spacing: 0.02em; }
+  .about .a-card p { color: var(--mute); font-size: 0.92rem; line-height: 1.75; margin-bottom: 14px; }
+  .about .a-card p:last-child { margin-bottom: 0; }
+  .about .a-card b { color: #fff; font-weight: 600; }
+  .about .a-etym {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px;
+  }
+  @media (max-width: 560px) { .about .a-etym { grid-template-columns: 1fr; } }
+  .about .a-etym .e {
+    background: rgba(15, 23, 42, 0.55); border: 1px solid var(--line); border-radius: 12px;
+    padding: 16px 18px; text-align: center;
+  }
+  .about .a-etym .e .raiz { font-family: var(--font-m); font-size: 1.25rem; font-weight: 700; color: var(--cyan); letter-spacing: 0.1em; }
+  .about .a-etym .e .sig { font-size: 0.8rem; color: var(--mute); margin-top: 6px; line-height: 1.5; }
+  .about .bloque {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 26px 28px;
+  }
+  .about .bloque h3 { color: #fff; font-size: 1.05rem; margin-bottom: 16px; letter-spacing: 0.02em; }
+  .about .bloque p { color: var(--mute); font-size: 0.92rem; line-height: 1.75; margin-bottom: 14px; }
+  .about .bloque p:last-child { margin-bottom: 0; }
+  .about .bloque b { color: #fff; font-weight: 600; }
+  .about .cita {
+    border-left: 3px solid var(--cyan); padding: 6px 0 6px 18px; margin-top: 18px;
+    font-family: var(--font-m); font-size: 0.95rem; color: #fff; line-height: 1.7;
+  }
   .support {
     display: grid; grid-template-columns: 1.3fr 1fr; gap: 18px; margin-top: 36px;
   }
@@ -366,7 +401,8 @@
     <a href="#la-suite"><span class="num">I.</span>La Suite</a>
     <a href="#planes"><span class="num">II.</span>Planes</a>
     <a href="#guia"><span class="num">III.</span>Guía</a>
-    <a href="#soporte"><span class="num">IV.</span>Soporte</a>
+    <a href="#acerca"><span class="num">IV.</span>Acerca de</a>
+    <a href="#soporte"><span class="num">V.</span>Soporte</a>
   </nav>
   <div class="burger" id="burger" role="button" aria-label="Abrir menú" tabindex="0">
     <span></span><span></span><span></span>
@@ -500,9 +536,33 @@
     </div>
   </section>
 
-  <section class="block" id="soporte">
+  <section class="block" id="acerca">
     <div class="sec-head">
       <span class="num">// IV</span>
+      <h2>Acerca de NEXORA</h2>
+      <span class="ghost">LA RAZÓN DE SER</span>
+    </div>
+    <div class="about">
+      <div class="a-card">
+        <h3>El significado del nombre</h3>
+        <div class="a-etym">
+          <div class="e"><div class="raiz">NEXO</div><div class="sig">el vínculo que une cada área de tu negocio</div></div>
+          <div class="e"><div class="raiz">ORA</div><div class="sig">la hora, el momento decisivo de la operación</div></div>
+        </div>
+        <p><b>NEXORA</b> es el nexo que llega a tiempo: sistemas que conectan a tu empresa entera en el instante exacto en que lo necesitas.</p>
+      </div>
+      <div class="bloque">
+        <h3>Quiénes somos</h3>
+        <p>NEXORA es una línea de soluciones de gestión empresarial diseñada para negocios que no pueden darse el lujo de detenerse. Nacimos de una realidad concreta: entornos donde la señal falla, el tendido se cae y los bancos no siempre están. Por eso nuestros productos operan en <b>modo offline</b>, con la información siempre bajo tu control y 100% de propiedad de tus datos.</p>
+        <p>Nuestra suite integra inventario, facturación, punto de venta y recursos humanos — del almacén al mostrador, de la bodega al restaurante — para que cada operación quede registrada, validada y disponible al instante.</p>
+        <div class="cita">Tu negocio no se detiene cuando falla la infraestructura. NEXORA lo mantiene conectado.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="soporte">
+    <div class="sec-head">
+      <span class="num">// V</span>
       <h2>Soporte y Licenciamiento</h2>
       <span class="ghost">ATENCIÓN DIRECTA</span>
     </div>
