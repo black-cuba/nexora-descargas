@@ -386,8 +386,10 @@
   footer .legal { font-size: 0.82rem; color: #fff; line-height: 1.9; }
   footer .legal b { color: #fff; font-weight: 700; }
   footer .legal .dim { color: #cbd5e1; }
-  .meta-line { text-align: center; margin-top: 26px; position: relative; z-index: 1; }
+  .meta-line { text-align: center; margin-top: 26px; position: relative; z-index: 1; display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; }
   .meta { display: inline-block; padding: 8px 20px; border-radius: 999px; font-family: var(--font-m); font-size: 0.7rem; color: #cbd5e1; background: rgba(255,255,255,0.06); border: 1px solid var(--line-strong); letter-spacing: 0.06em; }
+  .meta-counter { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px 7px 8px; border-radius: 999px; font-family: var(--font-m); font-size: 0.7rem; color: #cbd5e1; background: rgba(255,255,255,0.06); border: 1px solid var(--line-strong); }
+  .meta-counter img { height: 20px; width: auto; display: block; border-radius: 4px; }
 </style>
 </head>
 <body>
@@ -584,7 +586,7 @@
     </div>
   </section>
 
-  <div class="meta-line"><div class="meta" id="meta"></div></div>
+  <div class="meta-line"><div class="meta" id="meta"></div><span class="meta-counter">VISITAS&nbsp;<img src="https://visitor-badge.laobi.icu/badge?page_id=black-cuba.nexora-descargas&amp;left_text=&amp;left_color=%230ea5e9&amp;right_color=%23a78bfa" alt="Contador de visitas NEXORA" loading="lazy" /></span></div>
 </div>
 
 <footer>
