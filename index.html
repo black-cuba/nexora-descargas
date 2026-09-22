@@ -649,6 +649,8 @@ const APPS = [
         <li>Fecha de vencimiento automática: si se omite, calcula 1 año a partir del registro.</li>
         <li>Alerta visual de stock mínimo y límite de stock.</li>
         <li>Eliminación segura de productos y edición directa de costos y precios.</li>
+        <li>Panel de filtros avanzados: por categoría, nivel de stock (agotado / bajo / óptimo / rango numérico) y vencimientos (ya vencidos, próximos 15/30/60 días o fecha límite), con chips para quitar filtros uno a uno y conteo en vivo del almacén.</li>
+        <li>Badges visuales de trazabilidad en la tabla para productos vencidos o próximos a caducar.</li>
       </ul>
       <b>Vales de Entrada y Compras (Tecla F3)</b>
       <ul>
@@ -664,6 +666,8 @@ const APPS = [
         <li>Validación estricta de stock disponible en el almacén activo.</li>
         <li>Impresión de tickets térmicos (58 mm / 80 mm) y facturas oficiales.</li>
         <li>Control de caja, consumidor final o clientes registrados.</li>
+        <li>Valé de salida a costo para consumo interno del dueño, con marcador de trazabilidad en el ticket y observaciones.</li>
+        <li>Condición de pago por factura: Contado (con método y referencia bancaria) o Crédito (plazo 15/30/45/60 días o personalizado).</li>
       </ul>
       <b>Transferencias entre Almacenes (Tecla F5)</b>
       <ul>
@@ -690,6 +694,15 @@ const APPS = [
         <li>Sincroniza NIT, sujeto pasivo, municipio, provincia y régimen de tributación desde los datos de la empresa.</li>
         <li>Autocálculo de ingresos brutos y gastos deducibles del año fiscal.</li>
         <li>Impresión con formato idéntico al documento oficial.</li>
+      </ul>
+      <b>Control de Facturas: Cuentas por Cobrar y por Pagar</b>
+      <ul>
+        <li>Cuentas por Cobrar (ventas a crédito): seguimiento de cartera de clientes con fecha límite y alertas de facturas vencidas.</li>
+        <li>Cuentas por Pagar (compras a proveedores): control de compromisos y liquidación progresiva de saldos.</li>
+        <li>Estados de factura: PAGADA, PENDIENTE, PARCIAL y VENCIDA con cálculo automático de días en mora.</li>
+        <li>Abonos parciales o totales con trazabilidad bancarizada obligatoria: medio de pago (transferencia BPA/BANDEC/BANMET, Transfermóvil, EnZona, cheque nominativo o efectivo) + número de operación.</li>
+        <li>Regla de deducción D-01: solo el gasto efectivamente liquidado y bancarizado del período es deducible (respaldado por su operación).</li>
+        <li>Historial auditado de cada abono con fecha, monto, método, banco, referencia y usuario.</li>
       </ul>
       <b>Reportes y Estadísticas</b>
       <ul>
