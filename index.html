@@ -496,6 +496,7 @@
         <li>Cada app incluye <b>15 días de prueba gratuita</b> con todos los módulos; al vencer requiere activación.</li>
         <li>Pago coordinado por <b>WhatsApp</b>: Modelo D-01 ONAT · transferencia · efectivo.</li>
         <li>La licencia queda ligada al <b>equipo (Machine ID)</b> donde se activa.</li>
+        <li>Antes de activar se exige aceptar el <b>EULA</b> (una sola vez por equipo, validado por el propio sistema).</li>
       </ul>
       <p style="margin-top:12px">
         <a class="btn btn-ghost" href="docs/CONTRATO-SUITE-NEXORA.md" rel="noopener" style="padding:10px 18px;font-size:0.84rem;">📄 Ver contrato general de la Suite</a>
@@ -720,9 +721,16 @@ const APPS = [
       <b>Licenciamiento</b>
       <ul>
         <li>15 días de prueba con todos los módulos.</li>
+        <li>EULA obligatorio (paso único por equipo): la aceptación queda grabada en la PC y la valida el propio servidor, de modo que no se puede saltar ni siquiera llamando a la API por fuera.</li>
         <li>Activación por Machine ID + archivo .lic.</li>
         <li>Machine ID estable: queda anclado en el equipo y no cambia al cambiar la tarjeta de red o la red WiFi; si cambia el hardware, el sistema re-emite la licencia por WhatsApp sin confundirse con una licencia vencida.</li>
         <li>Planes: Mensual $15 · Trimestral $50 · Semestral $75 · Anual $100.</li>
+      </ul>
+      <b>Seguridad de la instalación</b>
+      <ul>
+        <li>La app se abre en su propia ventana (sin navegador, sin barra de direcciones ni menú) y el servidor solo escucha en el propio equipo (127.0.0.1).</li>
+        <li>Todo el API exige una cookie de sesión exclusiva de la aplicación: las llamadas externas reciben 403.</li>
+        <li>Cerrar la X oculta la app en la bandeja; para apagar, bandeja → "Cerrar y Apagar".</li>
       </ul>
       <b>Atajos de teclado</b>
       <ul>
