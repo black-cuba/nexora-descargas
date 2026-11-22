@@ -851,6 +851,35 @@ const APPS = [
       </ul>`,
   },
   {
+    id: 'control-tareas',
+    prefix: 'control-tareas',
+    icon: 'assets/app/nexora-256.png',
+    accent: '#1769aa',
+    nombre: 'NEXORA Control-Tareas',
+    versionLabel: 'v1.0.13',
+    plat: 'APK · Android',
+    descargaUrl: 'https://github.com/black-cuba/Control-Tareas-General-/releases/download/v1.0.13/Control-Tareas.apk',
+    sizeMB: 80,
+    specChips: ['Android', 'Organización de tareas', 'Uso local'],
+    desc: 'Organiza, planifica y controla tus tareas y subtareas, con prioridades, fechas de término, recordatorios, calendario e informes PDF.',
+    feats: `
+      <h4>Características principales</h4>
+      <ul>
+        <li>Creación y seguimiento de tareas principales y subtareas.</li>
+        <li>Prioridades, fechas de término y repetición de tareas.</li>
+        <li>Control de tareas activas y completadas.</li>
+        <li>Calendario, estadísticas e historial.</li>
+        <li>Recordatorios y notificaciones.</li>
+        <li>Generación de informes PDF bajo demanda.</li>
+        <li>Copias de seguridad y migración de datos mediante QR.</li>
+        <li>Interfaz para Android con modo oscuro.</li>
+      </ul>
+      <b>Instalación</b>
+      <ul>
+        <li>Descarga el archivo APK e instálalo en un dispositivo Android compatible.</li>
+      </ul>`,
+  },
+  {
     id: 'cubapos-exe',
     prefix: 'cubapos-exe',
     icon: 'assets/app/cubapos-256.png',
@@ -958,7 +987,7 @@ function chipsHtml(app) {
 function cardHtml(app, data) {
   const ver = data ? data.version : app.versionLabel + ' · consultando...';
   const size = data && data.sizeMB ? ` · ~${data.sizeMB.toFixed(0)} MB` : '';
-  const dlHref = (!app.sinDescarga && data && data.url) ? data.url : null;
+  const dlHref = (!app.sinDescarga && ((data && data.url) || app.descargaUrl)) ? ((data && data.url) || app.descargaUrl) : null;
   const dlBtn = dlHref
     ? `<a class="btn btn-pri btn-sm" href="${dlHref}" rel="noopener">⬇ Descargar</a>`
     : `<a class="btn btn-dis btn-sm" href="#" aria-disabled="true">Próximamente</a>`;
@@ -1069,6 +1098,8 @@ async function cargar() {
         app.descargaUrl = app.sinDescarga ? null : data.url;
         const t = new Date(latest.published_at).getTime();
         if (!fechaMax || t > fechaMax) fechaMax = t;
+      } else if (app.descargaUrl) {
+        data = { version: app.versionLabel, url: app.descargaUrl, sizeMB: app.sizeMB || null };
       }
       const cards = grid.querySelectorAll('.card');
       cards[APPS.indexOf(app)].outerHTML = cardHtml(app, data);
