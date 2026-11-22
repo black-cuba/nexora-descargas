@@ -1088,7 +1088,19 @@ async function cargar() {
     }));
     const releasesByRepo = Object.fromEntries(resultados);
     if (!Object.values(releasesByRepo).some(list => list.length)) throw new Error('No hay lanzamientos disponibles');
-    let fechaMax = null;
+    // Fecha global: ultimo lanzamiento publicado de cualquier producto del catalogo.
+    // Se consideran instaladores de Windows y Android en todos los repositorios vinculados.
+    const lanzamientos = Object.values(releasesByRepo).flat().filter(release =>
+      !release.draft && !release.prerelease &&
+      release.published_at &&
+      Array.isArray(release.assets) &&
+      release.assets.some(asset => /\\.(apk|exe|zip)$/i.test(asset.name))
+    );
+    const fechas = lanzamientos
+      .map(release => new Date(release.published_at).getTime())
+      .filter(timestamp => Number.isFinite(timestamp));
+    const fechaMax = fechas.length ? Math.max(...fechas) : null;
+
     for (const app of APPS) {
       const repo = app.releaseRepo || `${REPO_OWNER}/${REPO_DESCARGAS}`;
       const releases = releasesByRepo[repo] || [];
@@ -1112,8 +1124,6 @@ async function cargar() {
         };
         app.descargaUrl = app.sinDescarga ? null : data.url;
         app.versionLabel = data.version;
-        const t = new Date(latest.published_at).getTime();
-        if (!fechaMax || t > fechaMax) fechaMax = t;
       } else if (app.descargaUrl) {
         data = { version: app.versionLabel, url: app.descargaUrl, sizeMB: app.sizeMB || null };
       }
