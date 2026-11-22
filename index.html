@@ -853,7 +853,9 @@ const APPS = [
   {
     id: 'control-tareas',
     prefix: 'control-tareas',
-    icon: 'assets/app/nexora-256.png',
+    releaseRepo: 'black-cuba/Control-Tareas-General-',
+    releaseTagPrefix: 'v',
+    icon: 'https://raw.githubusercontent.com/black-cuba/Control-Tareas-General-/main/expo-rn/assets/icon.png',
     accent: '#1769aa',
     nombre: 'NEXORA Control-Tareas',
     versionLabel: 'v1.0.13',
@@ -1073,13 +1075,26 @@ async function cargar() {
   grid.innerHTML = APPS.map(a => cardHtml(a, null)).join('');
   bindFeat();
   try {
-    const res = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_DESCARGAS}/releases?per_page=100`);
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const releases = await res.json();
+    const repos = [...new Set(APPS.map(app => app.releaseRepo || `${REPO_OWNER}/${REPO_DESCARGAS}`))];
+    const resultados = await Promise.all(repos.map(async repo => {
+      try {
+        const res = await fetch(`https://api.github.com/repos/${repo}/releases?per_page=100`, { cache: 'no-store' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return [repo, await res.json()];
+      } catch (error) {
+        console.warn('No se pudieron consultar los lanzamientos de', repo, error);
+        return [repo, []];
+      }
+    }));
+    const releasesByRepo = Object.fromEntries(resultados);
+    if (!Object.values(releasesByRepo).some(list => list.length)) throw new Error('No hay lanzamientos disponibles');
     let fechaMax = null;
     for (const app of APPS) {
+      const repo = app.releaseRepo || `${REPO_OWNER}/${REPO_DESCARGAS}`;
+      const releases = releasesByRepo[repo] || [];
+      const tagPrefix = (app.releaseTagPrefix || app.prefix + '-').toLowerCase();
       const matches = releases.filter(r =>
-        r.tag_name && r.tag_name.toLowerCase().startsWith(app.prefix.toLowerCase()) &&
+        r.tag_name && r.tag_name.toLowerCase().startsWith(tagPrefix) &&
         !r.draft && !r.prerelease
       );
       const latest = matches[0] || null;
@@ -1091,11 +1106,12 @@ async function cargar() {
         const asset = eligibles.sort((a, b) => (a.name.toLowerCase().includes('portable') ? 1 : 0) - (b.name.toLowerCase().includes('portable') ? 1 : 0))[0] || null;
         const ok = asset && asset.size >= (1024 * 1024);
         data = {
-          version: latest.tag_name.split(app.prefix.toLowerCase() + '-').pop() || latest.tag_name,
+          version: latest.tag_name.slice(tagPrefix.length) || latest.tag_name,
           url: ok ? asset.browser_download_url : null,
           sizeMB: ok ? asset.size / (1024 * 1024) : null,
         };
         app.descargaUrl = app.sinDescarga ? null : data.url;
+        app.versionLabel = data.version;
         const t = new Date(latest.published_at).getTime();
         if (!fechaMax || t > fechaMax) fechaMax = t;
       } else if (app.descargaUrl) {
@@ -1113,6 +1129,7 @@ async function cargar() {
   }
 }
 cargar();
+setInterval(cargar, 5 * 60 * 1000);
 </script>
 
 </body>
